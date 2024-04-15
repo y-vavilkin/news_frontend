@@ -1,0 +1,12 @@
+@import './../../styles/variables';
+
+.container {
+  width: 100%;
+  background-color: $bright-grey;
+
+  .posts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}
