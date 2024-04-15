@@ -14,7 +14,11 @@
     "tags": [
       {
         "id": 1,
-        "text": "testTag"
+        "text": "test123131Tag"
+      },
+      {
+        "id": 2,
+        "text": "asdasdas"
       }
     ]
   },

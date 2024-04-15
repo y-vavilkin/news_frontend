@@ -1,11 +1,12 @@
-import Posts from '../../components/Posts/Posts';
+import PostsList from '../../components/PostsList/PostsList';
 
 import classes from './MainPage.module.scss';
+import mock from './mock.json';
 
 const MainPage = () => {
   return (
     <div className={classes.main}>
-      <Posts/>
+      <PostsList postsData={mock}/>
     </div>
   );
 };
