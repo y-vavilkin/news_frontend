@@ -1,4 +1,4 @@
-import PostsList from '../../components/PostsList/PostsList';
+import PostsList from '../../components/PostsList';
 
 import classes from './MainPage.module.scss';
 import mock from './mock.json';

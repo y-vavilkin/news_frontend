@@ -1,4 +1,4 @@
-const formatDate = (dateString: string) => {
+const changeFormatDate = (dateString: string) => {
   const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'long',
@@ -10,4 +10,4 @@ const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString('en-EN', options);
 };
 
-export default formatDate;
+export default changeFormatDate;

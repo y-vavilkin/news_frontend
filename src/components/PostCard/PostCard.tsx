@@ -1,8 +1,7 @@
-import { type User as UserDescription } from '../../types/index';
-import formatDate from '../../helpers/formatDate';
+import { type User as UserDescription } from '../../types';
+import changeFormatDate from '../../helpers/changeFormatDate';
 
-import { type TagProps as TagDescription } from './components/Tag/Tag';
-import Tag from './components/Tag/Tag';
+import Tag, { type TagProps as TagDescription } from './components/Tag';
 import classes from './PostCard.module.scss';
 import placeholderImage from './images/placeholderImage.png';
 import placeholderAvatar from './images/placeholderAvatar.png';
@@ -31,7 +30,7 @@ const PostCard = ({ id, imageUrl, title, createdAt, content, user, tags }: PostP
             <img className={classes.avatar} src={user.avatarUrl ?? placeholderAvatar} alt="avatar" />
             <div className={classes.info}>
               <p>{user.login}</p>
-              <p>{formatDate(createdAt)}</p>
+              <p>{changeFormatDate(createdAt)}</p>
             </div>
           </div>
           <p className={classes.text}>{content}</p>

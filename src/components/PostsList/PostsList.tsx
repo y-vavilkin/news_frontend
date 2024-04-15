@@ -1,4 +1,4 @@
-import PostCard, { type PostProps } from '../PostCard/PostCard';
+import PostCard, { type PostProps } from '../PostCard';
 
 import classes from './PostsList.module.scss';
 
