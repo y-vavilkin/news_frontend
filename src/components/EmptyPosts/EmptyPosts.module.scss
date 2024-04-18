@@ -1,0 +1,35 @@
+@import '../../styles/variables';
+
+.container {
+  width: 400px;
+  height: 500px;
+  
+  margin: 20px;
+  background-image: $gradient;
+  border-radius: 20px;
+  transition: all .3s;
+  cursor: pointer;
+
+  .post {
+    height: 100%;
+    width: 400px;
+    list-style-type: none;
+    background-color: $post-backgroud;
+    color: $white;
+    font-size: 50px;
+    border-radius: 15px;
+    transition: all .2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .post:hover {
+    transform: scale(0.99);
+    border-radius: 20px;
+  }
+}
+
+.container:hover {
+  box-shadow: $green-shadow;
+}

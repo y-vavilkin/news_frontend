@@ -22,13 +22,13 @@ const PostCard = ({ id, imageUrl, title, createdAt, content, user, tags }: PostP
     <div className={classes.container}>
       <li key={id} className={classes.post}>
         <div className={classes.imageBlock}>
-          <img className={classes.image} src={imageUrl ?? placeholderImage} alt="image" />
+          <img className={classes.image} src={imageUrl ?? placeholderImage} alt="image" draggable="false"/>
         </div>
         <div className={classes.contentBlock}>
           <h1 className={classes.title}>{title}</h1>
           <div className={classes.content}>
             <div className={classes.user}>
-              <img className={classes.avatar} src={user.avatarUrl ?? placeholderAvatar} alt="avatar" />
+              <img className={classes.avatar} src={user.avatarUrl ?? placeholderAvatar} alt="avatar" draggable="false"/>
               <div className={classes.info}>
                 <p>{user.login}</p>
                 <p>{changeFormatDate(createdAt)}</p>
