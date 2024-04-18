@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from '../../redux/hooks/hooks';
 import { postsRequest } from '../../redux/actions/posts';
 import PostsList from '../../components/PostsList';
 
-import classes from './MainPage.module.scss';
+import { Alert, CircularProgress } from '@mui/material';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
@@ -18,18 +18,18 @@ const MainPage = () => {
 
   if (isLoading) {
     return (
-      <div className={classes.container}>
-        <ul className={classes.posts}>
-          <CircularProgress/>
-        </ul>
-      </div>
+      <CircularProgress/>
+    );
+  }
+
+  if (error !== null) {
+    return (
+      <Alert severity="error">{error}</Alert>
     );
   }
 
   return (
-    <div className={classes.main}>
       <PostsList postsData={posts}/>
-    </div>
   );
 };
 

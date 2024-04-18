@@ -1,12 +1,10 @@
-import classes from './EmptyPosts.module.scss';
+import { Alert } from '@mui/material';
 
 const EmptyPosts = () => {
   return (
-    <div className={classes.container}>
-      <div className={classes.post}>
-        <p>No posts :(</p>
-      </div>
-    </div>
+    <Alert variant="filled" severity="success">
+      Everything is ok, but there are no posts :(.
+    </Alert>
   );
 };
 
