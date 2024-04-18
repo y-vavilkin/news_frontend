@@ -1,5 +1,6 @@
-import * as actionTypes from '../actionTypes';
 import { type PostAction, type Post } from '../../types';
+
+import * as actionTypes from '../actionTypes';
 
 export const postsFailed = (error: string): PostAction => ({
   type: actionTypes.POSTS_FAILED,

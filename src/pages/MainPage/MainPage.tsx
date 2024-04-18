@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
+import { Alert, CircularProgress } from '@mui/material';
 
 import { useAppSelector, useAppDispatch } from '../../redux/hooks/hooks';
 import { postsRequest } from '../../redux/actions/posts';
 import PostsList from '../../components/PostsList';
-
-import { Alert, CircularProgress } from '@mui/material';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();

@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react';
+
 import classes from './Content.module.scss';
 
 interface ContentProps {
