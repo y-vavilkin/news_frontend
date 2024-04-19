@@ -1,4 +1,4 @@
-const changeFormatDate = (dateString: string) => {
+const changeFormatDate = (dateString: string): string => {
   const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'long',

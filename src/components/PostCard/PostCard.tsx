@@ -1,34 +1,50 @@
-import { type User as UserDescription } from '../../types';
+import { type User as UserDescription, type Tag as TagDescription } from '../../types';
 import changeFormatDate from '../../helpers/changeFormatDate';
-
-import Tag, { type TagProps as TagDescription } from './components/Tag';
-import classes from './PostCard.module.scss';
-import placeholderImage from './images/placeholderImage.png';
 import placeholderAvatar from './images/placeholderAvatar.png';
+import placeholderImage from './images/placeholderImage.png';
+import classes from './PostCard.module.scss';
+import Tag from './components/Tag';
 
 export interface PostProps {
+  key: number
   id: number
   title: string
   content: string
-  userId: number
   imageUrl: string | null
   createdAt: string
   user: UserDescription
   tags: TagDescription[]
 }
 
-const PostCard = ({ id, imageUrl, title, createdAt, content, user, tags }: PostProps) => {
+const PostCard = ({
+  imageUrl,
+  title,
+  createdAt,
+  content,
+  user,
+  tags
+}: PostProps) => {
   return (
     <div className={classes.container}>
-      <li key={id} className={classes.post}>
+      <li className={classes.post}>
         <div className={classes.imageBlock}>
-          <img className={classes.image} src={imageUrl ?? placeholderImage} alt="image" draggable="false"/>
+          <img
+            className={classes.image}
+            src={imageUrl ?? placeholderImage}
+            alt="image"
+            draggable="false"
+          />
         </div>
         <div className={classes.contentBlock}>
           <h1 className={classes.title}>{title}</h1>
           <div className={classes.content}>
             <div className={classes.user}>
-              <img className={classes.avatar} src={user.avatarUrl ?? placeholderAvatar} alt="avatar" draggable="false"/>
+              <img
+                className={classes.avatar}
+                src={user.avatarUrl ?? placeholderAvatar}
+                alt="avatar"
+                draggable="false"
+              />
               <div className={classes.info}>
                 <p>{user.login}</p>
                 <p>{changeFormatDate(createdAt)}</p>
@@ -38,7 +54,7 @@ const PostCard = ({ id, imageUrl, title, createdAt, content, user, tags }: PostP
           </div>
         </div>
         <ul className={classes.tagsBlock}>
-          {tags.map((tagData: TagDescription) => <Tag key={tagData.id} {...tagData}/>)}
+          <Tag tags={tags}/>
         </ul>
       </li>
     </div>

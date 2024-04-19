@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
-import { Alert, CircularProgress } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 
-import { useAppSelector, useAppDispatch } from '../../redux/hooks/hooks';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { postsRequest } from '../../redux/actions/posts';
 import PostsList from '../../components/PostsList';
+import { EMPTY_POSTS } from '../../constants';
+import Notify from '../../components/Notify';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
@@ -13,22 +15,18 @@ const MainPage = () => {
 
   useEffect(() => {
     dispatch(postsRequest());
-  }, [dispatch]);
+  }, []);
 
-  if (isLoading) {
-    return (
-      <CircularProgress/>
-    );
-  }
+  if (isLoading) return (<CircularProgress/>);
 
-  if (error !== null) {
-    return (
-      <Alert severity="error">{error}</Alert>
-    );
-  }
+  if (error !== null) return <Notify info={error} status='error' />;
 
   return (
-      <PostsList postsData={posts}/>
+    <>
+      {posts.length !== 0
+        ? <PostsList postsData={posts} />
+        : <Notify info={EMPTY_POSTS} status='info' />}
+    </>
   );
 };
 

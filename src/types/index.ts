@@ -10,6 +10,7 @@ export interface Tag {
 }
 
 export interface Post {
+  key: number
   id: number
   title: string
   content: string
@@ -23,11 +24,11 @@ export interface Post {
 export interface PostsState {
   postsArray: Post[]
   isLoading: boolean
-  error: string | null
+  error?: string | null
 };
 
 export interface PostAction {
   payload?: Post[]
   type: string
-  error: string | null
+  error?: string | null
 };

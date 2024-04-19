@@ -1,5 +1,4 @@
 import { type PostAction, type PostsState } from '../../types';
-
 import { POSTS_REQUESTED, POSTS_RECEIVED, POSTS_FAILED } from '../actionTypes';
 
 const initialState: PostsState = {

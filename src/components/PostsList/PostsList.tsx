@@ -1,17 +1,27 @@
 import PostCard, { type PostProps } from '../PostCard';
-import EmptyPosts from '../EmptyPosts/EmptyPosts';
+import classes from './PostsList.module.scss';
 
-interface PostsProps {
+interface PostsListProps {
   postsData: PostProps[]
 }
 
-const PostsList = ({ postsData }: PostsProps) => {
+const PostsList = ({ postsData }: PostsListProps) => {
   return (
-    <>
-      {postsData.length !== 0
-        ? postsData.map((post) => <PostCard key={post.id} {...post}/>)
-        : <EmptyPosts/>}
-    </>
+    <div className={classes.posts}>
+      {
+        postsData.map((post) =>
+          <PostCard
+            key={post.id}
+            id={post.id}
+            imageUrl={post.imageUrl}
+            title={post.title}
+            createdAt={post.createdAt}
+            content={post.content}
+            user={post.user}
+            tags={post.tags}
+          />)
+      }
+    </div>
   );
 };
 
