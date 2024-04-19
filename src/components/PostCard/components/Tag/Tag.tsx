@@ -1,4 +1,5 @@
 import { Tag as TagDescription } from '../../../../types';
+
 import classes from './Tag.module.scss';
 
 export interface TagProps {
@@ -7,8 +8,9 @@ export interface TagProps {
 
 const Tag = ({ tags }: TagProps) => {
   return (
-    tags.map(tag =>
-      <li key={tag.id} className={classes.tag}>{tag.text}</li>)
+    <ul className={classes.tagsBlock}>
+      {tags.map(tag => <li key={tag.id} className={classes.tag}>{tag.text}</li>)}
+    </ul> 
   );
 };
 

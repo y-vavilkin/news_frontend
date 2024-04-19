@@ -24,7 +24,7 @@ export interface Post {
 export interface PostsState {
   postsArray: Post[]
   isLoading: boolean
-  error?: string | null
+  error: string | null
 };
 
 export interface PostAction {
