@@ -1,23 +1,33 @@
-@import './styles/variables';
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
 
 * {
-  font-family: $main-font;
   padding: 0;
   margin: 0;
   height: max-content;
 }
 
+:root {
+  --font:  "Tilt Neon", sans-serif;
+  --posts-background: rgb(26, 26, 26);
+  --posts-pattern: rgb(11, 11, 11);
+  --gradient: linear-gradient(163deg, rgb(0, 255, 117) 0%, rgb(55, 0, 255) 100%);
+  --post-backgroud: rgb(26, 26, 26);
+  --main-color-font: rgb(183, 183, 183);
+  --green-shadow: 0px 0px 30px 1px rgb(14, 91, 49);
+  --white: rgb(255, 255, 255);
+  --black: rgb(0, 0, 0);
+}
+
 #root {
   width: 100%;
+  font-family: var(--font);
 }
 
 body {
-  background-color: $posts-background;
-  background-image: linear-gradient(32deg, $posts-pattern 30px, transparent);
+  font-family: var(--font);
+  background-color: var(--posts-background);
+  background-image: linear-gradient(32deg, var(--posts-pattern) 30px, transparent);
   background-size: 60px 60px;
   background-position: -5px -5px;
   min-height: 95vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

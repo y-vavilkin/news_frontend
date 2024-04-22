@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { CircularProgress } from '@mui/material';
 
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { postsRequest } from '../../redux/actions/posts';
 import PostsList from '../../components/PostsList';
 import { EMPTY_POSTS } from '../../constants';
 import Notify from '../../components/Notify';
+import Loader from '../../components/Loader';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
@@ -17,7 +17,7 @@ const MainPage = () => {
     dispatch(postsRequest());
   }, []);
 
-  if (isLoading) return (<CircularProgress/>);
+  if (isLoading) return <Loader />;
 
   if (error !== null) return <Notify info={error} status='error' />;
 

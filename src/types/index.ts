@@ -25,10 +25,10 @@ export interface PostsState {
   postsArray: Post[]
   isLoading: boolean
   error: string | null
-};
+}
 
 export interface PostAction {
   payload?: Post[]
   type: string
   error?: string | null
-};
+}

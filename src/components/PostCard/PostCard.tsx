@@ -1,6 +1,6 @@
 import { type User as UserDescription, type Tag as TagDescription } from '../../types';
 
-import placeholderImage from './images/placeholderImage.png';
+import placeholderImage from './images/placeholderImage.webp';
 import classes from './PostCard.module.scss';
 import Tag from './components/Tag';
 import User from './components/User';

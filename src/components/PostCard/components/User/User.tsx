@@ -1,11 +1,11 @@
-import changeFormatDate from '../../../../helpers/changeFormatDate';
-import { type User } from '../../../../types';
+import changeFormatDate from '../../../../helpers';
+import { type User as UserDescription } from '../../../../types';
 
-import placeholderAvatar from './images/placeholderAvatar.png';
+import placeholderAvatar from './images/placeholderAvatar.webp';
 import classes from './User.module.scss';
 
 interface UserProps {
-  user: User
+  user: UserDescription
   createdAt: string
 }
 
@@ -23,7 +23,7 @@ const User = ({ user, createdAt }: UserProps) => {
         <p>{changeFormatDate(createdAt)}</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default User;

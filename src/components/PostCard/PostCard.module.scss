@@ -1,8 +1,6 @@
-@import '../../styles/variables';
-
 .container {
   margin: 20px;
-  background-image: $gradient;
+  background-image: var(--gradient);
   border-radius: 20px;
   transition: all .3s;
   cursor: pointer;
@@ -12,7 +10,7 @@
     width: 400px;
     list-style-type: none;
     border-radius: 15px;
-    background-color: $post-backgroud;
+    background-color: var(--post-backgroud);
     transition: all .2s;
     
     .imageBlock {
@@ -33,7 +31,7 @@
       box-sizing: border-box;
       padding: 10px 15px;
       height: 250px;
-      color: $main-color-font;
+      color: var(--main-color-font);
   
       .title {
         width: max-content;
@@ -61,5 +59,5 @@
 }
 
 .container:hover {
-  box-shadow: $green-shadow;
+  box-shadow: var(--post-card-green-shadow);
 }
