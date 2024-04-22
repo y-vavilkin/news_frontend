@@ -1,1 +1,1 @@
-export { default } from './changeFormatDate';
+export { default as changeFormatDate } from './changeFormatDate';

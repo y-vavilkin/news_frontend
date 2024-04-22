@@ -1,4 +1,4 @@
-import changeFormatDate from '../../../../helpers';
+import { changeFormatDate } from '../../../../helpers';
 import { type User as UserDescription } from '../../../../types';
 
 import placeholderAvatar from './images/placeholderAvatar.webp';
