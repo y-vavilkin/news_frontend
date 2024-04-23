@@ -1,0 +1,16 @@
+.tagsBlock {
+  height: max-content;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .tag {
+    list-style-type: none;
+    display: inline-block;
+    width: max-content;
+    border-radius: 10px;
+    background-image: var(--gradient);
+    margin: 10px;
+    padding: 5px;
+  }
+}
