@@ -1,7 +1,7 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { AxiosError, type AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 
-import { type Post } from '../../types';
+import { Post } from '../../types';
 import { GLOBAL_ERROR } from '../../constants';
 import { postsReseived, postsFailed } from '../actions/posts';
 import { POSTS_REQUESTED } from '../actionTypes';

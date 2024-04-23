@@ -1,4 +1,4 @@
-import { type User as UserDescription, type Tag as TagDescription } from '../../types';
+import { User as UserDescription, Tag as TagDescription } from '../../types';
 
 import placeholderImage from './images/placeholderImage.webp';
 import classes from './PostCard.module.scss';
