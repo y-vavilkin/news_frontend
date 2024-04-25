@@ -9,7 +9,6 @@ import classes from './Header.module.scss';
 
 const Header = () => {
   const dispatch = useAppDispatch();
-
   const handlerRegistration = () => {
     dispatch(openModal(REGISTRATION));
   };
@@ -25,8 +24,8 @@ const Header = () => {
       </a>
       <p>News</p>
       <div className={classes.links}>
-        <Button color="success" variant="contained" href="#auth/registration" onClick={handlerRegistration}>sign up</Button>
-        <Button variant="contained" href="#auth/login" onClick={handlerAuthorization}>sign in</Button>
+        <Button color="success" variant="contained" onClick={handlerRegistration}>sign up</Button>
+        <Button variant="contained" onClick={handlerAuthorization}>sign in</Button>
       </div>
     </div>
   );

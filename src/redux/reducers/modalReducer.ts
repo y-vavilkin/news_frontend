@@ -1,5 +1,5 @@
-import { OPEN_MODAL, CLOSE_MODAL } from '../actionTypes';
 import { ModalAction, ModalState } from '../../types';
+import { OPEN_MODAL, CLOSE_MODAL } from '../actionTypes';
 
 const initialState: ModalState = {
   isModalOpen: false,

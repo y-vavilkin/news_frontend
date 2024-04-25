@@ -18,7 +18,6 @@ const MainPage = () => {
   }, []);
 
   if (isLoading) return <Loader />;
-
   if (error !== null) return <Notify info={error} status='error' />;
 
   return (

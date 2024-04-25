@@ -21,16 +21,23 @@ export interface Post {
   tags: Tag[]
 }
 
-export interface PostsState {
-  postsArray: Post[]
-  isLoading: boolean
-  error: string | null
+type Error = string | null;
+type ArrayOfPosts = Post[] | [];
+
+export interface PostPayload {
+  posts?: ArrayOfPosts
+  error: Error
 }
 
 export interface PostAction {
-  payload?: Post[]
   type: string
-  error?: string | null
+  payload: PostPayload
+}
+
+export interface PostsState {
+  postsArray: ArrayOfPosts
+  isLoading: boolean
+  error: Error
 }
 
 export interface ModalAction {
@@ -41,4 +48,31 @@ export interface ModalAction {
 export interface ModalState {
   isModalOpen: boolean
   type: string | null
+}
+
+export interface Auth {
+  email: string
+  password: string
+  typeModal: string
+  login?: string
+  error?: string | null
+}
+
+export interface AuthState {
+  isOnline: boolean
+  isLoading: boolean
+  error?: string | null
+}
+
+export interface AuthAction {
+  type: string
+  payload?: Auth
+  loading?: boolean
+  modalType?: string
+  error?: string | null
+}
+
+export interface AuthResponse {
+  user: User
+  token: string
 }

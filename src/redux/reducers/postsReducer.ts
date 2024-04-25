@@ -19,14 +19,14 @@ export default function postsReducer (state: PostsState = initialState, action: 
       return {
         ...state,
         isLoading: false,
-        postsArray: action.payload ?? [],
+        postsArray: action.payload?.posts ?? [],
         error: null
       };
     case POSTS_FAILED:
       return {
         ...state,
         isLoading: false,
-        error: action.error
+        error: action.payload.error
       };
     default:
       return state;

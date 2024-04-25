@@ -6,7 +6,7 @@ export const openModal = (payload: string): ModalAction => ({
   payload
 });
 
-export const closeModal = (): ModalAction => ({
+export const closeModal = (payload = null): ModalAction => ({
   type: actionTypes.CLOSE_MODAL,
-  payload: null
+  payload
 });

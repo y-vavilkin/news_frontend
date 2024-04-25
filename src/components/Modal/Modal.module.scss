@@ -12,9 +12,9 @@
   height: max-content;
   width: max-content;
   border-radius: 10px;
-  background-color: white;
+  background-color: var(--white);
 }
 
 .button {
-  background: var(--gradient) !important;
+  background: var(--gradient);
 }
