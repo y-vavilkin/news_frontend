@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import { Post } from '../../types';
+import { Post } from '../../interfaces/posts';
 
 import api from './api';
 

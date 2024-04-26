@@ -1,8 +1,9 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { AxiosError, AxiosResponse } from 'axios';
 
-import { Post } from '../../types';
+import { changeStatusError } from '../../helpers';
 import { GLOBAL_ERROR } from '../../constants';
+import { Post } from '../../interfaces/posts';
 import { postsReseived, postsFailed } from '../actions/posts';
 import { POSTS_REQUESTED } from '../actionTypes';
 import getPosts from '../api/getPosts';
@@ -16,8 +17,9 @@ function * postsWorker () {
     yield put(postsReseived(payload.posts));
   } catch (error: unknown) {
     const currentError = error instanceof AxiosError ? error.message : GLOBAL_ERROR;
+    console.log(currentError);
 
-    const payload = { error: currentError };
+    const payload = { error: changeStatusError(currentError) };
 
     yield put(postsFailed(payload.error));
   }

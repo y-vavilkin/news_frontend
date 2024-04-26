@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import { Auth, AuthResponse } from '../../types';
+import { Auth, AuthResponse } from '../../interfaces/auth';
 
 import api from './api';
 

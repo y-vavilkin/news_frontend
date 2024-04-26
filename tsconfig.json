@@ -21,6 +21,6 @@
     "noFallthroughCasesInSwitch": true,
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
-  "include": ["src"],
+  "include": ["src", "src/components/Modal/index.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

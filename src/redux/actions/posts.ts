@@ -1,4 +1,4 @@
-import { Post, PostAction } from '../../types';
+import { Post, PostAction } from '../../interfaces/posts';
 import * as actionTypes from '../actionTypes';
 
 export const postsFailed = (error: string): PostAction => ({

@@ -1,16 +1,26 @@
-import { AuthAction, Auth } from '../../types';
+import { AuthAction, AuthPayload } from '../../interfaces/auth';
 import { AUTH_USER, AUTH_USER_SUCCESS, AUTH_USER_FAILURE } from '../actionTypes';
 
-export const authUser = (payload: Auth): AuthAction => ({
+export const authUser = (payload: AuthPayload): AuthAction => ({
   type: AUTH_USER,
-  payload
+  payload: {
+    authData: payload.authData,
+    error: null
+  }
 });
 
 export const authUserSuccess = (): AuthAction => ({
-  type: AUTH_USER_SUCCESS
+  type: AUTH_USER_SUCCESS,
+  payload: {
+    authData: null,
+    error: null
+  }
 });
 
-export const authUserFailure = (error: string): AuthAction => ({
+export const authUserFailure = (payload: AuthPayload): AuthAction => ({
   type: AUTH_USER_FAILURE,
-  error
+  payload: {
+    authData: null,
+    error: payload.error
+  }
 });

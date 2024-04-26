@@ -1,4 +1,4 @@
-import { ModalAction, ModalState } from '../../types';
+import { ModalAction, ModalState } from '../../interfaces/modal';
 import { OPEN_MODAL, CLOSE_MODAL } from '../actionTypes';
 
 const initialState: ModalState = {
@@ -6,7 +6,7 @@ const initialState: ModalState = {
   type: null
 };
 
-export default function modalReducer (state: ModalState = initialState, action: ModalAction) {
+export default function modalReducer (state: ModalState = initialState, action: ModalAction): ModalState {
   switch (action.type) {
     case OPEN_MODAL:
       return {
