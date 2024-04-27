@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { Auth, AuthPayload } from '../../../../interfaces/auth';
 import { authResetError, authUser } from '../../../../redux/actions/auth';
 import classes from '../../Modal.module.scss';
+
 import signUpSchema from './signUpSchema';
 
 const SignUpForm = () => {
@@ -71,7 +72,7 @@ const SignUpForm = () => {
         type="submit"
         variant="contained"
         color="primary"
-        disabled={!(authError == null)}
+        disabled={authError !== null}
         style={{ marginTop: '20px' }}
       >
         Continue
