@@ -7,20 +7,20 @@ import { changeStatusError } from '../../helpers';
 import { AUTH_USER, AUTHORIZATION, REGISTRATION } from '../actionTypes';
 import { authUserSuccess, authUserFailure } from '../actions/auth';
 import { updateUserStatus } from '../actions/update';
-import authorization from '../api/authorization';
-import registartion from '../api/registartion';
+import { signUp } from '../api/signUp';
+import { signIn } from '../api/signIn';
 
 function * authSaga (action: AuthAction) {
   try {
     if (action.payload.authData?.typeModal === REGISTRATION) {
-      const response: AxiosResponse<AuthResponse> = yield call(registartion, action.payload.authData);
+      const response: AxiosResponse<AuthResponse> = yield call(signUp, action.payload.authData);
       localStorage.setItem(TOKEN, response.data.token);
 
       yield put(authUserSuccess());
 
       yield put(updateUserStatus(true));
     } else if (action.payload.authData?.typeModal === AUTHORIZATION) {
-      const response: AxiosResponse<AuthResponse> = yield call(authorization, action.payload.authData);
+      const response: AxiosResponse<AuthResponse> = yield call(signIn, action.payload.authData);
 
       localStorage.setItem(TOKEN, response.data.token);
 

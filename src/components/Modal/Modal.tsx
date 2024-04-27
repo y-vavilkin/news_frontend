@@ -5,8 +5,8 @@ import { AUTHORIZATION, REGISTRATION } from '../../redux/actionTypes';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { closeModal } from '../../redux/actions/modal';
 
-import SignUpForm from './SignUpForm/SignUpForm';
-import SignInForm from './SignInForm/SignInForm';
+import SignUpForm from './components/SignUpForm/SignUpForm';
+import SignInForm from './components/SignInForm/SignInForm';
 import classes from './Modal.module.scss';
 
 const CustomModal = () => {
@@ -21,10 +21,8 @@ const CustomModal = () => {
   };
 
   useEffect(() => {
-    if (isOnline) {
-      dispatch(closeModal());
-    }
-  });
+    dispatch(closeModal());
+  }, [isOnline]);
 
   return (
     <Modal

@@ -1,5 +1,5 @@
 import { AuthAction, AuthState } from '../../interfaces/auth';
-import { AUTH_USER, AUTH_USER_SUCCESS, AUTH_USER_FAILURE } from '../actionTypes';
+import { AUTH_USER, AUTH_USER_SUCCESS, AUTH_USER_FAILURE, AUTH_USER_RESET } from '../actionTypes';
 
 const initialState: AuthState = {
   isLoading: false,
@@ -24,6 +24,12 @@ const authReducer = (state: AuthState = initialState, action: AuthAction): AuthS
         ...state,
         isLoading: false,
         error: action.payload.error
+      };
+    case AUTH_USER_RESET:
+      return {
+        ...state,
+        isLoading: false,
+        error: null
       };
     default:
       return state;

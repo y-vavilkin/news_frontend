@@ -17,7 +17,6 @@ function * postsWorker () {
     yield put(postsReseived(payload.posts));
   } catch (error: unknown) {
     const currentError = error instanceof AxiosError ? error.message : GLOBAL_ERROR;
-    console.log(currentError);
 
     const payload = { error: changeStatusError(currentError) };
 
