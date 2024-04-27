@@ -8,9 +8,11 @@ interface NotifyProps {
 
 const Notify = ({ info, status }: NotifyProps) => {
   return (
-    <Alert className={classes.alert} variant="filled" severity={status} >
-      {info}
-    </Alert>
+    <div className={classes.block}>
+      <Alert className={classes.alert} variant="filled" severity={status} >
+        {info}
+      </Alert>
+    </div>
   );
 };
 

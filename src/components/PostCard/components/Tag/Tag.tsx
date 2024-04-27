@@ -1,4 +1,4 @@
-import { Tag as TagDescription } from '../../../../types';
+import { Tag as TagDescription } from '../../../../interfaces';
 
 import classes from './Tag.module.scss';
 

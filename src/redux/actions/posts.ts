@@ -1,16 +1,26 @@
-import { PostAction, Post } from '../../types';
+import { Post, PostAction } from '../../interfaces/posts';
 import * as actionTypes from '../actionTypes';
 
 export const postsFailed = (error: string): PostAction => ({
   type: actionTypes.POSTS_FAILED,
-  error
+  payload: {
+    posts: [],
+    error
+  }
 });
 
-export const postsReseived = (payload: Post[]): PostAction => ({
+export const postsReseived = (posts: Post[] | []): PostAction => ({
   type: actionTypes.POSTS_RECEIVED,
-  payload
+  payload: {
+    posts,
+    error: null
+  }
 });
 
 export const postsRequest = (): PostAction => ({
-  type: actionTypes.POSTS_REQUESTED
+  type: actionTypes.POSTS_REQUESTED,
+  payload: {
+    posts: [],
+    error: null
+  }
 });

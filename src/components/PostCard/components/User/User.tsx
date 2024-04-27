@@ -1,5 +1,5 @@
 import { changeFormatDate } from '../../../../helpers';
-import { type User as UserDescription } from '../../../../types';
+import { type User as UserDescription } from '../../../../interfaces';
 
 import placeholderAvatar from './images/placeholderAvatar.webp';
 import classes from './User.module.scss';

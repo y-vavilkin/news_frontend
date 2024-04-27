@@ -1,4 +1,11 @@
 .alert {
   width: max-content;
-  margin: 300px auto;
+  margin: 0 auto;
+}
+
+.block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }

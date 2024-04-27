@@ -1,4 +1,4 @@
-import { type PostAction, type PostsState } from '../../types';
+import { PostAction, PostsState } from '../../interfaces/posts';
 import { POSTS_REQUESTED, POSTS_RECEIVED, POSTS_FAILED } from '../actionTypes';
 
 const initialState: PostsState = {
@@ -19,14 +19,14 @@ export default function postsReducer (state: PostsState = initialState, action: 
       return {
         ...state,
         isLoading: false,
-        postsArray: action.payload ?? [],
+        postsArray: action.payload?.posts ?? [],
         error: null
       };
     case POSTS_FAILED:
       return {
         ...state,
         isLoading: false,
-        error: action.error
+        error: action.payload.error
       };
     default:
       return state;

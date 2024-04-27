@@ -1,5 +1,5 @@
-import { type User as UserDescription, type Tag as TagDescription } from '../../types';
-
+import { User as UserDescription } from '../../interfaces/auth';
+import { Tag as TagDescription } from '../../interfaces/posts';
 import placeholderImage from './images/placeholderImage.webp';
 import classes from './PostCard.module.scss';
 import Tag from './components/Tag';
