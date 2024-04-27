@@ -17,7 +17,7 @@ const SignInForm = () => {
 
   const authError = useAppSelector(state => state.auth.error);
 
-  const onSubmit: SubmitHandler<AuthPayload> = (data: Auth) => {
+  const onSubmit: SubmitHandler<Auth> = (data: Auth) => {
     const authPayload: AuthPayload = {
       authData: {
         ...data,
@@ -42,7 +42,7 @@ const SignInForm = () => {
   }, [emailValue, passwordValue]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={classes.box}>
+    <form onSubmit={handleSubmit((data) => onSubmit({ ...data, typeModal }))} className={classes.box}>
       <TextField
         type="email"
         label="Email"
