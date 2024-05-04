@@ -1,5 +1,5 @@
 import { ModalAction, ModalState } from '../../interfaces/modal';
-import { OPEN_MODAL, CLOSE_MODAL } from '../actionTypes';
+import * as actionTypes from '../actions/actionTypes/modal';
 
 const initialState: ModalState = {
   isModalOpen: false,
@@ -8,17 +8,17 @@ const initialState: ModalState = {
 
 export default function modalReducer (state: ModalState = initialState, action: ModalAction): ModalState {
   switch (action.type) {
-    case OPEN_MODAL:
+    case actionTypes.OPEN_MODAL:
       return {
         ...state,
         isModalOpen: true,
-        type: action.payload
+        type: action.payload ?? null
       };
-    case CLOSE_MODAL:
+    case actionTypes.CLOSE_MODAL:
       return {
         ...state,
         isModalOpen: false,
-        type: action.payload
+        type: null
       };
     default:
       return state;

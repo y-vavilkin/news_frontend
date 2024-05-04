@@ -15,6 +15,11 @@
     display: flex;
     flex-direction: column;
     align-items: end;
+
+    .link {
+      text-decoration: none;
+      color: var(--second-color-font)
+    }
   }
 
   .info>p {

@@ -1,32 +1,30 @@
 import { PostAction, PostsState } from '../../interfaces/posts';
-import { POSTS_REQUESTED, POSTS_RECEIVED, POSTS_FAILED } from '../actionTypes';
+import * as actionTypes from '../actions/actionTypes/posts';
 
 const initialState: PostsState = {
-  postsArray: [],
+  posts: [],
   isLoading: false,
   error: null
 };
 
 export default function postsReducer (state: PostsState = initialState, action: PostAction): PostsState {
   switch (action.type) {
-    case POSTS_REQUESTED:
+    case actionTypes.POSTS_REQUESTED:
       return {
         ...state,
-        isLoading: true,
-        error: null
+        isLoading: true
       };
-    case POSTS_RECEIVED:
+    case actionTypes.POSTS_RECEIVED:
       return {
         ...state,
         isLoading: false,
-        postsArray: action.payload?.posts ?? [],
-        error: null
+        posts: action.payload ?? []
       };
-    case POSTS_FAILED:
+    case actionTypes.POSTS_FAILED:
       return {
         ...state,
         isLoading: false,
-        error: action.payload.error
+        error: action.error ?? null
       };
     default:
       return state;

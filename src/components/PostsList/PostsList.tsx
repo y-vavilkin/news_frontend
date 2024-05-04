@@ -13,6 +13,7 @@ const PostsList = ({ postsData }: PostsListProps) => {
         <PostCard
           key={post.id}
           id={post.id}
+          userId={post.userId}
           imageUrl={post.imageUrl}
           title={post.title}
           createdAt={post.createdAt}
@@ -20,8 +21,7 @@ const PostsList = ({ postsData }: PostsListProps) => {
           user={post.user}
           tags={post.tags}
         />
-      )
-      }
+      )}
     </div>
   );
 };

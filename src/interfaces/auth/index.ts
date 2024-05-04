@@ -1,37 +1,35 @@
-import { Error } from '../index';
+import { Post } from '../posts';
 
 export interface User {
   id: number
-  avatarUrl: string | null
   login: string
+  email: string
+  avatarUrl: string | null
+  createdAt: string
+  updatedAt: string
+  posts: Post[]
 }
 
-export interface Auth {
+export interface AuthForm {
+  login?: string
   email: string
   password: string
-  typeModal: string | null
-  login?: string
-}
-
-export interface AuthPayload {
-  authData: Auth | null
-  error: Error
-}
-
-export interface AuthAction {
-  type: string
-  payload: {
-    authData: Auth | null
-    error: Error
-  }
-}
-
-export interface AuthState {
-  isLoading: boolean
-  error: Error
 }
 
 export interface AuthResponse {
   user: User
   token: string
+}
+
+export interface AuthAction {
+  type: string
+  payload?: AuthForm | User
+  error?: string | null
+}
+
+export interface AuthState {
+  user: User | null
+  isOnline: boolean
+  isLoading: boolean
+  error: string | null
 }

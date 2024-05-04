@@ -1,6 +1,6 @@
 export interface ModalAction {
   type: string
-  payload: string | null
+  payload?: string
 }
 
 export interface ModalState {

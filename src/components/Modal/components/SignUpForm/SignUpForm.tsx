@@ -3,47 +3,35 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, TextField } from '@mui/material';
 import { useEffect } from 'react';
 
+import { authReset, authUserRegistration } from '../../../../redux/actions/auth';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
-import { Auth, AuthPayload } from '../../../../interfaces/auth';
-import { authResetError, authUser } from '../../../../redux/actions/auth';
+import { AuthForm } from '../../../../interfaces/auth';
 import classes from '../../Modal.module.scss';
 
 import signUpSchema from './signUpSchema';
 
 const SignUpForm = () => {
   const dispatch = useAppDispatch();
-
-  const typeModal = useAppSelector(state => state.modal.type);
-
   const authError = useAppSelector(state => state.auth.error);
-
-  const onSubmit: SubmitHandler<Auth> = (data: Auth) => {
-    const authPayload: AuthPayload = {
-      authData: {
-        ...data,
-        typeModal
-      },
-      error: null
-    };
-    dispatch(authUser(authPayload));
-  };
 
   const { register, watch, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(signUpSchema)
   });
 
+  const onSubmit: SubmitHandler<AuthForm> = async (data: AuthForm) => {
+    dispatch(authUserRegistration(data));
+  };
+
   const loginValue = watch('login');
-  const passwordValue = watch('password');
   const emailValue = watch('email');
+  const passwordValue = watch('password');
 
   useEffect(() => {
-    if (authError !== null) {
-      dispatch(authResetError());
-    }
+    dispatch(authReset());
   }, [emailValue, loginValue, passwordValue]);
 
   return (
-    <form onSubmit={handleSubmit((data) => onSubmit({ ...data, typeModal }))} className={classes.box}>
+    <form onSubmit={handleSubmit(onSubmit)} className={classes.box}>
       <TextField
         type="login"
         label="Login"
@@ -77,6 +65,7 @@ const SignUpForm = () => {
       >
         Continue
       </Button>
+      <p className={classes.error}>{authError}</p>
     </form>
   );
 };
