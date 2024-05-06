@@ -1,10 +1,10 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, TextField } from '@mui/material';
-import { useEffect } from 'react';
 
-import { authReset, authUserLogin } from '../../../../redux/actions/auth';
+import { AUTH_USER_LOGIN } from '../../../../redux/actions/actionTypes/auth';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
+import { authUser } from '../../../../redux/actions/auth';
 import { AuthForm } from '../../../../interfaces/auth';
 import classes from '../../Modal.module.scss';
 
@@ -13,22 +13,21 @@ import signUpSchema from './signInSchema';
 const SignInForm = () => {
   const dispatch = useAppDispatch();
   const authError = useAppSelector(state => state.auth.error);
-  const isError = authError !== null;
 
-  const { register, watch, handleSubmit, formState: { errors } } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
     resolver: yupResolver(signUpSchema)
   });
 
-  const onSubmit: SubmitHandler<AuthForm> = async (data: AuthForm) => {
-    dispatch(authUserLogin(data));
+  const onSubmit: SubmitHandler<AuthForm> = (data: AuthForm) => {
+    dispatch(authUser(AUTH_USER_LOGIN, data));
   };
 
-  const emailValue = watch('email');
-  const passwordValue = watch('password');
-
-  useEffect(() => {
-    dispatch(authReset());
-  }, [emailValue, passwordValue]);
+  const isEmailError = errors.email?.message !== undefined;
+  const isPasswordError = errors.password?.message !== undefined;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classes.box}>
@@ -52,12 +51,16 @@ const SignInForm = () => {
         type="submit"
         variant="contained"
         color="primary"
-        disabled={isError}
+        disabled={isEmailError || isPasswordError}
         style={{ marginTop: '20px' }}
       >
         Continue
       </Button>
-      <p className={classes.error}>{authError}</p>
+      {
+        authError !== null && (
+          <p className={classes.error}>{authError}</p>
+        )
+      }
     </form>
   );
 };

@@ -1,4 +1,14 @@
-import { User } from '../auth';
+import { Post } from '../posts';
+
+export interface User {
+  id: number
+  login: string
+  email: string
+  avatarUrl: string | null
+  createdAt: string
+  updatedAt: string
+  posts: Post[]
+}
 
 export interface UserAction {
   type: string
@@ -7,8 +17,8 @@ export interface UserAction {
 }
 
 export interface UserState {
-  id: number | null
   user: User | null
+  userPosts: Post[] | null
   isLoading: boolean
   error: string | null
 }

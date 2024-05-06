@@ -5,22 +5,13 @@ const initialState: AuthState = {
   isOnline: false,
   isLoading: false,
   error: null,
-  user: null
+  authUser: null
 };
 
 const authReducer = (state: AuthState = initialState, action: AuthAction): AuthState => {
   switch (action.type) {
-    case actionTypes.AUTH_USER_CHECK: {
-      return {
-        ...state,
-        isLoading: true
-      };
-    }
+    case actionTypes.AUTH_USER_CHECK:
     case actionTypes.AUTH_USER_LOGIN:
-      return {
-        ...state,
-        isLoading: true
-      };
     case actionTypes.AUTH_USER_REGISTRATION:
       return {
         ...state,
@@ -31,8 +22,7 @@ const authReducer = (state: AuthState = initialState, action: AuthAction): AuthS
         ...state,
         isLoading: false,
         isOnline: true,
-        // TODO
-        user: action.payload ?? null
+        authUser: action.payload ?? null
       };
     case actionTypes.AUTH_USER_FAILURE:
       return {
@@ -40,11 +30,11 @@ const authReducer = (state: AuthState = initialState, action: AuthAction): AuthS
         isLoading: false,
         error: action.error ?? null
       };
-    case actionTypes.AUTH_USER_RESET:
+    case actionTypes.AUTH_USER_LOGOUT:
       return {
         ...state,
         error: null,
-        user: null,
+        authUser: null,
         isOnline: false
       };
     default:

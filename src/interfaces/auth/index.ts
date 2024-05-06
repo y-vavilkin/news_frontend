@@ -1,6 +1,6 @@
 import { Post } from '../posts';
 
-export interface User {
+export interface AuthUser {
   id: number
   login: string
   email: string
@@ -17,18 +17,18 @@ export interface AuthForm {
 }
 
 export interface AuthResponse {
-  user: User
+  user: AuthUser
   token: string
 }
 
 export interface AuthAction {
   type: string
-  payload?: AuthForm | User
+  payload?: AuthForm | AuthUser
   error?: string | null
 }
 
 export interface AuthState {
-  user: User | null
+  authUser: AuthUser | null
   isOnline: boolean
   isLoading: boolean
   error: string | null

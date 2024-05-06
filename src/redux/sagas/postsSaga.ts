@@ -10,8 +10,8 @@ import getPosts from '../api/getPosts';
 
 function * postsWorker () {
   try {
-    const response: AxiosResponse<Post[]> = yield call(getPosts);
-    yield put(postsReseived(response.data));
+    const { data }: AxiosResponse<Post[]> = yield call(getPosts);
+    yield put(postsReseived(data));
   } catch (error: unknown) {
     const currentError: string = error instanceof AxiosError ? error.message : GLOBAL_ERROR;
     yield put(postsFailed(changeError(currentError)));

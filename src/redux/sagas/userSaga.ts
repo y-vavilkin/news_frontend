@@ -1,27 +1,22 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { AxiosError, AxiosResponse } from 'axios';
 
-import { BAD_URL, GLOBAL_ERROR } from '../../constants/errors';
-import { UserAction } from '../../interfaces/user';
-import { User } from '../../interfaces/auth';
+import { UserAction, User } from '../../interfaces/user';
+import { GLOBAL_ERROR } from '../../constants/errors';
 import { changeError } from '../../helpers';
-import { userFailed, userReceived, userReset } from '../actions/user';
+import { userFailed, userReceived } from '../actions/user';
 import * as actionTypes from '../actions/actionTypes/user';
 import getUser from '../api/getUser';
 
 function * userWorker (action: UserAction) {
   try {
     const id = action.payload;
-    // TODO
-    if (typeof id === 'number' && !isNaN(id)) {
-      const response: AxiosResponse<User> = yield call(getUser, id);
-      yield put(userReset());
-      yield put(userReceived(response.data));
-    } else {
-      yield put(userFailed(changeError(BAD_URL)));
-    }
+    const { data }: AxiosResponse<User> = yield call(getUser, Number(id));
+    yield put(userReceived(data));
   } catch (error: unknown) {
-    const currentError: string = error instanceof AxiosError ? error.response?.data.message : GLOBAL_ERROR;
+    const currentError: string = error instanceof AxiosError
+      ? error.response?.data.message
+      : GLOBAL_ERROR;
     yield put(userFailed(changeError(currentError)));
   }
 }

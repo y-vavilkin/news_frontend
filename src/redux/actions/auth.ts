@@ -1,17 +1,12 @@
-import { AuthAction, AuthForm, User } from '../../interfaces/auth';
+import { AuthAction, AuthForm, AuthUser } from '../../interfaces/auth';
 import * as actionTypes from './actionTypes/auth';
 
-export const authUserLogin = (payload: AuthForm): AuthAction => ({
-  type: actionTypes.AUTH_USER_LOGIN,
+export const authUser = (type: string, payload: AuthForm): AuthAction => ({
+  type,
   payload
 });
 
-export const authUserRegistration = (payload: AuthForm): AuthAction => ({
-  type: actionTypes.AUTH_USER_REGISTRATION,
-  payload
-});
-
-export const authUserSuccess = (payload: User): AuthAction => ({
+export const authUserSuccess = (payload: AuthUser): AuthAction => ({
   type: actionTypes.AUTH_USER_SUCCESS,
   payload
 });
@@ -20,8 +15,8 @@ export const authCheck = (): AuthAction => ({
   type: actionTypes.AUTH_USER_CHECK
 });
 
-export const authReset = (): AuthAction => ({
-  type: actionTypes.AUTH_USER_RESET
+export const authLogout = (): AuthAction => ({
+  type: actionTypes.AUTH_USER_LOGOUT
 });
 
 export const authUserFailure = (error: string): AuthAction => ({

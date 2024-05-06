@@ -7,7 +7,7 @@ const initialState: PostsState = {
   error: null
 };
 
-export default function postsReducer (state: PostsState = initialState, action: PostAction): PostsState {
+const postsReducer = (state: PostsState = initialState, action: PostAction): PostsState => {
   switch (action.type) {
     case actionTypes.POSTS_REQUESTED:
       return {
@@ -29,4 +29,6 @@ export default function postsReducer (state: PostsState = initialState, action: 
     default:
       return state;
   }
-}
+};
+
+export default postsReducer;

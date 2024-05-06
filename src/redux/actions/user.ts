@@ -1,5 +1,5 @@
-import { User } from '../../interfaces/auth';
-import { UserAction } from '../../interfaces/user';
+import { User, UserAction } from '../../interfaces/user';
+
 import * as actionTypes from './actionTypes/user';
 
 export const userRequest = (payload: number): UserAction => ({

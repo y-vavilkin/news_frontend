@@ -1,43 +1,24 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { AxiosError, AxiosResponse } from 'axios';
 
-import { AuthAction, AuthResponse, User } from '../../interfaces/auth';
+import { AuthAction, AuthUser } from '../../interfaces/auth';
 import { GLOBAL_ERROR } from '../../constants/errors';
 import { changeError } from '../../helpers';
 import { TOKEN } from '../../constants';
 import { authUserFailure, authUserSuccess } from '../actions/auth';
 import * as actionTypes from '../actions/actionTypes/auth';
-import { authenticate } from '../api/authenticate';
-import { closeModal } from '../actions/modal';
-import { userReset } from '../actions/user';
 import whoami from '../api/whoami';
 
 function * authSaga (action: AuthAction) {
   try {
     if (action.type === actionTypes.AUTH_USER_CHECK) {
-      const response: AxiosResponse<User> = yield call(whoami);
-      yield put(authUserSuccess(response.data));
-    }
-
-    if (action.type === actionTypes.AUTH_USER_REGISTRATION) {
-      // TODO
-      const response: AxiosResponse<AuthResponse> = yield call(authenticate, action.payload, 'registration');
-      localStorage.setItem(TOKEN, response.data.token);
-      yield put(authUserSuccess(response.data.user));
-      yield put(userReset());
-      yield put(closeModal());
-    }
-
-    if (action.type === actionTypes.AUTH_USER_LOGIN) {
-      // TODO
-      const response: AxiosResponse<AuthResponse> = yield call(authenticate, action.payload, 'login');
-      localStorage.setItem(TOKEN, response.data.token);
-      yield put(authUserSuccess(response.data.user));
-      yield put(userReset());
-      yield put(closeModal());
+      const { data }: AxiosResponse<AuthUser> = yield call(whoami);
+      yield put(authUserSuccess(data));
     }
   } catch (error: unknown) {
-    const currentError: string = error instanceof AxiosError ? error.response?.data.message : GLOBAL_ERROR;
+    const currentError: string = error instanceof AxiosError
+      ? error.response?.data.message
+      : GLOBAL_ERROR;
     localStorage.removeItem(TOKEN);
     yield put(authUserFailure(changeError(currentError)));
   }
@@ -45,6 +26,4 @@ function * authSaga (action: AuthAction) {
 
 export default function * watcherSaga () {
   yield takeLatest(actionTypes.AUTH_USER_CHECK, authSaga);
-  yield takeLatest(actionTypes.AUTH_USER_LOGIN, authSaga);
-  yield takeLatest(actionTypes.AUTH_USER_REGISTRATION, authSaga);
 }

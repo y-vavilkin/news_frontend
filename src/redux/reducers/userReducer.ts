@@ -4,43 +4,43 @@ import * as actionTypes from '../actions/actionTypes/user';
 const initialState: UserState = {
   isLoading: false,
   error: null,
-  id: null,
+  userPosts: null,
   user: null
 };
 
-export default function postsReducer (state: UserState = initialState, action: UserAction): UserState {
+const postsReducer = (state: UserState = initialState, action: UserAction): UserState => {
   switch (action.type) {
     case actionTypes.USER_REQUESTED:
       return {
         ...state,
-        // TODO
-        id: action.payload ?? null,
+        error: null,
         isLoading: true
       };
     case actionTypes.USER_RECEIVED:
       return {
         ...state,
         isLoading: false,
-        // TODO
-        user: action.payload ?? null
+        user: action.payload instanceof Object ? action.payload : null,
+        userPosts: action.payload instanceof Object ? action.payload.posts : null
       };
     case actionTypes.USER_FAILED:
       return {
         ...state,
-        id: null,
         isLoading: false,
         error: action.error ?? null
       };
     case actionTypes.USER_RESET: {
       return {
         ...state,
-        id: null,
         isLoading: false,
         error: null,
-        user: null
+        user: null,
+        userPosts: null
       };
     }
     default:
       return state;
   }
-}
+};
+
+export default postsReducer;

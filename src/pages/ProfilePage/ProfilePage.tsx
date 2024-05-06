@@ -1,72 +1,50 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import Edit from '@mui/icons-material/Edit';
-import Add from '@mui/icons-material/Add';
-import { Button } from '@mui/material';
 import { useEffect } from 'react';
 
-import placeholderAvatar from '../../assets/placeholderAvatar.webp';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { changeError, compareUserId } from '../../helpers';
 import { userRequest } from '../../redux/actions/user';
-import { ERROR_401 } from '../../constants/errors';
 import PostsList from '../../components/PostsList';
+import UserCard from '../../components/UserCard';
 import { EMPTY_POSTS } from '../../constants';
 import Loader from '../../components/Loader';
 import Notify from '../../components/Notify';
 
-import classes from './ProfilePage.module.scss';
-
 const ProfilePage = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const { id } = useParams();
   const posts = useAppSelector(state => state.currentUser.user?.posts);
   const dataUser = useAppSelector(state => state.currentUser.user);
   const error = useAppSelector(state => state.currentUser.error);
   const isLoading = useAppSelector(state => state.currentUser.isLoading);
-  const currentUserId = useAppSelector(state => state.auth.user?.id);
-  const { id } = useParams();
-  const navigate = useNavigate();
   const isNotEmpty = posts !== undefined && posts.length !== 0;
 
   useEffect(() => {
-    dispatch(userRequest(Number(id)));
+    const requestId = Number(id);
 
-    if (error === changeError(ERROR_401)) {
-      navigate('/');
+    if (!isNaN(requestId)) {
+      dispatch(userRequest(requestId));
+      return;
     }
-  }, [id, error]);
 
-  if (error !== null) return <Notify info={error} status="error" />;
+    navigate('/');
+  }, [id]);
 
   if (isLoading) return <Loader />;
 
+  if (error !== null) return <Notify info={error} status="error" />;
+
   return (
     <>
-      <div className={classes.userDescription}>
-        <img
-          className={classes.avatar}
-          src={dataUser?.avatarUrl ?? placeholderAvatar}
-          alt="Avatar"
-        />
-        <div className={classes.information}>
-          <p>Login: {dataUser?.login}</p>
-          <p>Email: {dataUser?.email}</p>
-        </div>
-        {
-          compareUserId(id, currentUserId) && (
-            <div className={classes.buttons}>
-              <Button variant="contained" startIcon={<Add />}>Add Post</Button>
-              <Button variant="contained" startIcon={<Edit />}>Edit Profile</Button>
-            </div>
-          )
-        }
-      </div>
-      <>
-        {
-          isNotEmpty
-            ? <PostsList postsData={posts} />
-            : <Notify info={EMPTY_POSTS} status="info" />
-        }
-      </>
+      {
+        dataUser !== null && <UserCard id={Number(id)} dataUser={dataUser} />
+      }
+      {
+        isNotEmpty
+          ? <PostsList postsData={posts} />
+          : <Notify info={EMPTY_POSTS} status="info" />
+      }
     </>
   );
 };

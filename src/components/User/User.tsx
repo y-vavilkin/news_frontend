@@ -1,18 +1,16 @@
 import { Link } from 'react-router-dom';
 
-import { type User as UserDescription } from '../../../../interfaces/auth';
-import placeholderAvatar from '../../../../assets/placeholderAvatar.webp';
-import { useAppSelector } from '../../../../redux/hooks';
-import { changeFormatDate } from '../../../../helpers';
+import { type User as UserDescription } from '../../interfaces/user';
+import placeholderAvatar from '../../assets/placeholderAvatar.webp';
+import { useAppSelector } from '../../redux/hooks';
 
 import classes from './User.module.scss';
 
 interface UserProps {
   user: UserDescription
-  createdAt: string
 }
 
-const User = ({ user, createdAt }: UserProps) => {
+const User = ({ user }: UserProps) => {
   const isOnline = useAppSelector(state => state.auth.isOnline);
 
   return (
@@ -34,7 +32,6 @@ const User = ({ user, createdAt }: UserProps) => {
             <p>{user.login}</p>
           )
         }
-        <p>{changeFormatDate(createdAt)}</p>
       </div>
     </div>
   );

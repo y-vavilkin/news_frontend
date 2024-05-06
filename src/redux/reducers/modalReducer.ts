@@ -6,21 +6,17 @@ const initialState: ModalState = {
   type: null
 };
 
-export default function modalReducer (state: ModalState = initialState, action: ModalAction): ModalState {
+const modalReducer = (state: ModalState = initialState, action: ModalAction): ModalState => {
   switch (action.type) {
-    case actionTypes.OPEN_MODAL:
+    case actionTypes.TOGGLE_MODAL:
       return {
         ...state,
-        isModalOpen: true,
+        isModalOpen: !state.isModalOpen,
         type: action.payload ?? null
-      };
-    case actionTypes.CLOSE_MODAL:
-      return {
-        ...state,
-        isModalOpen: false,
-        type: null
       };
     default:
       return state;
   }
-}
+};
+
+export default modalReducer;

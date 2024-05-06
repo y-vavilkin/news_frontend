@@ -1,30 +1,45 @@
 import { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom';
 
 import { authCheck } from './redux/actions/auth';
 import { useAppDispatch } from './redux/hooks';
 import ProfilePage from './pages/ProfilePage';
-import CustomModal from './components/Modal';
-import Header from './components/Header';
 import MainPage from './pages/MainPage';
+import { TOKEN } from './constants';
+import Layout from './Layout';
 import './App.scss';
+
+const routes = [
+  {
+    path: '/',
+    element: <Layout/>,
+    children: [
+      {
+        path: '/',
+        element: <MainPage />
+      },
+      {
+        path: '/users/:id',
+        element: <ProfilePage />
+      }]
+  }
+];
 
 const App = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(authCheck());
+    if (localStorage.getItem(TOKEN) !== null) {
+      dispatch(authCheck());
+    }
   }, []);
 
+  const routing = useRoutes(routes);
+
   return (
-    <Router>
-      <CustomModal/>
-      <Header />
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/users/:id" element={<ProfilePage />}/>
-      </Routes>
-    </Router>
+    <>
+      {routing}
+    </>
   );
 };
 

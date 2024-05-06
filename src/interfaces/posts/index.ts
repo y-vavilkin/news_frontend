@@ -1,4 +1,4 @@
-import { User } from '../auth';
+import { User } from '../user';
 
 export interface Tag {
   id: number
