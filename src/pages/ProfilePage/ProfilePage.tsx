@@ -25,6 +25,7 @@ const ProfilePage = () => {
   const currentUserId = useAppSelector(state => state.auth.user?.id);
   const { id } = useParams();
   const navigate = useNavigate();
+  const isNotEmpty = posts !== undefined && posts.length !== 0;
 
   useEffect(() => {
     dispatch(userRequest(Number(id)));
@@ -34,14 +35,18 @@ const ProfilePage = () => {
     }
   }, [id, error]);
 
-  if (error !== null) return <Notify info={error} status='error' />;
+  if (error !== null) return <Notify info={error} status="error" />;
 
   if (isLoading) return <Loader />;
 
   return (
     <>
       <div className={classes.userDescription}>
-        <img className={classes.avatar} src={dataUser?.avatarUrl ?? placeholderAvatar} alt="Avatar" />
+        <img
+          className={classes.avatar}
+          src={dataUser?.avatarUrl ?? placeholderAvatar}
+          alt="Avatar"
+        />
         <div className={classes.information}>
           <p>Login: {dataUser?.login}</p>
           <p>Email: {dataUser?.email}</p>
@@ -57,11 +62,9 @@ const ProfilePage = () => {
       </div>
       <>
         {
-          posts !== undefined && (
-            posts.length !== 0
-              ? <PostsList postsData={posts} />
-              : <Notify info={EMPTY_POSTS} status='info' />
-          )
+          isNotEmpty
+            ? <PostsList postsData={posts} />
+            : <Notify info={EMPTY_POSTS} status="info" />
         }
       </>
     </>

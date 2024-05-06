@@ -13,6 +13,7 @@ import signUpSchema from './signInSchema';
 const SignInForm = () => {
   const dispatch = useAppDispatch();
   const authError = useAppSelector(state => state.auth.error);
+  const isError = authError !== null;
 
   const { register, watch, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(signUpSchema)
@@ -51,7 +52,7 @@ const SignInForm = () => {
         type="submit"
         variant="contained"
         color="primary"
-        disabled={authError !== null}
+        disabled={isError}
         style={{ marginTop: '20px' }}
       >
         Continue

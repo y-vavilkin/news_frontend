@@ -12,6 +12,7 @@ const MainPage = () => {
   const posts = useAppSelector((state) => state.posts.posts);
   const isLoading = useAppSelector((state) => state.posts.isLoading);
   const error = useAppSelector((state) => state.posts.error);
+  const isNotEmpty = posts.length !== 0;
 
   useEffect(() => {
     dispatch(postsRequest());
@@ -19,14 +20,14 @@ const MainPage = () => {
 
   if (isLoading) return <Loader />;
 
-  if (error !== null) return <Notify info={error} status='error' />;
+  if (error !== null) return <Notify info={error} status="error" />;
 
   return (
     <>
       {
-        posts.length !== 0
+        isNotEmpty
           ? <PostsList postsData={posts} />
-          : <Notify info={EMPTY_POSTS} status='info' />
+          : <Notify info={EMPTY_POSTS} status="info" />
       }
     </>
   );

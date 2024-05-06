@@ -34,7 +34,7 @@ const Header = () => {
 
   return (
     <div className={classes.header}>
-      <Link to='/' className={classes.logo}>
+      <Link to="/" className={classes.logo}>
         <img src={logo} alt="logo" />
       </Link>
       <p>News</p>
@@ -42,8 +42,19 @@ const Header = () => {
         {
           !isOnline && (
             <>
-              <Button color="success" variant="contained" onClick={handlerRegistration}>sign up</Button>
-              <Button variant="contained" onClick={handlerAuthorization}>sign in</Button>
+              <Button
+                color="success"
+                variant="contained"
+                onClick={handlerRegistration}
+              >
+                sign up
+              </Button>
+              <Button
+                variant="contained"
+                onClick={handlerAuthorization}
+              >
+                sign in
+              </Button>
             </>
           )
         }
@@ -51,9 +62,19 @@ const Header = () => {
           isOnline && (
             <>
               <Link to={`/users/${userId}`}>
-                <img className={classes.avatar} src={userAvatar ?? placeHolderAvatar} alt="Profile" />
+                <img
+                  className={classes.avatar}
+                  src={userAvatar ?? placeHolderAvatar}
+                  alt="Profile"
+                />
               </Link>
-              <Button color="success" variant="contained" onClick={handlerLogout}>logout</Button>
+              <Button
+                color="success"
+                variant="contained"
+                onClick={handlerLogout}
+              >
+                logout
+              </Button>
             </>
           )
         }

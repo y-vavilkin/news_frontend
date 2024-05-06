@@ -1,5 +1,6 @@
-import { Button } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
+import { useLocation } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 import placeholderImage from '../../assets/placeholderImage.webp';
 import { User as UserDescription } from '../../interfaces/auth';
@@ -10,7 +11,6 @@ import { compareUserId } from '../../helpers';
 import classes from './PostCard.module.scss';
 import Tag from './components/Tag';
 import User from './components/User';
-import { useLocation } from 'react-router-dom';
 
 export interface PostProps {
   key: number

@@ -12,6 +12,8 @@ const CustomModal = () => {
   const dispatch = useAppDispatch();
   const isModalOpen = useAppSelector(state => state.modal.isModalOpen);
   const typeModal = useAppSelector(state => state.modal.type);
+  const isRegistration = typeModal === actionTypes.AUTH_USER_REGISTRATION;
+  const isLogin = typeModal === actionTypes.AUTH_USER_LOGIN;
 
   const handleClose = () => {
     dispatch(closeModal());
@@ -25,12 +27,12 @@ const CustomModal = () => {
     >
       <Box>
         {
-          typeModal === actionTypes.AUTH_USER_REGISTRATION && (
+          isRegistration && (
             <SignUpForm />
           )
         }
         {
-          typeModal === actionTypes.AUTH_USER_LOGIN && (
+          isLogin && (
             <SignInForm />
           )
         }
