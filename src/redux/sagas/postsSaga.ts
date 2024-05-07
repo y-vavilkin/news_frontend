@@ -1,29 +1,23 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { AxiosError, AxiosResponse } from 'axios';
 
-import { changeStatusError } from '../../helpers';
-import { GLOBAL_ERROR } from '../../constants';
+import { GLOBAL_ERROR } from '../../constants/errors';
 import { Post } from '../../interfaces/posts';
+import { changeError } from '../../helpers';
 import { postsReseived, postsFailed } from '../actions/posts';
-import { POSTS_REQUESTED } from '../actionTypes';
+import * as actionTypes from '../actions/actionTypes/posts';
 import getPosts from '../api/getPosts';
 
 function * postsWorker () {
   try {
-    const response: AxiosResponse<Post[] | []> = yield call(getPosts);
-
-    const payload = { posts: response.data };
-
-    yield put(postsReseived(payload.posts));
+    const { data }: AxiosResponse<Post[]> = yield call(getPosts);
+    yield put(postsReseived(data));
   } catch (error: unknown) {
-    const currentError = error instanceof AxiosError ? error.message : GLOBAL_ERROR;
-
-    const payload = { error: changeStatusError(currentError) };
-
-    yield put(postsFailed(payload.error));
+    const currentError: string = error instanceof AxiosError ? error.message : GLOBAL_ERROR;
+    yield put(postsFailed(changeError(currentError)));
   }
 }
 
 export default function * watcherSaga () {
-  yield takeLatest(POSTS_REQUESTED, postsWorker);
+  yield takeLatest(actionTypes.POSTS_REQUESTED, postsWorker);
 }

@@ -1,7 +1,4 @@
-import { User } from '../auth';
-import { Error } from '../index';
-
-type ArrayOfPosts = Post[] | [];
+import { User } from '../user';
 
 export interface Tag {
   id: number
@@ -20,18 +17,14 @@ export interface Post {
   tags: Tag[]
 }
 
-export interface PostPayload {
-  posts?: ArrayOfPosts
-  error: Error
-}
-
 export interface PostAction {
   type: string
-  payload: PostPayload
+  payload?: Post[]
+  error?: string
 }
 
 export interface PostsState {
-  postsArray: ArrayOfPosts
+  posts: Post[]
   isLoading: boolean
-  error: Error
+  error: string | null
 }

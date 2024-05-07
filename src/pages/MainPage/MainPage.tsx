@@ -9,22 +9,26 @@ import Loader from '../../components/Loader';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
-  const posts = useAppSelector((state) => state.posts.postsArray);
+  const posts = useAppSelector((state) => state.posts.posts);
   const isLoading = useAppSelector((state) => state.posts.isLoading);
   const error = useAppSelector((state) => state.posts.error);
+  const isNotEmpty = posts.length !== 0;
 
   useEffect(() => {
     dispatch(postsRequest());
   }, []);
 
   if (isLoading) return <Loader />;
-  if (error !== null) return <Notify info={error} status='error' />;
+
+  if (error !== null) return <Notify info={error} status="error" />;
 
   return (
     <>
-      {posts.length !== 0
-        ? <PostsList postsData={posts} />
-        : <Notify info={EMPTY_POSTS} status='info' />}
+      {
+        isNotEmpty
+          ? <PostsList postsData={posts} />
+          : <Notify info={EMPTY_POSTS} status="info" />
+      }
     </>
   );
 };

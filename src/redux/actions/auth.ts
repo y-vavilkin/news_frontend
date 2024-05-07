@@ -1,34 +1,29 @@
-import { AuthAction, AuthPayload } from '../../interfaces/auth';
-import { AUTH_USER, AUTH_USER_SUCCESS, AUTH_USER_FAILURE, AUTH_USER_RESET } from '../actionTypes';
+import { AuthAction, AuthForm, AuthUser } from '../../interfaces/auth';
+import * as actionTypes from './actionTypes/auth';
 
-export const authUser = (payload: AuthPayload): AuthAction => ({
-  type: AUTH_USER,
-  payload: {
-    authData: payload.authData,
-    error: null
-  }
+export const authUser = (type: string, payload: AuthForm): AuthAction => ({
+  type,
+  payload
 });
 
-export const authUserSuccess = (): AuthAction => ({
-  type: AUTH_USER_SUCCESS,
-  payload: {
-    authData: null,
-    error: null
-  }
+export const authUserSuccess = (payload: AuthUser): AuthAction => ({
+  type: actionTypes.AUTH_USER_SUCCESS,
+  payload
 });
 
-export const authUserFailure = (payload: AuthPayload): AuthAction => ({
-  type: AUTH_USER_FAILURE,
-  payload: {
-    authData: null,
-    error: payload.error
-  }
+export const authCheck = (): AuthAction => ({
+  type: actionTypes.AUTH_USER_CHECK
 });
 
-export const authResetError = (): AuthAction => ({
-  type: AUTH_USER_RESET,
-  payload: {
-    authData: null,
-    error: null
-  }
+export const authLogout = (): AuthAction => ({
+  type: actionTypes.AUTH_USER_LOGOUT
+});
+
+export const authUserFailure = (error: string): AuthAction => ({
+  type: actionTypes.AUTH_USER_FAILURE,
+  error
+});
+
+export const authUserReset = (): AuthAction => ({
+  type: actionTypes.AUTH_USER_RESET
 });

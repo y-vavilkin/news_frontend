@@ -1,35 +1,45 @@
 import { AuthAction, AuthState } from '../../interfaces/auth';
-import { AUTH_USER, AUTH_USER_SUCCESS, AUTH_USER_FAILURE, AUTH_USER_RESET } from '../actionTypes';
+import { TOKEN } from '../../constants';
+import * as actionTypes from '../actions/actionTypes/auth';
 
 const initialState: AuthState = {
+  isOnline: false,
   isLoading: false,
-  error: null
+  error: null,
+  authUser: null
 };
 
 const authReducer = (state: AuthState = initialState, action: AuthAction): AuthState => {
   switch (action.type) {
-    case AUTH_USER:
+    case actionTypes.AUTH_USER_CHECK:
+    case actionTypes.AUTH_USER_LOGIN:
+    case actionTypes.AUTH_USER_REGISTRATION:
       return {
         ...state,
         isLoading: true
       };
-    case AUTH_USER_SUCCESS:
+    case actionTypes.AUTH_USER_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        error: null
+        isOnline: true,
+        error: null,
+        authUser: action.payload ?? null
       };
-    case AUTH_USER_FAILURE:
+    case actionTypes.AUTH_USER_FAILURE:
       return {
         ...state,
         isLoading: false,
-        error: action.payload.error
+        error: action.error ?? null
       };
-    case AUTH_USER_RESET:
+    case actionTypes.AUTH_USER_LOGOUT:
+    case actionTypes.AUTH_USER_RESET:
+      localStorage.removeItem(TOKEN);
       return {
         ...state,
-        isLoading: false,
-        error: null
+        error: null,
+        authUser: null,
+        isOnline: false
       };
     default:
       return state;

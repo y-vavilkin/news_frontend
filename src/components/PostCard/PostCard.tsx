@@ -1,9 +1,13 @@
-import { User as UserDescription } from '../../interfaces/auth';
+import { useLocation } from 'react-router-dom';
+
+import placeholderImage from '../../assets/placeholderImage.webp';
+import { User as UserDescription } from '../../interfaces/user';
 import { Tag as TagDescription } from '../../interfaces/posts';
-import placeholderImage from './images/placeholderImage.webp';
+import { changeFormatDate } from '../../helpers';
+import User from '../User';
+import Tag from '../Tag';
+
 import classes from './PostCard.module.scss';
-import Tag from './components/Tag';
-import User from './components/User';
 
 export interface PostProps {
   key: number
@@ -24,6 +28,9 @@ const PostCard = ({
   user,
   tags
 }: PostProps) => {
+  const location = useLocation();
+  const isMainPagePath = location.pathname === '/';
+
   return (
     <div className={classes.container}>
       <li className={classes.post}>
@@ -38,7 +45,10 @@ const PostCard = ({
         <div className={classes.contentBlock}>
           <h1 className={classes.title}>{title}</h1>
           <div className={classes.content}>
-            <User user={user} createdAt={createdAt}/>
+            {isMainPagePath && (
+              <User user={user} />
+            )}
+            <p>{changeFormatDate(createdAt)}</p>
             <p className={classes.text}>{content}</p>
           </div>
         </div>

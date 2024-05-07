@@ -3,13 +3,13 @@ import { combineReducers } from 'redux';
 import postsReducer from './postsReducer';
 import modalReducer from './modalReducer';
 import authReducer from './authReducer';
-import statusReducer from './statusReducer';
+import userReducer from './userReducer';
 
 const rootReducer = combineReducers({
   posts: postsReducer,
   modal: modalReducer,
   auth: authReducer,
-  status: statusReducer
+  currentUser: userReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

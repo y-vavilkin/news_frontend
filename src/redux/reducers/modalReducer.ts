@@ -1,26 +1,22 @@
 import { ModalAction, ModalState } from '../../interfaces/modal';
-import { OPEN_MODAL, CLOSE_MODAL } from '../actionTypes';
+import * as actionTypes from '../actions/actionTypes/modal';
 
 const initialState: ModalState = {
   isModalOpen: false,
   type: null
 };
 
-export default function modalReducer (state: ModalState = initialState, action: ModalAction): ModalState {
+const modalReducer = (state: ModalState = initialState, action: ModalAction): ModalState => {
   switch (action.type) {
-    case OPEN_MODAL:
+    case actionTypes.TOGGLE_MODAL:
       return {
         ...state,
-        isModalOpen: true,
-        type: action.payload
-      };
-    case CLOSE_MODAL:
-      return {
-        ...state,
-        isModalOpen: false,
-        type: action.payload
+        isModalOpen: !state.isModalOpen,
+        type: action.payload ?? null
       };
     default:
       return state;
   }
-}
+};
+
+export default modalReducer;
