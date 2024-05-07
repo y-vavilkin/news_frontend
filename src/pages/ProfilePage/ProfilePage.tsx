@@ -37,14 +37,8 @@ const ProfilePage = () => {
 
   return (
     <>
-      {
-        dataUser !== null && <UserCard id={Number(id)} dataUser={dataUser} />
-      }
-      {
-        isNotEmpty
-          ? <PostsList postsData={posts} />
-          : <Notify info={EMPTY_POSTS} status="info" />
-      }
+      {dataUser !== null && <UserCard id={Number(id)} dataUser={dataUser} />}
+      {isNotEmpty ? <PostsList postsData={posts} /> : <Notify info={EMPTY_POSTS} status="info" />}
     </>
   );
 };

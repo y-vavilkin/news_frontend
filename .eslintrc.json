@@ -42,6 +42,11 @@
       "return": true, 
       "arrow": false 
     }],
+    "react/jsx-tag-spacing": ["error", {
+      "closingSlash": "never",
+      "beforeSelfClosing": "always",
+      "afterOpening": "never"
+    }],
     "@typescript-eslint/indent": ["error", 2, { "SwitchCase": 1 }],
     "@typescript-eslint/member-delimiter-style": ["error", {
       "multiline": {

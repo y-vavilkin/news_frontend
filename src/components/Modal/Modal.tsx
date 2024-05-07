@@ -3,9 +3,9 @@ import { Modal, Box } from '@mui/material';
 import * as actionTypes from '../../redux/actions/actionTypes/auth';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { closeModal } from '../../redux/actions/modal';
+import SignUpForm from '../SignUpForm';
+import SignInForm from '../SignInForm';
 
-import SignUpForm from './components/SignUpForm';
-import SignInForm from './components/SignInForm';
 import classes from './Modal.module.scss';
 
 const CustomModal = () => {
@@ -26,16 +26,12 @@ const CustomModal = () => {
       className={classes.modal}
     >
       <Box>
-        {
-          isRegistration && (
-            <SignUpForm />
-          )
-        }
-        {
-          isLogin && (
-            <SignInForm />
-          )
-        }
+        {isRegistration && (
+          <SignUpForm />
+        )}
+        {isLogin && (
+          <SignInForm />
+        )}
       </Box>
     </Modal>
   );

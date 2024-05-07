@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 
 import { useAppSelector } from '../../redux/hooks';
 import logo from '../../assets/world-news.webp';
+import UserMenu from '../UserMenu';
+import AuthMenu from '../AuthMenu';
 
-import UserMenu from './components/UserMenu';
-import AuthMenu from './components/AuthMenu';
 import classes from './Header.module.scss';
 
 const Header = () => {
@@ -17,9 +17,7 @@ const Header = () => {
       </Link>
       <p>News</p>
       <div className={classes.links}>
-        {
-          isOnline ? <UserMenu /> : <AuthMenu />
-        }
+        {isOnline ? <UserMenu /> : <AuthMenu />}
       </div>
     </div>
   );

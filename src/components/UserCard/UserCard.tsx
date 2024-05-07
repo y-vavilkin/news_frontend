@@ -27,14 +27,12 @@ const UserCard = ({ id, dataUser }: UserCardProps) => {
         <p>Login: {dataUser.login}</p>
         <p>Email: {dataUser.email}</p>
       </div>
-      {
-        id === userId && (
-          <div className={classes.buttons}>
-            <Button variant="contained" startIcon={<Add />}>Add Post</Button>
-            <Button variant="contained" startIcon={<Edit />}>Edit Profile</Button>
-          </div>
-        )
-      }
+      {id === userId && (
+        <div className={classes.buttons}>
+          <Button variant="contained" startIcon={<Add />}>Add Post</Button>
+          <Button variant="contained" startIcon={<Edit />}>Edit Profile</Button>
+        </div>
+      )}
     </div>
   );
 };

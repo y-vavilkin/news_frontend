@@ -6,13 +6,13 @@ import { useAppDispatch } from './redux/hooks';
 import ProfilePage from './pages/ProfilePage';
 import MainPage from './pages/MainPage';
 import { TOKEN } from './constants';
-import Layout from './Layout';
+import Layout from './components/Layout/Layout';
 import './App.scss';
 
 const routes = [
   {
     path: '/',
-    element: <Layout/>,
+    element: <Layout />,
     children: [
       {
         path: '/',

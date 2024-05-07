@@ -1,10 +1,10 @@
 import Button from '@mui/material/Button';
 import { Link, useNavigate } from 'react-router-dom';
 
-import placeHolderAvatar from '../../../../assets/placeholderAvatar.webp';
-import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
-import { authLogout } from '../../../../redux/actions/auth';
-import { TOKEN } from '../../../../constants';
+import placeHolderAvatar from '../../assets/placeholderAvatar.webp';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { authLogout } from '../../redux/actions/auth';
+import { TOKEN } from '../../constants';
 
 import classes from './UserMenu.module.scss';
 
