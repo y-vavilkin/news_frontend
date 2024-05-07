@@ -1,5 +1,6 @@
 import Button from '@mui/material/Button';
 
+import { authUserReset } from '../../../../redux/actions/auth';
 import { openModal } from '../../../../redux/actions/modal';
 import { useAppDispatch } from '../../../../redux/hooks';
 import {
@@ -11,10 +12,12 @@ const AuthMenu = () => {
   const dispatch = useAppDispatch();
 
   const handlerRegistration = () => {
+    dispatch(authUserReset());
     dispatch(openModal(AUTH_USER_REGISTRATION));
   };
 
   const handlerAuthorization = () => {
+    dispatch(authUserReset());
     dispatch(openModal(AUTH_USER_LOGIN));
   };
 

@@ -23,3 +23,7 @@ export const authUserFailure = (error: string): AuthAction => ({
   type: actionTypes.AUTH_USER_FAILURE,
   error
 });
+
+export const authUserReset = (): AuthAction => ({
+  type: actionTypes.AUTH_USER_RESET
+});

@@ -32,6 +32,7 @@ const authReducer = (state: AuthState = initialState, action: AuthAction): AuthS
         error: action.error ?? null
       };
     case actionTypes.AUTH_USER_LOGOUT:
+    case actionTypes.AUTH_USER_RESET:
       return {
         ...state,
         error: null,
