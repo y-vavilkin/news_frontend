@@ -29,15 +29,6 @@ const postsReducer = (state: UserState = initialState, action: UserAction): User
         isLoading: false,
         error: action.error ?? null
       };
-    case actionTypes.USER_RESET: {
-      return {
-        ...state,
-        isLoading: false,
-        error: null,
-        user: null,
-        userPosts: null
-      };
-    }
     default:
       return state;
   }

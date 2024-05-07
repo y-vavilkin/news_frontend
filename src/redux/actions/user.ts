@@ -16,7 +16,3 @@ export const userFailed = (error: string): UserAction => ({
   type: actionTypes.USER_FAILED,
   error
 });
-
-export const userReset = (): UserAction => ({
-  type: actionTypes.USER_RESET
-});

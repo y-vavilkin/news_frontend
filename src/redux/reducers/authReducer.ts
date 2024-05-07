@@ -22,6 +22,7 @@ const authReducer = (state: AuthState = initialState, action: AuthAction): AuthS
         ...state,
         isLoading: false,
         isOnline: true,
+        error: null,
         authUser: action.payload ?? null
       };
     case actionTypes.AUTH_USER_FAILURE:

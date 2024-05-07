@@ -9,31 +9,28 @@ import { authUserFailure, authUserSuccess } from '../actions/auth';
 import * as actionTypes from '../actions/actionTypes/auth';
 import { authenticate } from '../api/authenticate';
 import { closeModal } from '../actions/modal';
-import { userReset } from '../actions/user';
 
 function * authSaga (action: AuthAction) {
   try {
     if (action.type === actionTypes.AUTH_USER_REGISTRATION) {
-      const response: AxiosResponse<AuthResponse> = yield call(
+      const { data }: AxiosResponse<AuthResponse> = yield call(
         authenticate,
         action.payload,
         'registration'
       );
-      localStorage.setItem(TOKEN, response.data.token);
-      yield put(authUserSuccess(response.data.user));
-      yield put(userReset());
+      localStorage.setItem(TOKEN, data.token);
+      yield put(authUserSuccess(data.user));
       yield put(closeModal());
     }
 
     if (action.type === actionTypes.AUTH_USER_LOGIN) {
-      const response: AxiosResponse<AuthResponse> = yield call(
+      const { data }: AxiosResponse<AuthResponse> = yield call(
         authenticate,
         action.payload,
         'login'
       );
-      localStorage.setItem(TOKEN, response.data.token);
-      yield put(authUserSuccess(response.data.user));
-      yield put(userReset());
+      localStorage.setItem(TOKEN, data.token);
+      yield put(authUserSuccess(data.user));
       yield put(closeModal());
     }
   } catch (error: unknown) {
