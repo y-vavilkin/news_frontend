@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 
 import { GLOBAL_ERROR } from '../constants/errors';
 
-const convertError = (error: unknown): string => {
+const extractErrorMessage = (error: unknown): string => {
   if (error instanceof AxiosError) {
     return error.response?.data.message;
   } else {
@@ -10,4 +10,4 @@ const convertError = (error: unknown): string => {
   }
 };
 
-export default convertError;
+export default extractErrorMessage;

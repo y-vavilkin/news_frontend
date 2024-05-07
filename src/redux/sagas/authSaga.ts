@@ -2,7 +2,7 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 
 import { AuthAction, AuthResponse } from '../../interfaces/auth';
-import { changeError, convertError } from '../../helpers';
+import { changeError, extractErrorMessage } from '../../helpers';
 import { TOKEN } from '../../constants';
 import { authUserFailure, authUserSuccess } from '../actions/auth';
 import * as actionTypes from '../actions/actionTypes/auth';
@@ -23,7 +23,7 @@ function * authSaga (action: AuthAction) {
     yield put(authUserSuccess(data.user));
     yield put(closeModal());
   } catch (error: unknown) {
-    const currentError: string = convertError(error);
+    const currentError: string = extractErrorMessage(error);
     yield put(authUserFailure(changeError(currentError)));
   }
 }
