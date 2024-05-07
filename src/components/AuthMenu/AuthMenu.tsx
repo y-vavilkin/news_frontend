@@ -11,14 +11,10 @@ import {
 const AuthMenu = () => {
   const dispatch = useAppDispatch();
 
-  const handlerRegistration = () => {
+  const handlerAuth = (type: string) => {
+    console.log(type);
     dispatch(authUserReset());
-    dispatch(openModal(AUTH_USER_REGISTRATION));
-  };
-
-  const handlerAuthorization = () => {
-    dispatch(authUserReset());
-    dispatch(openModal(AUTH_USER_LOGIN));
+    dispatch(openModal(type));
   };
 
   return (
@@ -26,13 +22,13 @@ const AuthMenu = () => {
       <Button
         color="success"
         variant="contained"
-        onClick={handlerRegistration}
+        onClick={() => { handlerAuth(AUTH_USER_REGISTRATION); }}
       >
         sign up
       </Button>
       <Button
         variant="contained"
-        onClick={handlerAuthorization}
+        onClick={() => { handlerAuth(AUTH_USER_LOGIN); }}
       >
         sign in
       </Button>
