@@ -12,7 +12,6 @@ const AuthMenu = () => {
   const dispatch = useAppDispatch();
 
   const handlerAuth = (type: string) => {
-    console.log(type);
     dispatch(authUserReset());
     dispatch(openModal(type));
   };
