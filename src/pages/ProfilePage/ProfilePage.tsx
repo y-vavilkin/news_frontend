@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { userRequest } from '../../redux/actions/user';
+import { UNAUTHORIZED } from '../../constants/errors';
 import PostsList from '../../components/PostsList';
 import UserCard from '../../components/UserCard';
 import { EMPTY_POSTS } from '../../constants';
@@ -25,11 +26,16 @@ const ProfilePage = () => {
 
     if (!isNaN(requestId)) {
       dispatch(userRequest(requestId));
-      return;
+    } else {
+      navigate('/');
     }
-
-    navigate('/');
   }, [id]);
+
+  useEffect(() => {
+    if (error === UNAUTHORIZED) {
+      navigate('/');
+    }
+  }, [error]);
 
   if (isLoading) return <Loader />;
 

@@ -12,7 +12,6 @@ import classes from './PostCard.module.scss';
 export interface PostProps {
   key: number
   id: number
-  userId: number
   title: string
   content: string
   imageUrl: string | null
