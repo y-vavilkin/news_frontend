@@ -1,9 +1,8 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
 import { AuthAction, AuthResponse } from '../../interfaces/auth';
-import { GLOBAL_ERROR } from '../../constants/errors';
-import { changeError } from '../../helpers';
+import { changeError, convertError } from '../../helpers';
 import { TOKEN } from '../../constants';
 import { authUserFailure, authUserSuccess } from '../actions/auth';
 import * as actionTypes from '../actions/actionTypes/auth';
@@ -24,9 +23,7 @@ function * authSaga (action: AuthAction) {
     yield put(authUserSuccess(data.user));
     yield put(closeModal());
   } catch (error: unknown) {
-    const currentError: string = error instanceof AxiosError
-      ? error.response?.data.message
-      : GLOBAL_ERROR;
+    const currentError: string = convertError(error);
     yield put(authUserFailure(changeError(currentError)));
   }
 }

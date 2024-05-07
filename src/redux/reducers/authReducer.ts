@@ -1,4 +1,5 @@
 import { AuthAction, AuthState } from '../../interfaces/auth';
+import { TOKEN } from '../../constants';
 import * as actionTypes from '../actions/actionTypes/auth';
 
 const initialState: AuthState = {
@@ -33,6 +34,7 @@ const authReducer = (state: AuthState = initialState, action: AuthAction): AuthS
       };
     case actionTypes.AUTH_USER_LOGOUT:
     case actionTypes.AUTH_USER_RESET:
+      localStorage.removeItem(TOKEN);
       return {
         ...state,
         error: null,

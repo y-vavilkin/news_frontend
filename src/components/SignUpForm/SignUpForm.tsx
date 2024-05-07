@@ -6,7 +6,7 @@ import { AUTH_USER_REGISTRATION } from '../../redux/actions/actionTypes/auth';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { authUser } from '../../redux/actions/auth';
 import { AuthForm } from '../../interfaces/auth';
-import classes from '../Modal/Modal.module.scss';
+import classes from './SignUpForm.module.scss';
 
 import signUpSchema from './signUpSchema';
 

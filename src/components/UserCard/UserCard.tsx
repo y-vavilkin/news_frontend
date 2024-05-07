@@ -1,6 +1,5 @@
-import Edit from '@mui/icons-material/Edit';
-import Add from '@mui/icons-material/Add';
-import Button from '@mui/material/Button';
+import { Edit, Add } from '@mui/icons-material';
+import { Button } from '@mui/material';
 
 import placeholderAvatar from '../../assets/placeholderAvatar.webp';
 import { User as UserDescription } from '../../interfaces/user';

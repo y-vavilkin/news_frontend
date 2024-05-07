@@ -1,10 +1,9 @@
-import Button from '@mui/material/Button';
+import { Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 
 import placeHolderAvatar from '../../assets/placeholderAvatar.webp';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { authLogout } from '../../redux/actions/auth';
-import { TOKEN } from '../../constants';
 
 import classes from './UserMenu.module.scss';
 
@@ -16,7 +15,6 @@ const UserMenu = () => {
   const userAvatar = useAppSelector((state) => state.auth.authUser?.avatarUrl);
 
   const handlerLogout = () => {
-    localStorage.removeItem(TOKEN);
     dispatch(authLogout());
     navigate('/');
   };

@@ -23,7 +23,9 @@ const User = ({ user }: UserProps) => {
       />
       <div className={classes.info}>
         {isOnline && (
-          <Link className={classes.link} to={`users/${user.id}`}><p>{user.login}</p></Link>
+          <Link className={classes.link} to={`users/${user.id}`}>
+            <p>{user.login}</p>
+          </Link>
         )}
         {!isOnline && (
           <p>{user.login}</p>
