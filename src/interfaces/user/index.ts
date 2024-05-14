@@ -18,7 +18,6 @@ export interface UserAction {
 
 export interface UserState {
   user: User | null
-  userPosts: Post[] | null
   isLoading: boolean
   error: string | null
 }

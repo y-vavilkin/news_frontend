@@ -1,0 +1,28 @@
+.box {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  height: max-content;
+  width: max-content;
+  border-radius: 10px;
+  background-color: var(--white);
+}
+
+.error {
+  color: var(--red)
+}
+
+.hiddenInput {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.button {
+  margin: 5px !important;
+}

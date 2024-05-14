@@ -3,6 +3,8 @@ import { Modal, Box } from '@mui/material';
 import * as actionTypes from '../../redux/actions/actionTypes/auth';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { closeModal } from '../../redux/actions/modal';
+import { ADD_POST } from '../../constants';
+import AddPostForm from '../AddPostForm';
 import SignUpForm from '../SignUpForm';
 import SignInForm from '../SignInForm';
 
@@ -14,6 +16,7 @@ const CustomModal = () => {
   const typeModal = useAppSelector(state => state.modal.type);
   const isRegistration = typeModal === actionTypes.AUTH_USER_REGISTRATION;
   const isLogin = typeModal === actionTypes.AUTH_USER_LOGIN;
+  const isAddPost = typeModal === ADD_POST;
 
   const handleClose = () => {
     dispatch(closeModal());
@@ -31,6 +34,9 @@ const CustomModal = () => {
         )}
         {isLogin && (
           <SignInForm />
+        )}
+        {isAddPost && (
+          <AddPostForm />
         )}
       </Box>
     </Modal>

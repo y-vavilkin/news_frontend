@@ -2,8 +2,10 @@ import { Edit, Add } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
 import placeholderAvatar from '../../assets/placeholderAvatar.webp';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { User as UserDescription } from '../../interfaces/user';
-import { useAppSelector } from '../../redux/hooks';
+import { openModal } from '../../redux/actions/modal';
+import { ADD_POST } from '../../constants';
 
 import classes from './UserCard.module.scss';
 
@@ -13,7 +15,12 @@ interface UserCardProps {
 }
 
 const UserCard = ({ id, dataUser }: UserCardProps) => {
+  const dispatch = useAppDispatch();
   const userId = useAppSelector(state => state.auth.authUser?.id);
+
+  const handlerAddPost = () => {
+    dispatch(openModal(ADD_POST));
+  };
 
   return (
     <div className={classes.userDescription}>
@@ -28,7 +35,7 @@ const UserCard = ({ id, dataUser }: UserCardProps) => {
       </div>
       {id === userId && (
         <div className={classes.buttons}>
-          <Button variant="contained" startIcon={<Add />}>Add Post</Button>
+          <Button variant="contained" startIcon={<Add />} onClick={handlerAddPost}>Add Post</Button>
           <Button variant="contained" startIcon={<Edit />}>Edit Profile</Button>
         </div>
       )}
