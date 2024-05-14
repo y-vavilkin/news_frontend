@@ -12,7 +12,7 @@ const addPostSchema = Yup.object().shape({
     .required('Tags is required'),
   image: Yup.mixed()
     .test('isImage',
-      'Incorrect file format',
+      'File format: jpeg, jpg, png or gif',
       (value: Yup.AnyObject | undefined) => {
         if (value instanceof FileList) {
           if (value.length === 0) return true;
