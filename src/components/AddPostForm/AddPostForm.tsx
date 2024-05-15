@@ -78,7 +78,7 @@ const AddPostForm = () => {
         tabIndex={-1}
         startIcon={<CloudUploadIcon />}
         color={color}
-        sx={{ margin: '5px' }}
+        className={classes.button}
       >
         {textButton}
         <input
@@ -93,7 +93,7 @@ const AddPostForm = () => {
         variant="contained"
         color="primary"
         disabled={isTitleError || isContentError || isTagsError}
-        sx={{ margin: '5px' }}
+        className={classes.button}
       >
         Add Post
       </Button>

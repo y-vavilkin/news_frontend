@@ -39,11 +39,15 @@ const UserCard = ({ id, dataUser }: UserCardProps) => {
             variant="contained"
             startIcon={<Add />}
             onClick={openAddPostModal}
-          >Add Post</Button>
+          >
+            Add Post
+          </Button>
           <Button
             variant="contained"
             startIcon={<Edit />}
-          >Edit Profile</Button>
+          >
+            Edit Profile
+          </Button>
         </div>
       )}
     </div>

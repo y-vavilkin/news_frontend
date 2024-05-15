@@ -5,5 +5,5 @@ export interface ModalAction {
 
 export interface ModalState {
   isModalOpen: boolean
-  type: string | null
+  type: string
 }

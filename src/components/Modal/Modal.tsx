@@ -10,12 +10,11 @@ const CustomModal = () => {
   const dispatch = useAppDispatch();
   const isModalOpen = useAppSelector(state => state.modal.isModalOpen);
   const typeModal = useAppSelector(state => state.modal.type);
+  const Form = selectForm(typeModal);
 
   const handleClose = () => {
     dispatch(closeModal());
   };
-
-  const Form = selectForm(typeModal);
 
   return (
     <Modal
@@ -24,7 +23,7 @@ const CustomModal = () => {
       className={classes.modal}
     >
       <Box>
-        {Form !== null ? <Form /> : null}
+        <Form />
       </Box>
     </Modal>
   );
