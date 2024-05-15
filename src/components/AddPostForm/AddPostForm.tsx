@@ -4,14 +4,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, TextField } from '@mui/material';
 
 import createRequestAddPost from '../../helpers/createRequestAddPost';
-import { addPostRequested } from '../../redux/actions/addPost';
-import { AddPostForm } from '../../interfaces/addPost';
+import { addPostRequested } from '../../redux/actions/user';
+import { AddPostFormData } from '../../interfaces/user';
 import { useAppDispatch } from '../../redux/hooks';
 
 import classes from './AddPostForm.module.scss';
 import addPostSchema from './addPostSchema';
 
-const SignInForm = () => {
+const AddPostForm = () => {
   const dispatch = useAppDispatch();
 
   const {
@@ -26,26 +26,21 @@ const SignInForm = () => {
   const image = watch('image');
   const isImageUploaded = image instanceof FileList && image.length > 0;
 
-  const onSubmit: SubmitHandler<AddPostForm> = (data: AddPostForm) => {
+  const onSubmit: SubmitHandler<AddPostFormData> = (data: AddPostFormData) => {
     dispatch(addPostRequested(createRequestAddPost(data)));
   };
 
   const isTitleError = errors.title?.message !== undefined;
   const isContentError = errors.content?.message !== undefined;
   const isTagsError = errors.tags?.message !== undefined;
-  const isImageError = errors.image?.message !== undefined;
 
-  const color = isImageError
-    ? 'error'
-    : isImageUploaded
-      ? 'success'
-      : 'primary';
+  const color = isImageUploaded
+    ? 'success'
+    : 'primary';
 
-  const textButton = isImageError
-    ? 'please image'
-    : isImageUploaded
-      ? 'thanks'
-      : 'upload file';
+  const textButton = isImageUploaded
+    ? 'thanks'
+    : 'upload file';
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classes.box}>
@@ -83,22 +78,22 @@ const SignInForm = () => {
         tabIndex={-1}
         startIcon={<CloudUploadIcon />}
         color={color}
-        className={classes.button}
+        sx={{ margin: '5px' }}
       >
         {textButton}
         <input
           type="file"
+          accept="image/*"
           className={classes.hiddenInput}
           {...register('image', { required: false })}
         />
       </Button>
-      <p className={classes.error}>{errors.image?.message}</p>
       <Button
         type="submit"
         variant="contained"
         color="primary"
-        disabled={isTitleError || isContentError || isTagsError || isImageError}
-        className={classes.button}
+        disabled={isTitleError || isContentError || isTagsError}
+        sx={{ margin: '5px' }}
       >
         Add Post
       </Button>
@@ -106,4 +101,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default AddPostForm;

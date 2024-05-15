@@ -1,11 +1,8 @@
-import { AddPostForm } from '../interfaces/addPost';
+import { AddPost, AddPostFormData } from '../interfaces/user';
 
-const createRequestAddPost = (data: AddPostForm) => {
-  if (data.image.length === 0) {
-    return { ...data, image: null };
-  } else {
-    return { ...data, image: data.image[0] };
-  }
+const createRequestAddPost = (data: AddPostFormData): AddPost => {
+  const image = data.image.length === 0 ? null : data.image[0];
+  return { ...data, image };
 };
 
 export default createRequestAddPost;

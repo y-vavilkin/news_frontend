@@ -18,7 +18,7 @@ const UserCard = ({ id, dataUser }: UserCardProps) => {
   const dispatch = useAppDispatch();
   const userId = useAppSelector(state => state.auth.authUser?.id);
 
-  const handlerAddPost = () => {
+  const openAddPostModal = () => {
     dispatch(openModal(ADD_POST));
   };
 
@@ -35,8 +35,15 @@ const UserCard = ({ id, dataUser }: UserCardProps) => {
       </div>
       {id === userId && (
         <div className={classes.buttons}>
-          <Button variant="contained" startIcon={<Add />} onClick={handlerAddPost}>Add Post</Button>
-          <Button variant="contained" startIcon={<Edit />}>Edit Profile</Button>
+          <Button
+            variant="contained"
+            startIcon={<Add />}
+            onClick={openAddPostModal}
+          >Add Post</Button>
+          <Button
+            variant="contained"
+            startIcon={<Edit />}
+          >Edit Profile</Button>
         </div>
       )}
     </div>

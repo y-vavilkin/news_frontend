@@ -1,16 +1,16 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { AxiosError, AxiosResponse } from 'axios';
 
-import { AddPostAction } from '../../interfaces/addPost';
 import { GLOBAL_ERROR } from '../../constants/errors';
+import { UserAction } from '../../interfaces/user';
 import { Post } from '../../interfaces/posts';
 import { changeError } from '../../helpers';
-import { addPostFailed, addPostSuccesses } from '../actions/addPost';
+import { addPostFailed, addPostSuccesses } from '../actions/user';
 import * as actionTypes from '../actions/actionTypes/user';
 import { closeModal } from '../actions/modal';
 import addPost from '../api/addPost';
 
-function * addPostWorker ({ payload }: AddPostAction) {
+function * addPostWorker ({ payload }: UserAction) {
   try {
     const { data }: AxiosResponse<Post> = yield call(addPost, payload);
     yield put(addPostSuccesses(data));

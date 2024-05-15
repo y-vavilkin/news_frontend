@@ -1,14 +1,11 @@
 import { AxiosResponse } from 'axios';
 
-import { AddPost } from '../../interfaces/addPost';
+import { UserAction } from './../../interfaces/user';
 import { Post } from '../../interfaces/posts';
 
 import api from './api';
 
-const addPost = (body: AddPost): Promise<AxiosResponse<Post>> => api.post<Post>('users', body, {
-  headers: {
-    'Content-Type': 'multipart/form-data'
-  }
-});
+const addPost = (body: UserAction): Promise<AxiosResponse<Post>> =>
+  api.postForm<Post>('users', body);
 
 export default addPost;
