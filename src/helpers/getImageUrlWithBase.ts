@@ -1,4 +1,4 @@
-import placeholderImage from '../assets/placeholderImage.webp';
+import placeholderImage from '../../public/placeholderImage.webp';
 
 const getImageUrlWithBase = (imageUrl: string | null): string => {
   if (imageUrl !== null) {
