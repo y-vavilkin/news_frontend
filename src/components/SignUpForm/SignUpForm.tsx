@@ -2,12 +2,11 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, TextField } from '@mui/material';
 
-import { AUTH_USER_REGISTRATION } from '../../redux/actions/actionTypes/auth';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { authUser } from '../../redux/actions/auth';
 import { AuthForm } from '../../interfaces/auth';
-import classes from './SignUpForm.module.scss';
 
+import classes from './SignUpForm.module.scss';
 import signUpSchema from './signUpSchema';
 
 const SignUpForm = () => {
@@ -23,7 +22,7 @@ const SignUpForm = () => {
   });
 
   const onSubmit: SubmitHandler<AuthForm> = (data: AuthForm) => {
-    dispatch(authUser(AUTH_USER_REGISTRATION, data));
+    dispatch(authUser(data));
   };
 
   const isLoginError = errors.login?.message !== undefined;
@@ -37,6 +36,7 @@ const SignUpForm = () => {
         label="Login"
         fullWidth
         margin="normal"
+        autoComplete="username"
         {...register('login', { required: true })}
       />
       <p className={classes.error}>{errors.login?.message}</p>
@@ -45,6 +45,7 @@ const SignUpForm = () => {
         label="Email"
         fullWidth
         margin="normal"
+        autoComplete="email"
         {...register('email', { required: true })}
       />
       <p className={classes.error}>{errors.email?.message}</p>
@@ -53,6 +54,7 @@ const SignUpForm = () => {
         label="Password"
         fullWidth
         margin="normal"
+        autoComplete="new-password"
         {...register('password', { required: true })}
       />
       <p className={classes.error}>{errors.password?.message}</p>
@@ -61,7 +63,7 @@ const SignUpForm = () => {
         variant="contained"
         color="primary"
         disabled={isLoginError || isEmailError || isPasswordError}
-        style={{ marginTop: '20px' }}
+        className={classes.button}
       >
         Continue
       </Button>

@@ -1,9 +1,8 @@
 import { useLocation } from 'react-router-dom';
 
-import placeholderImage from '../../assets/placeholderImage.webp';
+import { changeFormatDate, getImageUrlWithBase } from '../../helpers';
 import { User as UserDescription } from '../../interfaces/user';
 import { Tag as TagDescription } from '../../interfaces/posts';
-import { changeFormatDate } from '../../helpers';
 import User from '../User';
 import Tag from '../Tag';
 
@@ -37,7 +36,7 @@ const PostCard = ({
         <div className={classes.imageBlock}>
           <img
             className={classes.image}
-            src={imageUrl ?? placeholderImage}
+            src={getImageUrlWithBase(imageUrl)}
             alt="image"
             draggable="false"
           />

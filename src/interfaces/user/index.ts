@@ -12,13 +12,26 @@ export interface User {
 
 export interface UserAction {
   type: string
-  payload?: User | number
+  payload?: User | number | Post | PostRequest
   error?: string | null
 }
 
 export interface UserState {
   user: User | null
-  userPosts: Post[] | null
   isLoading: boolean
   error: string | null
+}
+
+export interface AddPostFormData {
+  title: string
+  content: string
+  tags: string
+  image: FileList
+}
+
+export interface PostRequest {
+  title: string
+  content: string
+  tags: string
+  image: File | null
 }

@@ -4,7 +4,6 @@ import * as actionTypes from '../actions/actionTypes/user';
 const initialState: UserState = {
   isLoading: false,
   error: null,
-  userPosts: null,
   user: null
 };
 
@@ -20,14 +19,29 @@ const postsReducer = (state: UserState = initialState, action: UserAction): User
       return {
         ...state,
         isLoading: false,
-        user: action.payload instanceof Object ? action.payload : null,
-        userPosts: action.payload instanceof Object ? action.payload.posts : null
+        user: action.payload
       };
     case actionTypes.USER_FAILED:
+    case actionTypes.ADD_POST_FAILED:
       return {
         ...state,
         isLoading: false,
         error: action.error ?? null
+      };
+    case actionTypes.ADD_POST_REQUESTED:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case actionTypes.ADD_POST_SUCCESSES:
+      return {
+        ...state,
+        isLoading: false,
+        user: {
+          ...state.user,
+          posts: [...state.user.posts, action.payload]
+        }
+
       };
     default:
       return state;

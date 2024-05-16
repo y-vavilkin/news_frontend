@@ -1,7 +1,7 @@
-import { ModalAction } from '../../interfaces/modal';
+import { ModalAction, TypeModal } from '../../interfaces/modal';
 import * as actionTypes from './actionTypes/modal';
 
-export const openModal = (payload: string): ModalAction => ({
+export const openModal = (payload: TypeModal): ModalAction => ({
   type: actionTypes.TOGGLE_MODAL,
   payload
 });
