@@ -36,6 +36,7 @@ const SignInForm = () => {
         label="Email"
         fullWidth
         margin="normal"
+        autoComplete="email"
         {...register('email', { required: true })}
       />
       <p className={classes.error}>{errors.email?.message}</p>
@@ -44,6 +45,7 @@ const SignInForm = () => {
         label="Password"
         fullWidth
         margin="normal"
+        autoComplete="current-password"
         {...register('password', { required: true })}
       />
       <p className={classes.error}>{errors.password?.message}</p>
@@ -52,7 +54,7 @@ const SignInForm = () => {
         variant="contained"
         color="primary"
         disabled={isEmailError || isPasswordError}
-        style={{ marginTop: '20px' }}
+        className={classes.button}
       >
         Continue
       </Button>

@@ -15,10 +15,10 @@ const AddPostForm = () => {
   const dispatch = useAppDispatch();
 
   const {
+    watch,
     register,
     handleSubmit,
-    formState: { errors },
-    watch
+    formState: { errors }
   } = useForm({
     resolver: yupResolver(addPostSchema)
   });
@@ -34,13 +34,8 @@ const AddPostForm = () => {
   const isContentError = errors.content?.message !== undefined;
   const isTagsError = errors.tags?.message !== undefined;
 
-  const color = isImageUploaded
-    ? 'success'
-    : 'primary';
-
-  const textButton = isImageUploaded
-    ? 'thanks'
-    : 'upload file';
+  const textButton = isImageUploaded ? 'thanks' : 'upload file';
+  const color = isImageUploaded ? 'success' : 'primary';
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classes.box}>
@@ -65,15 +60,14 @@ const AddPostForm = () => {
       <TextField
         type="text"
         label="Tags"
-        placeholder='Use more than one: `,`'
         fullWidth
         margin="normal"
+        placeholder='Use more than one: `,`'
         {...register('tags', { required: true })}
       />
       <p className={classes.error}>{errors.tags?.message}</p>
       <Button
         component="label"
-        role={undefined}
         variant="contained"
         tabIndex={-1}
         startIcon={<CloudUploadIcon />}

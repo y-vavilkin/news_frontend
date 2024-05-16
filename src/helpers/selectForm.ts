@@ -1,14 +1,14 @@
-import { AUTH_USER_LOGIN, AUTH_USER_REGISTRATION } from '../constants';
+import { LOGIN, REGISTRATION } from '../constants';
 import SignUpForm from '../components/SignUpForm';
 import SignInForm from '../components/SignInForm';
 import AddPostForm from '../components/AddPostForm';
 
 const selectForm = (type: string) => {
   switch (type) {
-    case AUTH_USER_REGISTRATION: {
+    case REGISTRATION: {
       return SignUpForm;
     }
-    case AUTH_USER_LOGIN: {
+    case LOGIN: {
       return SignInForm;
     }
     default:

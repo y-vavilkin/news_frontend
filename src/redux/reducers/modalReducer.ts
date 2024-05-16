@@ -1,10 +1,10 @@
 import { ModalAction, ModalState } from '../../interfaces/modal';
-import { AUTH_USER_REGISTRATION } from '../../constants';
+import { REGISTRATION } from '../../constants';
 import * as actionTypes from '../actions/actionTypes/modal';
 
 const initialState: ModalState = {
   isModalOpen: false,
-  type: AUTH_USER_REGISTRATION
+  type: REGISTRATION
 };
 
 const modalReducer = (state: ModalState = initialState, action: ModalAction): ModalState => {
