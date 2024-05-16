@@ -2,7 +2,7 @@ import { Modal, Box } from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { closeModal } from '../../redux/actions/modal';
-import selectForm from '../../helpers/selectForm';
+import { selectForm } from '../../helpers';
 
 import classes from './Modal.module.scss';
 

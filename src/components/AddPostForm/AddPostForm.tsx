@@ -3,10 +3,10 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, TextField } from '@mui/material';
 
-import createRequestAddPost from '../../helpers/createRequestAddPost';
 import { addPostRequested } from '../../redux/actions/user';
 import { AddPostFormData } from '../../interfaces/user';
 import { useAppDispatch } from '../../redux/hooks';
+import { createRequestAddPost } from '../../helpers';
 
 import classes from './AddPostForm.module.scss';
 import addPostSchema from './addPostSchema';
