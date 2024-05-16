@@ -1,4 +1,4 @@
-enum TypeModal {
+export enum TypeModal {
   LOGIN = 'LOGIN',
   ADD_POST = 'ADD_POST',
   REGISTRATION = 'REGISTRATION'

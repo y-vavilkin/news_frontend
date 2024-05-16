@@ -5,7 +5,7 @@ import placeholderAvatar from '../../assets/placeholderAvatar.webp';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { User as UserDescription } from '../../interfaces/user';
 import { openModal } from '../../redux/actions/modal';
-import { ADD_POST } from '../../constants';
+import { TypeModal } from '../../interfaces/modal';
 
 import classes from './UserCard.module.scss';
 
@@ -19,7 +19,7 @@ const UserCard = ({ id, dataUser }: UserCardProps) => {
   const userId = useAppSelector(state => state.auth.authUser?.id);
 
   const openAddPostModal = () => {
-    dispatch(openModal(ADD_POST));
+    dispatch(openModal(TypeModal.ADD_POST));
   };
 
   return (

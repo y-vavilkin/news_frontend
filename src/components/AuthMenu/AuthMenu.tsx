@@ -1,9 +1,9 @@
 import { Button } from '@mui/material';
 
 import { authUserReset } from '../../redux/actions/auth';
-import { LOGIN, REGISTRATION } from '../../constants';
 import { openModal } from '../../redux/actions/modal';
 import { useAppDispatch } from '../../redux/hooks';
+import { TypeModal } from '../../interfaces/modal';
 
 const AuthMenu = () => {
   const dispatch = useAppDispatch();
@@ -18,13 +18,13 @@ const AuthMenu = () => {
       <Button
         color="success"
         variant="contained"
-        onClick={() => handlerAuth(REGISTRATION)}
+        onClick={() => handlerAuth(TypeModal.REGISTRATION)}
       >
         sign up
       </Button>
       <Button
         variant="contained"
-        onClick={() => handlerAuth(LOGIN)}
+        onClick={() => handlerAuth(TypeModal.LOGIN)}
       >
         sign in
       </Button>
