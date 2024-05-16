@@ -8,7 +8,7 @@ import { TypeModal } from '../../interfaces/modal';
 const AuthMenu = () => {
   const dispatch = useAppDispatch();
 
-  const handlerAuth = (type: string) => {
+  const handlerAuth = (type: TypeModal) => {
     dispatch(authUserReset());
     dispatch(openModal(type));
   };

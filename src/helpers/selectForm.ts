@@ -1,14 +1,14 @@
-import { LOGIN, REGISTRATION } from '../constants';
 import SignUpForm from '../components/SignUpForm';
 import SignInForm from '../components/SignInForm';
 import AddPostForm from '../components/AddPostForm';
+import { TypeModal } from '../interfaces/modal';
 
-const selectForm = (type: string) => {
+const selectForm = (type: TypeModal | undefined) => {
   switch (type) {
-    case REGISTRATION: {
+    case TypeModal.REGISTRATION: {
       return SignUpForm;
     }
-    case LOGIN: {
+    case TypeModal.LOGIN: {
       return SignInForm;
     }
     default:

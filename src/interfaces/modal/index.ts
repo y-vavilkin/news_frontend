@@ -6,10 +6,10 @@ export enum TypeModal {
 
 export interface ModalAction {
   type: string
-  payload?: string
+  payload?: TypeModal
 }
 
 export interface ModalState {
   isModalOpen: boolean
-  type: TypeModal
+  type?: TypeModal
 }
