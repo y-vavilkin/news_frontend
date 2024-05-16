@@ -2,12 +2,11 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, TextField } from '@mui/material';
 
-import { AUTH_USER_LOGIN } from '../../redux/actions/actionTypes/auth';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { authUser } from '../../redux/actions/auth';
 import { AuthForm } from '../../interfaces/auth';
-import classes from './SignInForm.module.scss';
 
+import classes from './SignInForm.module.scss';
 import signUpSchema from './signInSchema';
 
 const SignInForm = () => {
@@ -23,7 +22,7 @@ const SignInForm = () => {
   });
 
   const onSubmit: SubmitHandler<AuthForm> = (data: AuthForm) => {
-    dispatch(authUser(AUTH_USER_LOGIN, data));
+    dispatch(authUser(data));
   };
 
   const isEmailError = errors.email?.message !== undefined;

@@ -12,8 +12,7 @@ const initialState: AuthState = {
 const authReducer = (state: AuthState = initialState, action: AuthAction): AuthState => {
   switch (action.type) {
     case actionTypes.AUTH_USER_CHECK:
-    case actionTypes.AUTH_USER_LOGIN:
-    case actionTypes.AUTH_USER_REGISTRATION:
+    case actionTypes.AUTH_USER_REQUESTED:
       return {
         ...state,
         isLoading: true

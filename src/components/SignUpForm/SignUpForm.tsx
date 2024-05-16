@@ -5,7 +5,6 @@ import { Button, TextField } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { authUser } from '../../redux/actions/auth';
 import { AuthForm } from '../../interfaces/auth';
-import { REGISTRATION } from '../../constants';
 
 import classes from './SignUpForm.module.scss';
 import signUpSchema from './signUpSchema';
@@ -23,7 +22,7 @@ const SignUpForm = () => {
   });
 
   const onSubmit: SubmitHandler<AuthForm> = (data: AuthForm) => {
-    dispatch(authUser(REGISTRATION, data));
+    dispatch(authUser(data));
   };
 
   const isLoginError = errors.login?.message !== undefined;
