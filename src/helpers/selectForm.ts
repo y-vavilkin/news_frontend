@@ -4,9 +4,7 @@ import AuthForm from '../components/AuthForm';
 
 const selectForm = (type: TypeModal | undefined) => {
   switch (type) {
-    case TypeModal.REGISTRATION: {
-      return AuthForm;
-    }
+    case TypeModal.REGISTRATION:
     case TypeModal.LOGIN: {
       return AuthForm;
     }
