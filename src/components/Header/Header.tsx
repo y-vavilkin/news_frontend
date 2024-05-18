@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
 import { useAppSelector } from '../../redux/hooks';
-import logo from '../../assets/world-news.webp';
 import UserMenu from '../UserMenu';
 import AuthMenu from '../AuthMenu';
 
@@ -13,7 +12,7 @@ const Header = () => {
   return (
     <div className={classes.header}>
       <Link to="/" className={classes.logo}>
-        <img src={logo} alt="logo" />
+        <img src="/public/logo.webp" alt="logo" />
       </Link>
       <p>News</p>
       <div className={classes.links}>

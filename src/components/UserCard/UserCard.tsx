@@ -1,11 +1,12 @@
 import { Edit, Add } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
-import placeholderAvatar from '../../assets/placeholderAvatar.webp';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { User as UserDescription } from '../../interfaces/user';
 import { openModal } from '../../redux/actions/modal';
+import { getImageUrlWithBase } from '../../helpers';
 import { TypeModal } from '../../interfaces/modal';
+import { USER } from '../../constants';
 
 import classes from './UserCard.module.scss';
 
@@ -26,7 +27,7 @@ const UserCard = ({ id, dataUser }: UserCardProps) => {
     <div className={classes.userDescription}>
       <img
         className={classes.avatar}
-        src={dataUser.avatarUrl ?? placeholderAvatar}
+        src={getImageUrlWithBase(dataUser.avatarUrl, USER)}
         alt="Avatar"
       />
       <div className={classes.information}>
