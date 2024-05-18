@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
-import { changeFormatDate, getImageUrlWithBase } from '../../utils';
+import { changeFormatDate, getImageUrlWithBase } from '../../helpers';
 import { User as UserDescription } from '../../interfaces/user';
 import { Tag as TagDescription } from '../../interfaces/posts';
 import { CARD } from '../../constants';

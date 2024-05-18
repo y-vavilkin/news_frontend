@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { User as UserDescription } from '../../interfaces/user';
 import { addPostReset } from '../../redux/actions/user';
 import { openModal } from '../../redux/actions/modal';
-import { getImageUrlWithBase } from '../../utils';
+import { getImageUrlWithBase } from '../../helpers';
 import { TypeModal } from '../../interfaces/modal';
 import { USER } from '../../constants';
 

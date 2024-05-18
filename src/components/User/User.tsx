@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { type User as UserDescription } from '../../interfaces/user';
-import { getImageUrlWithBase } from '../../utils';
+import { getImageUrlWithBase } from '../../helpers';
 import { useAppSelector } from '../../redux/hooks';
 import { USER } from '../../constants';
 

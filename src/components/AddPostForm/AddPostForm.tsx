@@ -6,7 +6,7 @@ import { Button, TextField } from '@mui/material';
 import { addPostRequested } from '../../redux/actions/user';
 import { AddPostFormData } from '../../interfaces/user';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { createRequestAddPost } from '../../utils';
+import { createRequestAddPost } from '../../helpers';
 
 import classes from './AddPostForm.module.scss';
 import addPostSchema from './addPostSchema';

@@ -4,7 +4,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { GLOBAL_ERROR } from '../../constants/errors';
 import { UserAction } from '../../interfaces/user';
 import { Post } from '../../interfaces/posts';
-import { changeError } from '../../utils';
+import { changeError } from '../../helpers';
 import { addPostFailed, addPostSuccesses } from '../actions/user';
 import * as actionTypes from '../actions/actionTypes/user';
 import { closeModal } from '../actions/modal';

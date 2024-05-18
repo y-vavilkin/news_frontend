@@ -3,7 +3,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 
 import { GLOBAL_ERROR } from '../../constants/errors';
 import { Post } from '../../interfaces/posts';
-import { changeError } from '../../utils';
+import { changeError } from '../../helpers';
 import { postsReseived, postsFailed } from '../actions/posts';
 import * as actionTypes from '../actions/actionTypes/posts';
 import getPosts from '../api/getPosts';
