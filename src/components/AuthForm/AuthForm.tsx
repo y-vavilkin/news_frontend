@@ -3,25 +3,28 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, TextField } from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { AuthFormData } from '../../interfaces/auth';
 import { authUser } from '../../redux/actions/auth';
-import { AuthForm } from '../../interfaces/auth';
+import { TypeModal } from '../../interfaces/modal';
 
-import classes from './SignUpForm.module.scss';
-import signUpSchema from './signUpSchema';
+import classes from './AuthForm.module.scss';
+import authFormShema from './authFormShema';
 
-const SignUpForm = () => {
+const AuthForm = () => {
   const dispatch = useAppDispatch();
   const authError = useAppSelector(state => state.auth.error);
+  const typeAuth = useAppSelector(state => state.modal.type);
+  const isLogin = typeAuth === TypeModal.LOGIN;
 
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm({
-    resolver: yupResolver(signUpSchema)
+    resolver: yupResolver(authFormShema)
   });
 
-  const onSubmit: SubmitHandler<AuthForm> = (data: AuthForm) => {
+  const onSubmit: SubmitHandler<AuthFormData> = (data: AuthFormData) => {
     dispatch(authUser(data));
   };
 
@@ -31,15 +34,19 @@ const SignUpForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classes.box}>
-      <TextField
-        type="login"
-        label="Login"
-        fullWidth
-        margin="normal"
-        autoComplete="username"
-        {...register('login', { required: true })}
-      />
-      <p className={classes.error}>{errors.login?.message}</p>
+      {!isLogin && (
+        <>
+          <TextField
+            type="login"
+            label="Login"
+            fullWidth
+            margin="normal"
+            autoComplete="username"
+            {...register('login', { required: true })}
+          />
+          <p className={classes.error}>{errors.login?.message}</p>
+        </>
+      )}
       <TextField
         type="email"
         label="Email"
@@ -74,4 +81,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default AuthForm;
