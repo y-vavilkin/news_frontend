@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { authLogout } from '../../redux/actions/auth';
-import { getImageUrlWithBase } from '../../helpers';
+import { getImageUrlWithBase } from '../../utils';
 import { USER } from '../../constants';
 
 import classes from './UserMenu.module.scss';

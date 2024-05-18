@@ -20,6 +20,8 @@ const ProfilePage = () => {
   const error = useAppSelector(state => state.currentUser.error);
   const isLoading = useAppSelector(state => state.currentUser.isLoading);
   const isNotEmpty = posts !== undefined && posts.length !== 0;
+  const isUserExist = dataUser !== null;
+  const isError = error !== null;
 
   useEffect(() => {
     const requestId = Number(id);
@@ -39,12 +41,17 @@ const ProfilePage = () => {
 
   if (isLoading) return <Loader />;
 
-  if (error !== null) return <Notify info={error} status="error" />;
-
   return (
     <>
-      {dataUser !== null && <UserCard id={Number(id)} dataUser={dataUser} />}
-      {isNotEmpty ? <PostsList postsData={posts} /> : <Notify info={EMPTY_POSTS} status="info" />}
+      {!isUserExist && isError && <Notify info={error} status="error" />}
+      {isUserExist && (
+        <>
+          <UserCard id={Number(id)} dataUser={dataUser} />
+          {isNotEmpty
+            ? (<PostsList postsData={posts} />)
+            : (<Notify info={EMPTY_POSTS} status="info" />)}
+        </>
+      )}
     </>
   );
 };

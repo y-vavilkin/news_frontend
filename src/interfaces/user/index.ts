@@ -26,12 +26,12 @@ export interface AddPostFormData {
   title: string
   content: string
   tags: string
-  image: FileList
+  imagePost?: FileList
 }
 
 export interface PostRequest {
   title: string
   content: string
   tags: string
-  image: File | null
+  imagePost: File | null
 }

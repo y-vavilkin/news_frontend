@@ -3,6 +3,7 @@ import {
   USER_EXIST,
   INCORRECT_DATA,
   USER_NOT_EXIST,
+  ERROR_400,
   ERROR_401,
   ERROR_404,
   BAD_URL
@@ -30,6 +31,9 @@ const changeError = (error: string) => {
     }
     case ERROR_404: {
       return 'Sorry, page not found.';
+    }
+    case ERROR_400: {
+      return 'Sorry, bad request';
     }
     default: {
       return GLOBAL_ERROR;

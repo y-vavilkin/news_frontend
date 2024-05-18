@@ -1,6 +1,6 @@
 import { Post } from '../../interfaces/posts';
 import {
-  AddPost,
+  PostRequest,
   User,
   UserAction
 } from '../../interfaces/user';
@@ -22,7 +22,7 @@ export const userFailed = (error: string): UserAction => ({
   error
 });
 
-export const addPostRequested = (payload: AddPost): UserAction => ({
+export const addPostRequested = (payload: PostRequest): UserAction => ({
   type: actionTypes.ADD_POST_REQUESTED,
   payload
 });
@@ -35,4 +35,8 @@ export const addPostFailed = (error: string): UserAction => ({
 export const addPostSuccesses = (payload: Post): UserAction => ({
   type: actionTypes.ADD_POST_SUCCESSES,
   payload
+});
+
+export const addPostReset = (): UserAction => ({
+  type: actionTypes.ADD_POST_RESET
 });

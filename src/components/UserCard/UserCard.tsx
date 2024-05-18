@@ -3,8 +3,9 @@ import { Button } from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { User as UserDescription } from '../../interfaces/user';
+import { addPostReset } from '../../redux/actions/user';
 import { openModal } from '../../redux/actions/modal';
-import { getImageUrlWithBase } from '../../helpers';
+import { getImageUrlWithBase } from '../../utils';
 import { TypeModal } from '../../interfaces/modal';
 import { USER } from '../../constants';
 
@@ -20,6 +21,7 @@ const UserCard = ({ id, dataUser }: UserCardProps) => {
   const userId = useAppSelector(state => state.auth.authUser?.id);
 
   const openAddPostModal = () => {
+    dispatch(addPostReset());
     dispatch(openModal(TypeModal.ADD_POST));
   };
 

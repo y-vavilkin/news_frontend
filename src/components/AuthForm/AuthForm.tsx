@@ -42,7 +42,7 @@ const AuthForm = () => {
             fullWidth
             margin="normal"
             autoComplete="username"
-            {...register('login', { required: true })}
+            {...register('login')}
           />
           <p className={classes.error}>{errors.login?.message}</p>
         </>
@@ -53,7 +53,7 @@ const AuthForm = () => {
         fullWidth
         margin="normal"
         autoComplete="email"
-        {...register('email', { required: true })}
+        {...register('email')}
       />
       <p className={classes.error}>{errors.email?.message}</p>
       <TextField
@@ -62,7 +62,7 @@ const AuthForm = () => {
         fullWidth
         margin="normal"
         autoComplete="new-password"
-        {...register('password', { required: true })}
+        {...register('password')}
       />
       <p className={classes.error}>{errors.password?.message}</p>
       <Button

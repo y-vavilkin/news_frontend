@@ -37,11 +37,17 @@ const postsReducer = (state: UserState = initialState, action: UserAction): User
       return {
         ...state,
         isLoading: false,
+        error: null,
         user: {
           ...state.user,
           posts: [...state.user.posts, action.payload]
         }
 
+      };
+    case actionTypes.ADD_POST_RESET:
+      return {
+        ...state,
+        error: null
       };
     default:
       return state;

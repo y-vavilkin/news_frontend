@@ -12,7 +12,7 @@ const addPostSchema = Yup.object().shape({
     .min(1, 'Minimum 1 character')
     .max(255, 'Maximum 255 characters')
     .required('Tags is required'),
-  image: Yup.mixed()
+  imagePost: Yup.mixed()
 });
 
 export default addPostSchema;

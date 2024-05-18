@@ -2,7 +2,7 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 
 import { AuthAction, AuthUser } from '../../interfaces/auth';
-import { changeError, extractErrorMessage } from '../../helpers';
+import { changeError, extractErrorMessage } from '../../utils';
 import { TOKEN } from '../../constants';
 import { authUserFailure, authUserSuccess } from '../actions/auth';
 import * as actionTypes from '../actions/actionTypes/auth';
