@@ -55,7 +55,7 @@ const postsReducer = (state: UserState = initialState, action: UserAction): User
     case actionTypes.EDIT_PROFILE_RECEIVED: {
       return {
         ...state,
-        isLoading: false,
+        isLoadingModal: false,
         user: {
           ...state.user,
           login: action.payload?.login,
