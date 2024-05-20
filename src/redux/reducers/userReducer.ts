@@ -2,9 +2,11 @@ import { UserState, UserAction } from '../../interfaces/user';
 import * as actionTypes from '../actions/actionTypes/user';
 
 const initialState: UserState = {
-  isLoading: false,
+  isLoadingProfile: false,
+  isLoadingPosts: false,
   error: null,
-  user: null
+  user: null,
+  userPosts: []
 };
 
 const postsReducer = (state: UserState = initialState, action: UserAction): UserState => {
@@ -13,35 +15,39 @@ const postsReducer = (state: UserState = initialState, action: UserAction): User
       return {
         ...state,
         error: null,
-        isLoading: true
+        isLoadingProfile: true
       };
     case actionTypes.USER_RECEIVED:
       return {
         ...state,
-        isLoading: false,
-        user: action.payload
+        isLoadingProfile: false,
+        user: action.payload,
+        userPosts: action.payload?.posts
       };
     case actionTypes.USER_FAILED:
     case actionTypes.ADD_POST_FAILED:
       return {
         ...state,
-        isLoading: false,
+        isLoadingPosts: false,
         error: action.error ?? null
       };
     case actionTypes.ADD_POST_REQUESTED:
       return {
         ...state,
-        isLoading: true
+        isLoadingPosts: true
       };
     case actionTypes.ADD_POST_SUCCESSES:
       return {
         ...state,
-        isLoading: false,
-        user: {
-          ...state.user,
-          posts: [...state.user.posts, action.payload]
-        }
-
+        isLoadingPosts: false,
+        error: null,
+        userPosts: [action.payload, ...state.userPosts]
+      };
+    case actionTypes.ADD_POST_RESET:
+    case actionTypes.USER_RESET:
+      return {
+        ...state,
+        error: null
       };
     default:
       return state;

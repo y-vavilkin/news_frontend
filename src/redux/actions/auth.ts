@@ -1,7 +1,7 @@
-import { AuthAction, AuthForm, AuthUser } from '../../interfaces/auth';
+import { AuthAction, AuthFormData, AuthUser } from '../../interfaces/auth';
 import * as actionTypes from './actionTypes/auth';
 
-export const authUser = (payload: AuthForm): AuthAction => ({
+export const authUser = (payload: AuthFormData): AuthAction => ({
   type: actionTypes.AUTH_USER_REQUESTED,
   payload
 });

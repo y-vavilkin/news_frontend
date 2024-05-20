@@ -1,7 +1,9 @@
 export const USER_REQUESTED = 'USER_REQUESTED';
 export const USER_RECEIVED = 'USER_RECEIVED';
 export const USER_FAILED = 'USER_FAILED';
+export const USER_RESET = 'USER_RESET';
 
 export const ADD_POST_FAILED = 'ADD_POST_FAILED';
 export const ADD_POST_REQUESTED = 'ADD_POST_REQUESTED';
 export const ADD_POST_SUCCESSES = 'ADD_POST_SUCCESSES';
+export const ADD_POST_RESET = 'ADD_POST_RESET';

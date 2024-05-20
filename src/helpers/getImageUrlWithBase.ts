@@ -1,8 +1,14 @@
-const getImageUrlWithBase = (imageUrl: string | null): string => {
-  if (imageUrl !== null) {
-    return `${import.meta.env.VITE_SERVER_URL}${imageUrl}`;
-  } else {
-    return '/public/placeholderImage.webp';
+import { CARD, USER } from '../constants';
+
+const getImageUrlWithBase = (imageUrl: string | null, type: string): string => {
+  const baseUrl = import.meta.env.VITE_SERVER_URL;
+  switch (type) {
+    case CARD:
+      return imageUrl !== null ? `${baseUrl}/${imageUrl}` : '/placeholderImage.webp';
+    case USER:
+      return imageUrl !== null ? `${baseUrl}/${imageUrl}` : '/placeholderAvatar.webp';
+    default:
+      return '/public/notFound.webp';
   }
 };
 

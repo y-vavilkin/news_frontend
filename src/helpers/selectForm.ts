@@ -1,15 +1,12 @@
-import SignUpForm from '../components/SignUpForm';
-import SignInForm from '../components/SignInForm';
 import AddPostForm from '../components/AddPostForm';
 import { TypeModal } from '../interfaces/modal';
+import AuthForm from '../components/AuthForm';
 
 const selectForm = (type: TypeModal | undefined) => {
   switch (type) {
-    case TypeModal.REGISTRATION: {
-      return SignUpForm;
-    }
+    case TypeModal.REGISTRATION:
     case TypeModal.LOGIN: {
-      return SignInForm;
+      return AuthForm;
     }
     default:
       return AddPostForm;

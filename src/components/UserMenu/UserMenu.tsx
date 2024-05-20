@@ -1,9 +1,10 @@
 import { Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 
-import placeHolderAvatar from '../../assets/placeholderAvatar.webp';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { authLogout } from '../../redux/actions/auth';
+import { getImageUrlWithBase } from '../../helpers';
+import { USER } from '../../constants';
 
 import classes from './UserMenu.module.scss';
 
@@ -12,7 +13,7 @@ const UserMenu = () => {
   const navigate = useNavigate();
 
   const userId = useAppSelector((state) => state.auth.authUser?.id);
-  const userAvatar = useAppSelector((state) => state.auth.authUser?.avatarUrl);
+  const userAvatar = useAppSelector((state) => state.auth.authUser?.avatarUrl ?? null);
 
   const handlerLogout = () => {
     dispatch(authLogout());
@@ -24,7 +25,7 @@ const UserMenu = () => {
       <Link to={`/users/${userId}`}>
         <img
           className={classes.avatar}
-          src={userAvatar ?? placeHolderAvatar}
+          src={getImageUrlWithBase(userAvatar, USER)}
           alt="Profile"
         />
       </Link>

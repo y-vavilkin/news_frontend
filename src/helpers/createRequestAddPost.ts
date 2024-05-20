@@ -1,8 +1,8 @@
 import { PostRequest, AddPostFormData } from '../interfaces/user';
 
 const createRequestAddPost = (data: AddPostFormData): PostRequest => {
-  const image = data.image.length === 0 ? null : data.image[0];
-  return { ...data, image };
+  const imagePost = data.imagePost === undefined ? null : data.imagePost[0];
+  return { ...data, imagePost };
 };
 
 export default createRequestAddPost;

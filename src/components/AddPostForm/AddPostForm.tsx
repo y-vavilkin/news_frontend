@@ -3,16 +3,19 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, TextField } from '@mui/material';
 
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addPostRequested } from '../../redux/actions/user';
 import { AddPostFormData } from '../../interfaces/user';
-import { useAppDispatch } from '../../redux/hooks';
 import { createRequestAddPost } from '../../helpers';
+import Loader from '../Loader';
 
 import classes from './AddPostForm.module.scss';
 import addPostSchema from './addPostSchema';
 
 const AddPostForm = () => {
   const dispatch = useAppDispatch();
+  const error = useAppSelector(state => state.currentUser.error);
+  const isLoading = useAppSelector(state => state.currentUser.isLoadingPosts);
 
   const {
     watch,
@@ -23,7 +26,7 @@ const AddPostForm = () => {
     resolver: yupResolver(addPostSchema)
   });
 
-  const image = watch('image');
+  const image = watch('imagePost');
   const isImageUploaded = image instanceof FileList && image.length > 0;
 
   const onSubmit: SubmitHandler<AddPostFormData> = (data: AddPostFormData) => {
@@ -44,7 +47,7 @@ const AddPostForm = () => {
         label="Title"
         fullWidth
         margin="normal"
-        {...register('title', { required: true })}
+        {...register('title')}
       />
       <p className={classes.error}>{errors.title?.message}</p>
       <TextField
@@ -54,7 +57,7 @@ const AddPostForm = () => {
         margin="normal"
         multiline
         rows={4}
-        {...register('content', { required: true })}
+        {...register('content')}
       />
       <p className={classes.error}>{errors.content?.message}</p>
       <TextField
@@ -63,7 +66,7 @@ const AddPostForm = () => {
         fullWidth
         margin="normal"
         placeholder='Use more than one: `,`'
-        {...register('tags', { required: true })}
+        {...register('tags')}
       />
       <p className={classes.error}>{errors.tags?.message}</p>
       <Button
@@ -77,9 +80,9 @@ const AddPostForm = () => {
         {textButton}
         <input
           type="file"
-          accept="image/*"
+          accept=".jpg,.jpeg,.png,.gif"
           className={classes.hiddenInput}
-          {...register('image', { required: false })}
+          {...register('imagePost')}
         />
       </Button>
       <Button
@@ -91,6 +94,8 @@ const AddPostForm = () => {
       >
         Add Post
       </Button>
+      <p className={classes.error}>{error}</p>
+      {isLoading && <Loader />}
     </form>
   );
 };

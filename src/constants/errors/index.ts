@@ -7,3 +7,4 @@ export const UNAUTHORIZED = 'Sorry, you are unauthorized';
 
 export const ERROR_404 = 'Request failed with status code 404';
 export const ERROR_401 = 'Unauthorized';
+export const ERROR_400 = 'Request failed with status code 400';

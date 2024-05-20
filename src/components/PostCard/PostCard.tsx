@@ -1,8 +1,10 @@
 import { useLocation } from 'react-router-dom';
+import { memo } from 'react';
 
 import { changeFormatDate, getImageUrlWithBase } from '../../helpers';
 import { User as UserDescription } from '../../interfaces/user';
 import { Tag as TagDescription } from '../../interfaces/posts';
+import { CARD } from '../../constants';
 import User from '../User';
 import Tag from '../Tag';
 
@@ -36,7 +38,7 @@ const PostCard = ({
         <div className={classes.imageBlock}>
           <img
             className={classes.image}
-            src={getImageUrlWithBase(imageUrl)}
+            src={getImageUrlWithBase(imageUrl, CARD)}
             alt="image"
             draggable="false"
           />
@@ -57,4 +59,4 @@ const PostCard = ({
   );
 };
 
-export default PostCard;
+export default memo(PostCard);

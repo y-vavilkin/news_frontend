@@ -10,7 +10,7 @@ export interface AuthUser {
   posts: Post[]
 }
 
-export interface AuthForm {
+export interface AuthFormData {
   login?: string
   email: string
   password: string
@@ -23,7 +23,7 @@ export interface AuthResponse {
 
 export interface AuthAction {
   type: string
-  payload?: AuthForm | AuthUser
+  payload?: AuthFormData | AuthUser
   error?: string | null
 }
 

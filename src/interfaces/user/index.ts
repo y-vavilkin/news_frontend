@@ -18,7 +18,9 @@ export interface UserAction {
 
 export interface UserState {
   user: User | null
-  isLoading: boolean
+  userPosts: Post[]
+  isLoadingPosts: boolean
+  isLoadingProfile: boolean
   error: string | null
 }
 
@@ -26,12 +28,12 @@ export interface AddPostFormData {
   title: string
   content: string
   tags: string
-  image: FileList
+  imagePost?: FileList
 }
 
 export interface PostRequest {
   title: string
   content: string
   tags: string
-  image: File | null
+  imagePost: File | null
 }

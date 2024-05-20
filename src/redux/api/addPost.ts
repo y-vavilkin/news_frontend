@@ -1,11 +1,11 @@
 import { AxiosResponse } from 'axios';
 
-import { UserAction } from './../../interfaces/user';
+import { PostRequest } from './../../interfaces/user';
 import { Post } from '../../interfaces/posts';
 
 import api from './api';
 
-const addPost = (body: UserAction): Promise<AxiosResponse<Post>> =>
+const addPost = (body: PostRequest): Promise<AxiosResponse<Post>> =>
   api.postForm<Post>('users', body);
 
 export default addPost;

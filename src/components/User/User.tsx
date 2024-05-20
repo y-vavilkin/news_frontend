@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 
 import { type User as UserDescription } from '../../interfaces/user';
-import placeholderAvatar from '../../assets/placeholderAvatar.webp';
+import { getImageUrlWithBase } from '../../helpers';
 import { useAppSelector } from '../../redux/hooks';
+import { USER } from '../../constants';
 
 import classes from './User.module.scss';
 
@@ -17,7 +18,7 @@ const User = ({ user }: UserProps) => {
     <div className={classes.user}>
       <img
         className={classes.avatar}
-        src={user.avatarUrl ?? placeholderAvatar}
+        src={getImageUrlWithBase(user.avatarUrl, USER)}
         alt="avatar"
         draggable="false"
       />

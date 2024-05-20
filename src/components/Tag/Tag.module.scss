@@ -8,6 +8,8 @@
     list-style-type: none;
     display: inline-block;
     width: max-content;
+    max-width: 90%;
+    word-wrap: break-word;
     border-radius: 10px;
     background-image: var(--gradient);
     margin: 10px;

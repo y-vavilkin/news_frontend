@@ -1,10 +1,11 @@
 import * as Yup from 'yup';
 
-const signUpSchema = Yup.object().shape({
+const authFormSchema = Yup.object().shape({
   login: Yup.string()
     .min(5, 'Mininum 5 characters')
     .max(30, 'Maximum 30 characters')
-    .required('Login is required'),
+    .required('Login is required')
+    .optional(),
   email: Yup.string()
     .email('Please enter a valid email')
     .required('Email is required'),
@@ -13,4 +14,4 @@ const signUpSchema = Yup.object().shape({
     .required('Password is required')
 });
 
-export default signUpSchema;
+export default authFormSchema;

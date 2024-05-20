@@ -1,24 +1,29 @@
 import { Edit, Add } from '@mui/icons-material';
 import { Button } from '@mui/material';
+import { memo } from 'react';
 
-import placeholderAvatar from '../../assets/placeholderAvatar.webp';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { User as UserDescription } from '../../interfaces/user';
+import { addPostReset } from '../../redux/actions/user';
 import { openModal } from '../../redux/actions/modal';
+import { getImageUrlWithBase } from '../../helpers';
 import { TypeModal } from '../../interfaces/modal';
+import { USER } from '../../constants';
 
 import classes from './UserCard.module.scss';
 
 interface UserCardProps {
   id: number
-  dataUser: UserDescription
+  login: string
+  email: string
+  avatarUrl: string | null
 }
 
-const UserCard = ({ id, dataUser }: UserCardProps) => {
+const UserCard = ({ id, login, email, avatarUrl }: UserCardProps) => {
   const dispatch = useAppDispatch();
   const userId = useAppSelector(state => state.auth.authUser?.id);
 
   const openAddPostModal = () => {
+    dispatch(addPostReset());
     dispatch(openModal(TypeModal.ADD_POST));
   };
 
@@ -26,12 +31,12 @@ const UserCard = ({ id, dataUser }: UserCardProps) => {
     <div className={classes.userDescription}>
       <img
         className={classes.avatar}
-        src={dataUser.avatarUrl ?? placeholderAvatar}
+        src={getImageUrlWithBase(avatarUrl, USER)}
         alt="Avatar"
       />
       <div className={classes.information}>
-        <p>Login: {dataUser.login}</p>
-        <p>Email: {dataUser.email}</p>
+        <p>Login: {login}</p>
+        <p>Email: {email}</p>
       </div>
       {id === userId && (
         <div className={classes.buttons}>
@@ -54,4 +59,4 @@ const UserCard = ({ id, dataUser }: UserCardProps) => {
   );
 };
 
-export default UserCard;
+export default memo(UserCard);
