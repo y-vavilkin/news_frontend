@@ -1,5 +1,7 @@
+import { AuthUser } from '../../interfaces/auth';
 import { Post } from '../../interfaces/posts';
 import {
+  EditProfileRequest,
   PostRequest,
   User,
   UserAction
@@ -36,11 +38,30 @@ export const addPostFailed = (error: string): UserAction => ({
   error
 });
 
-export const addPostSuccesses = (payload: Post): UserAction => ({
-  type: actionTypes.ADD_POST_SUCCESSES,
+export const addPostReceived = (payload: Post): UserAction => ({
+  type: actionTypes.ADD_POST_RECEIVED,
   payload
 });
 
 export const addPostReset = (): UserAction => ({
   type: actionTypes.ADD_POST_RESET
+});
+
+export const editProfileRequested = (payload: EditProfileRequest): UserAction => ({
+  type: actionTypes.EDIT_PROFILE_REQUESTED,
+  payload
+});
+
+export const editProfileReceived = (payload: AuthUser): UserAction => ({
+  type: actionTypes.EDIT_PROFILE_RECEIVED,
+  payload
+});
+
+export const editProfileFailed = (error: string): UserAction => ({
+  type: actionTypes.EDIT_PROFILE_FAILED,
+  error
+});
+
+export const editProfileReset = (): UserAction => ({
+  type: actionTypes.EDIT_PROFILE_RESET
 });

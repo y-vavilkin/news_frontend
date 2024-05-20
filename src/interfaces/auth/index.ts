@@ -1,5 +1,3 @@
-import { Post } from '../posts';
-
 export interface AuthUser {
   id: number
   login: string
@@ -7,7 +5,6 @@ export interface AuthUser {
   avatarUrl: string | null
   createdAt: string
   updatedAt: string
-  posts: Post[]
 }
 
 export interface AuthFormData {

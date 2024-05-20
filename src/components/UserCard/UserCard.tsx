@@ -2,8 +2,8 @@ import { Edit, Add } from '@mui/icons-material';
 import { Button } from '@mui/material';
 import { memo } from 'react';
 
+import { addPostReset, editProfileReset } from '../../redux/actions/user';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { addPostReset } from '../../redux/actions/user';
 import { openModal } from '../../redux/actions/modal';
 import { getImageUrlWithBase } from '../../helpers';
 import { TypeModal } from '../../interfaces/modal';
@@ -25,6 +25,11 @@ const UserCard = ({ id, login, email, avatarUrl }: UserCardProps) => {
   const openAddPostModal = () => {
     dispatch(addPostReset());
     dispatch(openModal(TypeModal.ADD_POST));
+  };
+
+  const openEditProfileModal = () => {
+    dispatch(editProfileReset());
+    dispatch(openModal(TypeModal.EDIT_PROFILE));
   };
 
   return (
@@ -50,6 +55,7 @@ const UserCard = ({ id, login, email, avatarUrl }: UserCardProps) => {
           <Button
             variant="contained"
             startIcon={<Edit />}
+            onClick={openEditProfileModal}
           >
             Edit Profile
           </Button>

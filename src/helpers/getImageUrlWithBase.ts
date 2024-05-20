@@ -8,7 +8,7 @@ const getImageUrlWithBase = (imageUrl: string | null, type: string): string => {
     case USER:
       return imageUrl !== null ? `${baseUrl}/${imageUrl}` : '/placeholderAvatar.webp';
     default:
-      return '/public/notFound.webp';
+      return '/notFound.webp';
   }
 };
 

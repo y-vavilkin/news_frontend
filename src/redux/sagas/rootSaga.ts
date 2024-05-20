@@ -5,6 +5,7 @@ import authSaga from './verifySaga.ts';
 import userSaga from './userSaga.ts';
 import verifySaga from './authSaga.ts';
 import addPostSaga from './addPostSaga.ts';
+import editProfileSaga from './editProfileSaga.ts';
 
 function * rootSaga () {
   yield all([
@@ -12,7 +13,8 @@ function * rootSaga () {
     authSaga(),
     userSaga(),
     verifySaga(),
-    addPostSaga()
+    addPostSaga(),
+    editProfileSaga()
   ]);
 }
 

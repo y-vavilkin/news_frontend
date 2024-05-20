@@ -2,8 +2,8 @@ import { UserState, UserAction } from '../../interfaces/user';
 import * as actionTypes from '../actions/actionTypes/user';
 
 const initialState: UserState = {
-  isLoadingProfile: false,
-  isLoadingPosts: false,
+  isLoading: false,
+  isLoadingModal: false,
   error: null,
   user: null,
   userPosts: []
@@ -15,36 +15,57 @@ const postsReducer = (state: UserState = initialState, action: UserAction): User
       return {
         ...state,
         error: null,
-        isLoadingProfile: true
+        isLoading: true
+      };
+    case actionTypes.EDIT_PROFILE_REQUESTED:
+      return {
+        ...state,
+        error: null,
+        isLoadingModal: true
       };
     case actionTypes.USER_RECEIVED:
       return {
         ...state,
-        isLoadingProfile: false,
+        isLoading: false,
         user: action.payload,
         userPosts: action.payload?.posts
       };
     case actionTypes.USER_FAILED:
     case actionTypes.ADD_POST_FAILED:
+    case actionTypes.EDIT_PROFILE_FAILED:
       return {
         ...state,
-        isLoadingPosts: false,
+        isLoading: false,
+        isLoadingModal: false,
         error: action.error ?? null
       };
     case actionTypes.ADD_POST_REQUESTED:
       return {
         ...state,
-        isLoadingPosts: true
+        error: null,
+        isLoadingModal: true
       };
-    case actionTypes.ADD_POST_SUCCESSES:
+    case actionTypes.ADD_POST_RECEIVED:
       return {
         ...state,
-        isLoadingPosts: false,
+        isLoadingModal: false,
         error: null,
         userPosts: [action.payload, ...state.userPosts]
       };
+    case actionTypes.EDIT_PROFILE_RECEIVED: {
+      return {
+        ...state,
+        isLoading: false,
+        user: {
+          ...state.user,
+          login: action.payload?.login,
+          avatarUrl: action.payload?.avatarUrl
+        }
+      };
+    }
     case actionTypes.ADD_POST_RESET:
     case actionTypes.USER_RESET:
+    case actionTypes.EDIT_PROFILE_RESET:
       return {
         ...state,
         error: null

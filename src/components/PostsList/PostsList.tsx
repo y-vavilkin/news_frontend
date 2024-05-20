@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import PostCard, { type PostProps } from '../PostCard';
 
 import classes from './PostsList.module.scss';
@@ -25,4 +27,4 @@ const PostsList = ({ postsData }: PostsListProps) => {
   );
 };
 
-export default PostsList;
+export default memo(PostsList);

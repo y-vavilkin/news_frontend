@@ -2,20 +2,23 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, TextField } from '@mui/material';
+import { useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { addPostRequested } from '../../redux/actions/user';
-import { AddPostFormData } from '../../interfaces/user';
-import { createRequestAddPost } from '../../helpers';
+import { editProfileRequested } from '../../redux/actions/user';
+import { EditProfileFormData } from '../../interfaces/user';
+import { createRequestEditProfile } from '../../helpers';
 import Loader from '../Loader';
 
-import classes from './AddPostForm.module.scss';
-import addPostSchema from './addPostSchema';
+import classes from './EditProfileForm.module.scss';
+import editProfileSchema from './editProfileSchema';
 
-const AddPostForm = () => {
+const EditProfileForm = () => {
   const dispatch = useAppDispatch();
   const error = useAppSelector(state => state.currentUser.error);
   const isLoading = useAppSelector(state => state.currentUser.isLoadingModal);
+  const login = useAppSelector(state => state.auth.authUser?.login);
+  const [inputError, setInputError] = useState('');
 
   const {
     watch,
@@ -23,19 +26,21 @@ const AddPostForm = () => {
     handleSubmit,
     formState: { errors }
   } = useForm({
-    resolver: yupResolver(addPostSchema)
+    resolver: yupResolver(editProfileSchema)
   });
 
-  const image = watch('imagePost');
+  const image = watch('imageUser');
   const isImageUploaded = image instanceof FileList && image.length > 0;
 
-  const onSubmit: SubmitHandler<AddPostFormData> = (data: AddPostFormData) => {
-    dispatch(addPostRequested(createRequestAddPost(data)));
+  const onSubmit: SubmitHandler<EditProfileFormData> = (data: EditProfileFormData) => {
+    if (data.login === login && !isImageUploaded) {
+      setInputError('The data has not changed');
+    } else {
+      dispatch(editProfileRequested(createRequestEditProfile(data)));
+    }
   };
 
-  const isTitleError = errors.title?.message !== undefined;
-  const isContentError = errors.content?.message !== undefined;
-  const isTagsError = errors.tags?.message !== undefined;
+  const isLoginError = errors.login?.message !== undefined;
 
   const textButton = isImageUploaded ? 'thanks' : 'upload file';
   const color = isImageUploaded ? 'success' : 'primary';
@@ -44,31 +49,13 @@ const AddPostForm = () => {
     <form onSubmit={handleSubmit(onSubmit)} className={classes.box}>
       <TextField
         type="text"
-        label="Title"
+        label="Login"
         fullWidth
         margin="normal"
-        {...register('title')}
+        defaultValue={login}
+        {...register('login')}
       />
-      <p className={classes.error}>{errors.title?.message}</p>
-      <TextField
-        type="text"
-        label="Content"
-        fullWidth
-        margin="normal"
-        multiline
-        rows={4}
-        {...register('content')}
-      />
-      <p className={classes.error}>{errors.content?.message}</p>
-      <TextField
-        type="text"
-        label="Tags"
-        fullWidth
-        margin="normal"
-        placeholder='Use more than one: `,`'
-        {...register('tags')}
-      />
-      <p className={classes.error}>{errors.tags?.message}</p>
+      <p className={classes.error}>{errors.login?.message}</p>
       <div className={classes.buttons}>
         <Button
           component="label"
@@ -83,22 +70,23 @@ const AddPostForm = () => {
             type="file"
             accept=".jpg,.jpeg,.png,.gif"
             className={classes.hiddenInput}
-            {...register('imagePost')}
+            {...register('imageUser')}
           />
         </Button>
         <Button
           type="submit"
           variant="contained"
           color="primary"
-          disabled={isTitleError || isContentError || isTagsError}
+          disabled={isLoginError}
           className={classes.button}
         >
-          {isLoading ? <Loader /> : 'Create post'}
+          {isLoading ? <Loader /> : 'Save changes'}
         </Button>
       </div>
       <p className={classes.error}>{error}</p>
+      <p className={classes.error}>{inputError}</p>
     </form>
   );
 };
 
-export default AddPostForm;
+export default EditProfileForm;
