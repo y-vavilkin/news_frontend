@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-const authFormShema = Yup.object().shape({
+const authFormSchema = Yup.object().shape({
   login: Yup.string()
     .min(5, 'Mininum 5 characters')
     .max(30, 'Maximum 30 characters')
@@ -14,4 +14,4 @@ const authFormShema = Yup.object().shape({
     .required('Password is required')
 });
 
-export default authFormShema;
+export default authFormSchema;

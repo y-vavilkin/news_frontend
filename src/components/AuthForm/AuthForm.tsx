@@ -8,7 +8,7 @@ import { authUser } from '../../redux/actions/auth';
 import { TypeModal } from '../../interfaces/modal';
 
 import classes from './AuthForm.module.scss';
-import authFormShema from './authFormShema';
+import authFormSchema from './authFormSchema';
 
 const AuthForm = () => {
   const dispatch = useAppDispatch();
@@ -21,7 +21,7 @@ const AuthForm = () => {
     handleSubmit,
     formState: { errors }
   } = useForm({
-    resolver: yupResolver(authFormShema)
+    resolver: yupResolver(authFormSchema)
   });
 
   const onSubmit: SubmitHandler<AuthFormData> = (data: AuthFormData) => {

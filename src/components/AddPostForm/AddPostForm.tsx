@@ -7,10 +7,10 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addPostRequested } from '../../redux/actions/user';
 import { AddPostFormData } from '../../interfaces/user';
 import { createRequestAddPost } from '../../helpers';
+import Loader from '../Loader';
 
 import classes from './AddPostForm.module.scss';
 import addPostSchema from './addPostSchema';
-import Loader from '../Loader';
 
 const AddPostForm = () => {
   const dispatch = useAppDispatch();
@@ -95,7 +95,7 @@ const AddPostForm = () => {
         Add Post
       </Button>
       <p className={classes.error}>{error}</p>
-      {isLoading && (<Loader />)}
+      {isLoading && <Loader />}
     </form>
   );
 };

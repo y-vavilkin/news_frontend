@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <div className={classes.header}>
       <Link to="/" className={classes.logo}>
-        <img src="/public/logo.webp" alt="logo" />
+        <img src="/logo.webp" alt="logo" />
       </Link>
       <p>News</p>
       <div className={classes.links}>

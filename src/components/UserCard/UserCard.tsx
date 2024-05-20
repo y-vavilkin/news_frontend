@@ -19,7 +19,6 @@ interface UserCardProps {
 }
 
 const UserCard = ({ id, login, email, avatarUrl }: UserCardProps) => {
-  console.log({ id, login, email, avatarUrl });
   const dispatch = useAppDispatch();
   const userId = useAppSelector(state => state.auth.authUser?.id);
 

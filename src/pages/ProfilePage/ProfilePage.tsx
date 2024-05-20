@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { BAD_URL, UNAUTHORIZED } from '../../constants/errors';
 import PostsList from '../../components/PostsList';
 import UserCard from '../../components/UserCard';
-import { EMPTY_POSTS } from '../../constants';
+import { EMPTY_POSTS, TIME_REDIRECT } from '../../constants';
 import Loader from '../../components/Loader';
 import Notify from '../../components/Notify';
 import { changeError } from '../../helpers';
@@ -35,10 +35,11 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (error === UNAUTHORIZED || error === changeError(BAD_URL)) {
+      console.log(error);
       setTimeout(() => {
         dispatch(userReset());
         navigate('/');
-      }, 2000);
+      }, TIME_REDIRECT);
     }
   }, [error]);
 
@@ -56,8 +57,8 @@ const ProfilePage = () => {
             avatarUrl={dataUser.avatarUrl}
           />
           {isNotEmpty
-            ? (<PostsList postsData={posts} />)
-            : (<Notify info={EMPTY_POSTS} status="info" />)}
+            ? <PostsList postsData={posts} />
+            : <Notify info={EMPTY_POSTS} status="info" />}
         </>
       )}
     </>
