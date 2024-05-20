@@ -1,41 +1,44 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
+import { userFailed, userRequest, userReset } from '../../redux/actions/user';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { userRequest } from '../../redux/actions/user';
-import { UNAUTHORIZED } from '../../constants/errors';
+import { BAD_URL, UNAUTHORIZED } from '../../constants/errors';
 import PostsList from '../../components/PostsList';
 import UserCard from '../../components/UserCard';
 import { EMPTY_POSTS } from '../../constants';
 import Loader from '../../components/Loader';
 import Notify from '../../components/Notify';
+import { changeError } from '../../helpers';
 
 const ProfilePage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const { id } = useParams();
-  const posts = useAppSelector(state => state.currentUser.user?.posts);
+  const posts = useAppSelector(state => state.currentUser.userPosts);
   const dataUser = useAppSelector(state => state.currentUser.user);
   const error = useAppSelector(state => state.currentUser.error);
-  const isLoading = useAppSelector(state => state.currentUser.isLoading);
+  const isLoading = useAppSelector(state => state.currentUser.isLoadingProfile);
   const isNotEmpty = posts !== undefined && posts.length !== 0;
   const isUserExist = dataUser !== null;
   const isError = error !== null;
 
   useEffect(() => {
     const requestId = Number(id);
-
     if (!isNaN(requestId)) {
       dispatch(userRequest(requestId));
     } else {
-      navigate('/');
+      dispatch(userFailed(changeError(BAD_URL)));
     }
   }, [id]);
 
   useEffect(() => {
-    if (error === UNAUTHORIZED) {
-      navigate('/');
+    if (error === UNAUTHORIZED || error === changeError(BAD_URL)) {
+      setTimeout(() => {
+        dispatch(userReset());
+        navigate('/');
+      }, 2000);
     }
   }, [error]);
 
@@ -46,7 +49,12 @@ const ProfilePage = () => {
       {!isUserExist && isError && <Notify info={error} status="error" />}
       {isUserExist && (
         <>
-          <UserCard id={Number(id)} dataUser={dataUser} />
+          <UserCard
+            id={Number(id)}
+            login={dataUser.login}
+            email={dataUser.email}
+            avatarUrl={dataUser.avatarUrl}
+          />
           {isNotEmpty
             ? (<PostsList postsData={posts} />)
             : (<Notify info={EMPTY_POSTS} status="info" />)}

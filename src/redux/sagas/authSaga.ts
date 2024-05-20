@@ -10,6 +10,7 @@ import * as actionTypes from '../actions/actionTypes/auth';
 import { authenticate } from '../api/authenticate';
 import { useAuthType } from '../hooks/hooks';
 import { closeModal } from '../actions/modal';
+import { userReset } from '../actions/user';
 
 function * authSaga (action: AuthAction) {
   try {
@@ -21,6 +22,7 @@ function * authSaga (action: AuthAction) {
     );
     localStorage.setItem(TOKEN, data.token);
     yield put(authUserSuccess(data.user));
+    yield put(userReset());
     yield put(closeModal());
   } catch (error: unknown) {
     const currentError: string = extractErrorMessage(error);

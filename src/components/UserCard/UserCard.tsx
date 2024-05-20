@@ -1,8 +1,8 @@
 import { Edit, Add } from '@mui/icons-material';
 import { Button } from '@mui/material';
+import { memo } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { User as UserDescription } from '../../interfaces/user';
 import { addPostReset } from '../../redux/actions/user';
 import { openModal } from '../../redux/actions/modal';
 import { getImageUrlWithBase } from '../../helpers';
@@ -13,10 +13,13 @@ import classes from './UserCard.module.scss';
 
 interface UserCardProps {
   id: number
-  dataUser: UserDescription
+  login: string
+  email: string
+  avatarUrl: string | null
 }
 
-const UserCard = ({ id, dataUser }: UserCardProps) => {
+const UserCard = ({ id, login, email, avatarUrl }: UserCardProps) => {
+  console.log({ id, login, email, avatarUrl });
   const dispatch = useAppDispatch();
   const userId = useAppSelector(state => state.auth.authUser?.id);
 
@@ -29,12 +32,12 @@ const UserCard = ({ id, dataUser }: UserCardProps) => {
     <div className={classes.userDescription}>
       <img
         className={classes.avatar}
-        src={getImageUrlWithBase(dataUser.avatarUrl, USER)}
+        src={getImageUrlWithBase(avatarUrl, USER)}
         alt="Avatar"
       />
       <div className={classes.information}>
-        <p>Login: {dataUser.login}</p>
-        <p>Email: {dataUser.email}</p>
+        <p>Login: {login}</p>
+        <p>Email: {email}</p>
       </div>
       {id === userId && (
         <div className={classes.buttons}>
@@ -57,4 +60,4 @@ const UserCard = ({ id, dataUser }: UserCardProps) => {
   );
 };
 
-export default UserCard;
+export default memo(UserCard);

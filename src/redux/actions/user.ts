@@ -22,6 +22,10 @@ export const userFailed = (error: string): UserAction => ({
   error
 });
 
+export const userReset = (): UserAction => ({
+  type: actionTypes.USER_RESET
+});
+
 export const addPostRequested = (payload: PostRequest): UserAction => ({
   type: actionTypes.ADD_POST_REQUESTED,
   payload

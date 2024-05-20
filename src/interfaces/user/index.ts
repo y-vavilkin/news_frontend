@@ -18,7 +18,9 @@ export interface UserAction {
 
 export interface UserState {
   user: User | null
-  isLoading: boolean
+  userPosts: Post[]
+  isLoadingPosts: boolean
+  isLoadingProfile: boolean
   error: string | null
 }
 

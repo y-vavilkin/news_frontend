@@ -3,17 +3,19 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, TextField } from '@mui/material';
 
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addPostRequested } from '../../redux/actions/user';
 import { AddPostFormData } from '../../interfaces/user';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { createRequestAddPost } from '../../helpers';
 
 import classes from './AddPostForm.module.scss';
 import addPostSchema from './addPostSchema';
+import Loader from '../Loader';
 
 const AddPostForm = () => {
   const dispatch = useAppDispatch();
   const error = useAppSelector(state => state.currentUser.error);
+  const isLoading = useAppSelector(state => state.currentUser.isLoadingPosts);
 
   const {
     watch,
@@ -78,7 +80,7 @@ const AddPostForm = () => {
         {textButton}
         <input
           type="file"
-          accept="image/*"
+          accept=".jpg,.jpeg,.png,.gif"
           className={classes.hiddenInput}
           {...register('imagePost')}
         />
@@ -93,6 +95,7 @@ const AddPostForm = () => {
         Add Post
       </Button>
       <p className={classes.error}>{error}</p>
+      {isLoading && (<Loader />)}
     </form>
   );
 };
