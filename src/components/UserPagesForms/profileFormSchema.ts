@@ -14,6 +14,7 @@ export const addPostSchema = Yup.object().shape({
     .trim()
     .min(1, 'Minimum 1 character')
     .max(255, 'Maximum 255 characters')
+    .matches(/^([a-zA-Zа-яА-Я0-9]+,)*[a-zA-Zа-яА-Я0-9]+$/, 'Incorrect tags')
     .required('Tags is required'),
   imagePost: Yup.mixed()
 });
