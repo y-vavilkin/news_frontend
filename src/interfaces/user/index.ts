@@ -29,22 +29,22 @@ export interface AddPostFormData {
   title: string
   content: string
   tags: string
-  imagePost?: FileList
+  imagePost?: FileList | File
 }
 
 export interface PostRequest {
   title: string
   content: string
   tags: string
-  imagePost: File | null
+  imagePost?: File
 }
 
 export interface EditProfileFormData {
   login: string
-  imageUser?: FileList
+  imageUser?: FileList | File
 }
 
 export interface EditProfileRequest {
   login: string
-  imageUser: File | null
+  imageUser?: File
 }

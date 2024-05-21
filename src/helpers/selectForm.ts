@@ -1,4 +1,4 @@
-import AddPostForm from '../components/ProfileForm';
+import { AddPostForm, EditProfileForm } from '../components/UserPagesForms';
 import { TypeModal } from '../interfaces/modal';
 import AuthForm from '../components/AuthForm';
 
@@ -8,9 +8,11 @@ const selectForm = (type: TypeModal | undefined) => {
     case TypeModal.LOGIN: {
       return AuthForm;
     }
-    case TypeModal.ADD_POST:
-    case TypeModal.EDIT_PROFILE: {
+    case TypeModal.ADD_POST: {
       return AddPostForm;
+    }
+    case TypeModal.EDIT_PROFILE: {
+      return EditProfileForm;
     }
     default:
       return AddPostForm;
