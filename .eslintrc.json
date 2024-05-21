@@ -30,6 +30,7 @@
     "@typescript-eslint/consistent-type-imports": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/consistent-type-assertions": "off",
     "react/jsx-indent": ["error", 2],
     "react/jsx-indent-props": ["error", 2],
     "react/jsx-max-props-per-line": ["error", { "when": "multiline" }],

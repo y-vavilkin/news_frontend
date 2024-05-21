@@ -35,7 +35,6 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (error === UNAUTHORIZED || error === changeError(BAD_URL)) {
-      console.log(error);
       setTimeout(() => {
         dispatch(userReset());
         navigate('/');
