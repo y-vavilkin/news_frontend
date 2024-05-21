@@ -32,7 +32,6 @@ const createRequest = (
         throw new Error('Invalid data type for EDIT_PROFILE');
       }
     }
-
     case ADD_POST: {
       if (isAddPostFormData(data)) {
         const imagePost = data.imagePost === undefined

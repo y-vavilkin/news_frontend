@@ -12,9 +12,8 @@ import { ADD_POST, EDIT_PROFILE } from '../../constants';
 import { TypeModal } from '../../interfaces/modal';
 import { createRequest } from '../../helpers';
 
-import editProfileSchema from './editProfileSchema';
+import { addPostSchema, editProfileSchema } from './profileFormSchema';
 import classes from './ProfileForm.module.scss';
-import addPostSchema from './addPostSchema';
 
 const ProfileForm = () => {
   const dispatch = useAppDispatch();
