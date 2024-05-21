@@ -1,13 +1,13 @@
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import LoadingButton from '@mui/lab/LoadingButton';
 import { Button, TextField } from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addPostRequested } from '../../redux/actions/user';
 import { AddPostFormData } from '../../interfaces/user';
 import { createRequestAddPost } from '../../helpers';
-import Loader from '../Loader';
 
 import classes from './AddPostForm.module.scss';
 import addPostSchema from './addPostSchema';
@@ -93,7 +93,7 @@ const AddPostForm = () => {
           disabled={isTitleError || isContentError || isTagsError}
           className={classes.button}
         >
-          {isLoading ? <Loader /> : 'Create post'}
+          {isLoading ? <LoadingButton loading /> : 'Create post'}
         </Button>
       </div>
       <p className={classes.error}>{error}</p>

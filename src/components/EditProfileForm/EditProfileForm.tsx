@@ -1,6 +1,7 @@
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import LoadingButton from '@mui/lab/LoadingButton';
 import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
 
@@ -8,7 +9,6 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { editProfileRequested } from '../../redux/actions/user';
 import { EditProfileFormData } from '../../interfaces/user';
 import { createRequestEditProfile } from '../../helpers';
-import Loader from '../Loader';
 
 import classes from './EditProfileForm.module.scss';
 import editProfileSchema from './editProfileSchema';
@@ -80,7 +80,7 @@ const EditProfileForm = () => {
           disabled={isLoginError}
           className={classes.button}
         >
-          {isLoading ? <Loader /> : 'Save changes'}
+          {isLoading ? <LoadingButton loading /> : 'Save changes'}
         </Button>
       </div>
       <p className={classes.error}>{error}</p>
