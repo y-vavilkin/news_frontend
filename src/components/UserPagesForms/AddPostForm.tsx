@@ -40,7 +40,7 @@ const AddPostForm = () => {
     if (data.imagePost instanceof FileList && data.imagePost.length > 0) {
       data.imagePost = data.imagePost[0];
     } else {
-      delete data.imagePost;
+      data.imagePost = null;
     }
     dispatch(addPostRequested(data as PostRequest));
   };

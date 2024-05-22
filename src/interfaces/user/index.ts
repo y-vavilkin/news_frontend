@@ -29,7 +29,7 @@ export interface AddPostFormData {
   title: string
   content: string
   tags: string
-  imagePost?: FileList | File
+  imagePost?: FileList | File | null
 }
 
 export interface PostRequest {
@@ -41,7 +41,7 @@ export interface PostRequest {
 
 export interface EditProfileFormData {
   login: string
-  imageUser?: FileList | File
+  imageUser?: FileList | File | null
 }
 
 export interface EditProfileRequest {

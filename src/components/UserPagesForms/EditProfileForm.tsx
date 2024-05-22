@@ -43,7 +43,7 @@ const EditProfileForm = () => {
       if (data.imageUser instanceof FileList && data.imageUser.length > 0) {
         data.imageUser = data.imageUser[0];
       } else {
-        delete data.imageUser;
+        data.imageUser = null;
       }
       dispatch(editProfileRequested(data as EditProfileRequest));
     }
