@@ -28,10 +28,10 @@ const AddPostForm = () => {
   const image = watch('imagePost');
   const isImageUploaded = image instanceof FileList && image.length > 0;
 
-  const isContentError = errors.content?.message !== undefined;
-  const isTitleError = errors.title?.message !== undefined;
-  const isTagsError = errors.tags?.message !== undefined;
-  const isAddPostError = isTitleError || isContentError || isTagsError;
+  const hasContentError = errors.content?.message !== undefined;
+  const hasTitleError = errors.title?.message !== undefined;
+  const hasTagsError = errors.tags?.message !== undefined;
+  const hasAddPostError = hasContentError || hasTitleError || hasTagsError;
 
   const textButtonImage = isImageUploaded ? 'thanks' : 'upload file';
   const color = isImageUploaded ? 'success' : 'primary';
@@ -96,7 +96,7 @@ const AddPostForm = () => {
           color="primary"
           loading={isLoading}
           variant="contained"
-          disabled={isAddPostError}
+          disabled={hasAddPostError}
           className={classes.button}
         >
           Create post

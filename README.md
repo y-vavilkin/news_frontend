@@ -11,6 +11,11 @@
 
 ## The main functionality
 
+The user can create posts, edit their own profile (login and avatar). View the profiles of other users and their posts.
+
+### Routes
 `/` - the route of the main page with posts by all users;
 
 - `/users/:id` - the route to get the user profile;
+
+---

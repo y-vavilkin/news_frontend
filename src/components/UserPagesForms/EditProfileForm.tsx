@@ -31,7 +31,7 @@ const EditProfileForm = () => {
   const image = watch('imageUser');
   const isImageUploaded = image instanceof FileList && image.length > 0;
 
-  const isLoginError = errors.login?.message !== undefined;
+  const hasLoginError = errors.login?.message !== undefined;
 
   const textButtonImage = isImageUploaded ? 'thanks' : 'upload file';
   const color = isImageUploaded ? 'success' : 'primary';
@@ -82,7 +82,7 @@ const EditProfileForm = () => {
           color="primary"
           loading={isLoading}
           variant="contained"
-          disabled={isLoginError}
+          disabled={hasLoginError}
           className={classes.button}
         >
           Save changes
