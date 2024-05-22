@@ -3,24 +3,25 @@ import { AxiosError, AxiosResponse } from 'axios';
 
 import { GLOBAL_ERROR } from '../../constants/errors';
 import { UserAction } from '../../interfaces/user';
-import { Post } from '../../interfaces/posts';
 import { changeError } from '../../helpers';
-import { addPostFailed, addPostReceived } from '../actions/user';
+import { editProfileFailed, editProfileReceived, editProfileReset } from '../actions/user';
 import * as actionTypes from '../actions/actionTypes/user';
 import { closeModal } from '../actions/modal';
-import addPost from '../api/addPost';
+import editProfile from '../api/editProfile';
+import { AuthUser } from '../../interfaces/auth';
 
-function * addPostWorker ({ payload }: UserAction) {
+function * editProfileWorker ({ payload }: UserAction) {
   try {
-    const { data }: AxiosResponse<Post> = yield call(addPost, payload);
-    yield put(addPostReceived(data));
+    const { data }: AxiosResponse<AuthUser> = yield call(editProfile, payload);
+    yield put(editProfileReceived(data));
+    yield put(editProfileReset());
     yield put(closeModal());
   } catch (error: unknown) {
     const currentError: string = error instanceof AxiosError ? error.message : GLOBAL_ERROR;
-    yield put(addPostFailed(changeError(currentError)));
+    yield put(editProfileFailed(changeError(currentError)));
   }
 }
 
 export default function * watcherSaga () {
-  yield takeLatest(actionTypes.ADD_POST_REQUESTED, addPostWorker);
+  yield takeLatest(actionTypes.EDIT_PROFILE_REQUESTED, editProfileWorker);
 }

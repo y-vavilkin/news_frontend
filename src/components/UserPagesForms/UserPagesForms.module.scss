@@ -1,0 +1,37 @@
+.box {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  height: max-content;
+  border-radius: 10px;
+  background-color: var(--white);
+  width: 350px;
+
+  .buttons {
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+
+    .button {
+      height: 100%;
+      width: 47%;
+
+      .hiddenInput {
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+      }
+    }
+  }
+}
+
+.error {
+  color: var(--red)
+}

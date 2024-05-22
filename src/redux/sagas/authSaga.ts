@@ -5,7 +5,7 @@ import { AuthAction, AuthResponse } from '../../interfaces/auth';
 import { changeError, extractErrorMessage } from '../../helpers';
 import { TypeModal } from '../../interfaces/modal';
 import { TOKEN } from '../../constants';
-import { authUserFailure, authUserSuccess } from '../actions/auth';
+import { authUserFailure, authUserReceived } from '../actions/auth';
 import * as actionTypes from '../actions/actionTypes/auth';
 import { authenticate } from '../api/authenticate';
 import { useAuthType } from '../hooks/hooks';
@@ -21,7 +21,7 @@ function * authSaga (action: AuthAction) {
       modalType
     );
     localStorage.setItem(TOKEN, data.token);
-    yield put(authUserSuccess(data.user));
+    yield put(authUserReceived(data.user));
     yield put(userReset());
     yield put(closeModal());
   } catch (error: unknown) {

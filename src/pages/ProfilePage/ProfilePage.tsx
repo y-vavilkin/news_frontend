@@ -4,9 +4,9 @@ import { useEffect } from 'react';
 import { userFailed, userRequest, userReset } from '../../redux/actions/user';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { BAD_URL, UNAUTHORIZED } from '../../constants/errors';
+import { EMPTY_POSTS, TIME_REDIRECT } from '../../constants';
 import PostsList from '../../components/PostsList';
 import UserCard from '../../components/UserCard';
-import { EMPTY_POSTS, TIME_REDIRECT } from '../../constants';
 import Loader from '../../components/Loader';
 import Notify from '../../components/Notify';
 import { changeError } from '../../helpers';
@@ -19,7 +19,7 @@ const ProfilePage = () => {
   const posts = useAppSelector(state => state.currentUser.userPosts);
   const dataUser = useAppSelector(state => state.currentUser.user);
   const error = useAppSelector(state => state.currentUser.error);
-  const isLoading = useAppSelector(state => state.currentUser.isLoadingProfile);
+  const isLoading = useAppSelector(state => state.currentUser.isLoading);
   const isNotEmpty = posts !== undefined && posts.length !== 0;
   const isUserExist = dataUser !== null;
   const isError = error !== null;
@@ -35,7 +35,6 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (error === UNAUTHORIZED || error === changeError(BAD_URL)) {
-      console.log(error);
       setTimeout(() => {
         dispatch(userReset());
         navigate('/');

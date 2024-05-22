@@ -6,8 +6,8 @@ export const authUser = (payload: AuthFormData): AuthAction => ({
   payload
 });
 
-export const authUserSuccess = (payload: AuthUser): AuthAction => ({
-  type: actionTypes.AUTH_USER_SUCCESS,
+export const authUserReceived = (payload: AuthUser): AuthAction => ({
+  type: actionTypes.AUTH_USER_RECEIVED,
   payload
 });
 
