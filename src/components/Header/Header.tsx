@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 
 import { useAppSelector } from '../../redux/hooks';
+import FiltersField from '../FiltersField';
+import SearchField from '../SearchField';
 import UserMenu from '../UserMenu';
 import AuthMenu from '../AuthMenu';
 
@@ -14,7 +16,10 @@ const Header = () => {
       <Link to="/" className={classes.logo}>
         <img src="/logo.webp" alt="logo" />
       </Link>
-      <p>News</p>
+      <div className={classes.inputs}>
+        <SearchField />
+        <FiltersField />
+      </div>
       <div className={classes.links}>
         {isOnline ? <UserMenu /> : <AuthMenu />}
       </div>
