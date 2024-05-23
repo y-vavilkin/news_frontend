@@ -19,12 +19,14 @@ export interface Post {
 
 export interface PostAction {
   type: string
-  payload?: Post[]
+  payload?: Post[] | string
   error?: string
 }
 
 export interface PostsState {
   posts: Post[]
+  postsForView: Post[]
   isLoading: boolean
   error: string | null
+  typeOfSearch: string
 }

@@ -14,3 +14,13 @@ export const postsReseived = (payload: Post[] | []): PostAction => ({
   type: actionTypes.POSTS_RECEIVED,
   payload
 });
+
+export const postsSetType = (payload: string): PostAction => ({
+  type: actionTypes.POSTS_SET_TYPE,
+  payload
+});
+
+export const postsSearchReceived = (payload: Post[] | []): PostAction => ({
+  type: actionTypes.POSTS_SEARCH_RECEIVED,
+  payload
+});

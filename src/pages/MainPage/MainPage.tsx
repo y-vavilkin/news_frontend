@@ -9,7 +9,7 @@ import Loader from '../../components/Loader';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
-  const posts = useAppSelector((state) => state.posts.posts);
+  const posts = useAppSelector((state) => state.posts.postsForView);
   const isLoading = useAppSelector((state) => state.posts.isLoading);
   const error = useAppSelector((state) => state.posts.error);
   const isNotEmpty = posts.length !== 0;
@@ -24,11 +24,7 @@ const MainPage = () => {
 
   return (
     <>
-      {
-        isNotEmpty
-          ? <PostsList postsData={posts} />
-          : <Notify info={EMPTY_POSTS} status="info" />
-      }
+      {isNotEmpty ? <PostsList postsData={posts} /> : <Notify info={EMPTY_POSTS} status="info" />}
     </>
   );
 };
