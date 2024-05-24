@@ -25,11 +25,6 @@ export const postsSetPage = (payload: string): PostAction => ({
   payload
 });
 
-export const postsSearchReceived = (payload: Post[] | []): PostAction => ({
-  type: actionTypes.POSTS_SEARCH_RECEIVED,
-  payload
-});
-
 export const postsSetInput = (payload: string): PostAction => ({
   type: actionTypes.POSTS_SET_INPUT,
   payload

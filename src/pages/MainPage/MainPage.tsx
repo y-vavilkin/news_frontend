@@ -1,34 +1,38 @@
 import { useEffect, useState } from 'react';
 
-import { postsRequest, postsSearchReceived, postsSetPage } from '../../redux/actions/posts';
+import { postsRequest, postsSetInput, postsSetPage } from '../../redux/actions/posts';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
-import { EMPTY_POSTS, MAIN_PAGE } from '../../constants';
+import { EMPTY, MAIN_PAGE } from '../../constants';
 import PostsList from '../../components/PostsList';
+import { Post } from '../../interfaces/posts';
 import Notify from '../../components/Notify';
 import Loader from '../../components/Loader';
-import { searchPosts } from '../../helpers';
+import { filterPosts } from '../../helpers';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
-  const [isCanView, setIsCanView] = useState(false);
-  const globalPosts = useAppSelector(state => state.posts.posts);
-  const posts = useAppSelector((state) => state.posts.postsForView);
+  const posts = useAppSelector(state => state.posts.posts);
   const isLoading = useAppSelector((state) => state.posts.isLoading);
   const error = useAppSelector((state) => state.posts.error);
   const textInput = useAppSelector(state => state.posts.input);
   const typeOfSearch = useAppSelector(state => state.posts.typeOfSearch);
 
+  const [filtredPosts, setFiltredPosts] = useState<Post[]>([]);
+
+  const isNotEmpty = filtredPosts.length > 0;
+
   useEffect(() => {
     dispatch(postsSetPage(MAIN_PAGE));
+    dispatch(postsSetInput(''));
     dispatch(postsRequest());
   }, []);
 
   useEffect(() => {
-    !isLoading && posts.length > 0 ? setIsCanView(true) : setIsCanView(false);
-  }, [isLoading, posts]);
+    setFiltredPosts(posts);
+  }, [posts]);
 
   useEffect(() => {
-    dispatch(postsSearchReceived(searchPosts(globalPosts, textInput, typeOfSearch)));
+    setFiltredPosts(filterPosts(posts, textInput, typeOfSearch));
   }, [textInput, typeOfSearch]);
 
   if (isLoading) return <Loader />;
@@ -37,7 +41,7 @@ const MainPage = () => {
 
   return (
     <>
-      {isCanView ? <PostsList postsData={posts} /> : <Notify info={EMPTY_POSTS} status="info" />}
+      {isNotEmpty ? <PostsList postsData={filtredPosts} /> : <Notify info={EMPTY} status="info" />}
     </>
   );
 };

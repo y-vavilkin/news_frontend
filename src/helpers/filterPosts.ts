@@ -1,7 +1,7 @@
 import { AUTHORS, TAGS, TITLE } from '../constants';
 import { Post } from '../interfaces/posts';
 
-const searchPosts = (posts: Post[], searchData: string, typeOfSearch: string) => {
+const filterPosts = (posts: Post[], searchData: string, typeOfSearch: string) => {
   const text = searchData.toLowerCase();
 
   switch (typeOfSearch) {
@@ -30,4 +30,4 @@ const searchPosts = (posts: Post[], searchData: string, typeOfSearch: string) =>
   }
 };
 
-export default searchPosts;
+export default filterPosts;

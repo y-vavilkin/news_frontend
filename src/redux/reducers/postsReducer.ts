@@ -5,7 +5,6 @@ import * as actionTypes from '../actions/actionTypes/posts';
 const initialState: PostsState = {
   input: '',
   posts: [],
-  postsForView: [],
   page: MAIN_PAGE,
   isLoading: false,
   error: null,
@@ -23,8 +22,7 @@ const postsReducer = (state: PostsState = initialState, action: PostAction): Pos
       return {
         ...state,
         isLoading: false,
-        posts: action.payload,
-        postsForView: action.payload
+        posts: action.payload
       };
     case actionTypes.POSTS_FAILED:
       return {
@@ -36,11 +34,6 @@ const postsReducer = (state: PostsState = initialState, action: PostAction): Pos
       return {
         ...state,
         typeOfSearch: action.payload
-      };
-    case actionTypes.POSTS_SEARCH_RECEIVED:
-      return {
-        ...state,
-        postsForView: action.payload
       };
     case actionTypes.POSTS_SET_PAGE:
       return {

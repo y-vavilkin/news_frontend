@@ -26,7 +26,6 @@ export interface PostAction {
 export interface PostsState {
   input: string
   posts: Post[]
-  postsForView: Post[]
   page: string
   isLoading: boolean
   error: string | null

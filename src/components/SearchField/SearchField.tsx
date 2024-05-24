@@ -1,22 +1,16 @@
-import { ChangeEvent, useEffect } from 'react';
 import { Box, TextField } from '@mui/material';
+import { ChangeEvent } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { postsSetInput } from '../../redux/actions/posts';
 
 const SearchField = () => {
   const dispatch = useAppDispatch();
-  const page = useAppSelector(state => state.posts.page);
   const inputText = useAppSelector(state => state.posts.input);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const text = event.target.value;
-    dispatch(postsSetInput(text));
+    dispatch(postsSetInput(event.target.value));
   };
-
-  useEffect(() => {
-    dispatch(postsSetInput(''));
-  }, [page]);
 
   return (
     <Box>
