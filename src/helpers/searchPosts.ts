@@ -19,7 +19,7 @@ const searchPosts = (posts: Post[], searchData: string, typeOfSearch: string) =>
     default: {
       return posts.filter((post) => {
         return post.title.includes(searchData) ||
-        post.user.login.includes(searchData) ||
+        post.user?.login.includes(searchData) ||
         post.tags.find((tag) => {
           return tag.text.includes(searchData);
         });

@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 
 import { userFailed, userRequest, userReset } from '../../redux/actions/user';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { postsSearchReceived } from '../../redux/actions/posts';
+import { postsSearchReceived, postsSetPage } from '../../redux/actions/posts';
 import { BAD_URL, UNAUTHORIZED } from '../../constants/errors';
-import { EMPTY_POSTS, TIME_REDIRECT } from '../../constants';
+import { EMPTY_POSTS, PROFILE_PAGE, TIME_REDIRECT } from '../../constants';
 import PostsList from '../../components/PostsList';
 import UserCard from '../../components/UserCard';
 import Loader from '../../components/Loader';
@@ -46,6 +46,7 @@ const ProfilePage = () => {
   }, [error]);
 
   useEffect(() => {
+    dispatch(postsSetPage(PROFILE_PAGE));
     dispatch(postsSearchReceived(userPosts));
     return () => {
       dispatch(postsSearchReceived(globalPosts));

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
-import { postsRequest } from '../../redux/actions/posts';
+import { postsRequest, postsSetPage } from '../../redux/actions/posts';
 import PostsList from '../../components/PostsList';
-import { EMPTY_POSTS } from '../../constants';
+import { EMPTY_POSTS, MAIN_PAGE } from '../../constants';
 import Notify from '../../components/Notify';
 import Loader from '../../components/Loader';
 
@@ -15,6 +15,7 @@ const MainPage = () => {
   const error = useAppSelector((state) => state.posts.error);
 
   useEffect(() => {
+    dispatch(postsSetPage(MAIN_PAGE));
     dispatch(postsRequest());
   }, []);
 

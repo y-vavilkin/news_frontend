@@ -5,12 +5,13 @@ import Box from '@mui/material/Box';
 import { useState } from 'react';
 
 import { postsSetType } from '../../redux/actions/posts';
-import { useAppDispatch } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import {
   ALL,
   TITLE,
   TAGS,
-  AUTHORS
+  AUTHORS,
+  MAIN_PAGE
 } from '../../constants';
 
 import classes from './FiltersField.module.scss';
@@ -18,6 +19,8 @@ import classes from './FiltersField.module.scss';
 const FiltersField = () => {
   const dispatch = useAppDispatch();
   const [age, setAge] = useState<string>('ALL');
+  const page = useAppSelector(state => state.posts.page);
+  const isMainPage = page === MAIN_PAGE;
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
@@ -34,7 +37,7 @@ const FiltersField = () => {
           <MenuItem value={ALL}>ALL</MenuItem>
           <MenuItem value={TITLE}>TITLE</MenuItem>
           <MenuItem value={TAGS}>TAGS</MenuItem>
-          <MenuItem value={AUTHORS}>AUTHORS</MenuItem>
+          {isMainPage && <MenuItem value={AUTHORS}>AUTHORS</MenuItem>}
         </Select>
       </FormControl>
     </Box>
