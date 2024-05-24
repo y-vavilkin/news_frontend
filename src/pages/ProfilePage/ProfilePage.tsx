@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 
 import { userFailed, userRequest, userReset } from '../../redux/actions/user';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { postsSearchReceived } from '../../redux/actions/posts';
 import { BAD_URL, UNAUTHORIZED } from '../../constants/errors';
 import { EMPTY_POSTS, TIME_REDIRECT } from '../../constants';
 import PostsList from '../../components/PostsList';
@@ -16,11 +17,13 @@ const ProfilePage = () => {
   const navigate = useNavigate();
 
   const { id } = useParams();
-  const posts = useAppSelector(state => state.currentUser.userPosts);
+  const userPosts = useAppSelector(state => state.currentUser.userPosts);
+  const globalPosts = useAppSelector(state => state.posts.posts);
+  const postsForView = useAppSelector(state => state.posts.postsForView);
   const dataUser = useAppSelector(state => state.currentUser.user);
   const error = useAppSelector(state => state.currentUser.error);
   const isLoading = useAppSelector(state => state.currentUser.isLoading);
-  const isNotEmpty = posts !== undefined && posts.length !== 0;
+  const isNotEmpty = postsForView !== undefined && postsForView.length !== 0;
   const isUserExist = dataUser !== null;
   const isError = error !== null;
 
@@ -42,6 +45,13 @@ const ProfilePage = () => {
     }
   }, [error]);
 
+  useEffect(() => {
+    dispatch(postsSearchReceived(userPosts));
+    return () => {
+      dispatch(postsSearchReceived(globalPosts));
+    };
+  }, [userPosts]);
+
   if (isLoading) return <Loader />;
 
   return (
@@ -56,7 +66,7 @@ const ProfilePage = () => {
             avatarUrl={dataUser.avatarUrl}
           />
           {isNotEmpty
-            ? <PostsList postsData={posts} />
+            ? <PostsList postsData={postsForView} />
             : <Notify info={EMPTY_POSTS} status="info" />}
         </>
       )}
