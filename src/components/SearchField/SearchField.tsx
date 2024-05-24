@@ -1,10 +1,8 @@
-import { Box, TextField } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
+import { Box, TextField } from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { postsSearchReceived } from '../../redux/actions/posts';
-import searchPosts from '../../helpers/searchPosts';
-import { MAIN_PAGE, PROFILE_PAGE } from '../../constants';
+import dispatchSearch from '../../helpers/dispatchSearch';
 
 const SearchField = () => {
   const dispatch = useAppDispatch();
@@ -15,22 +13,18 @@ const SearchField = () => {
   const page = useAppSelector(state => state.posts.page);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInput(event.target.value);
-    switch (page) {
-      case MAIN_PAGE:
-        dispatch(postsSearchReceived(searchPosts(globalPosts, event.target.value, typeOfSearch)));
-        break;
-      case PROFILE_PAGE:
-        dispatch(postsSearchReceived(searchPosts(userPosts, event.target.value, typeOfSearch)));
-        break;
-      default:
-        break;
-    }
+    const text = event.target.value;
+    setInput(text);
+    dispatchSearch(dispatch, page, text, typeOfSearch, globalPosts, userPosts);
   };
 
   useEffect(() => {
     setInput('');
   }, [page]);
+
+  useEffect(() => {
+    dispatchSearch(dispatch, page, input, typeOfSearch, globalPosts, userPosts);
+  }, [typeOfSearch]);
 
   return (
     <Box>

@@ -29,3 +29,12 @@ export const postsSearchReceived = (payload: Post[] | []): PostAction => ({
   type: actionTypes.POSTS_SEARCH_RECEIVED,
   payload
 });
+
+export const postsSetInput = (payload: string): PostAction => ({
+  type: actionTypes.POSTS_SET_INPUT,
+  payload
+});
+
+export const postsResetIntput = (): PostAction => ({
+  type: actionTypes.POSTS_RESET_INPUT
+});

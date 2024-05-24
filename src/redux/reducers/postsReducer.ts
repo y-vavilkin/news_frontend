@@ -3,6 +3,7 @@ import { ALL, MAIN_PAGE } from '../../constants';
 import * as actionTypes from '../actions/actionTypes/posts';
 
 const initialState: PostsState = {
+  input: '',
   posts: [],
   postsForView: [],
   page: MAIN_PAGE,
@@ -45,6 +46,16 @@ const postsReducer = (state: PostsState = initialState, action: PostAction): Pos
       return {
         ...state,
         page: action.payload
+      };
+    case actionTypes.POSTS_SET_INPUT:
+      return {
+        ...state,
+        input: action.payload
+      };
+    case actionTypes.POSTS_RESET_INPUT:
+      return {
+        ...state,
+        input: ''
       };
     default:
       return state;
