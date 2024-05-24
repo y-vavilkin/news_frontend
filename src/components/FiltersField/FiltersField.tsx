@@ -2,7 +2,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
-import { useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { postsSetType } from '../../redux/actions/posts';
@@ -18,26 +17,41 @@ import classes from './FiltersField.module.scss';
 
 const FiltersField = () => {
   const dispatch = useAppDispatch();
-  const [filter, setFilter] = useState<string>('ALL');
+  const typeOfSearch = useAppSelector(state => state.posts.typeOfSearch);
   const page = useAppSelector(state => state.posts.page);
-  const isMainPage = page === MAIN_PAGE;
+  const isNotMainPage = page !== MAIN_PAGE;
 
   const handleChange = (event: SelectChangeEvent) => {
-    setFilter(event.target.value);
     dispatch(postsSetType(event.target.value));
   };
+
+  const menuList = [
+    { id: 1, value: ALL, onlyOnMainPage: false },
+    { id: 2, value: TITLE, onlyOnMainPage: false },
+    { id: 3, value: TAGS, onlyOnMainPage: false },
+    { id: 4, value: AUTHORS, onlyOnMainPage: true }
+  ];
 
   return (
     <Box className={classes.box}>
       <FormControl fullWidth>
         <Select
-          value={filter}
+          value={typeOfSearch}
           onChange={handleChange}
         >
-          <MenuItem value={ALL}>ALL</MenuItem>
-          <MenuItem value={TITLE}>TITLE</MenuItem>
-          <MenuItem value={TAGS}>TAGS</MenuItem>
-          {isMainPage && <MenuItem value={AUTHORS}>AUTHORS</MenuItem>}
+          {menuList.filter((menuItem) => {
+            if (isNotMainPage) {
+              return !menuItem.onlyOnMainPage;
+            } else {
+              return true;
+            }
+          }).map((menuItem) => {
+            return (
+              <MenuItem key={menuItem.id} value={menuItem.value}>
+                {menuItem.value}
+              </MenuItem>
+            );
+          })}
         </Select>
       </FormControl>
     </Box>

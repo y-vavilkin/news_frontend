@@ -52,11 +52,6 @@ const postsReducer = (state: PostsState = initialState, action: PostAction): Pos
         ...state,
         input: action.payload
       };
-    case actionTypes.POSTS_RESET_INPUT:
-      return {
-        ...state,
-        input: ''
-      };
     default:
       return state;
   }
