@@ -19,7 +19,7 @@ const FiltersField = () => {
   const dispatch = useAppDispatch();
   const typeOfSearch = useAppSelector(state => state.posts.typeOfSearch);
   const page = useAppSelector(state => state.posts.page);
-  const isNotMainPage = page !== MAIN_PAGE;
+  const isMainPage = page === MAIN_PAGE;
 
   const handleChange = (event: SelectChangeEvent) => {
     dispatch(postsSetType(event.target.value));
@@ -39,19 +39,13 @@ const FiltersField = () => {
           value={typeOfSearch}
           onChange={handleChange}
         >
-          {menuList.filter((menuItem) => {
-            if (isNotMainPage) {
-              return !menuItem.onlyOnMainPage;
-            } else {
-              return true;
-            }
-          }).map((menuItem) => {
-            return (
+          {menuList
+            .filter((menuItem) => isMainPage || !menuItem.onlyOnMainPage)
+            .map((menuItem) => (
               <MenuItem key={menuItem.id} value={menuItem.value}>
                 {menuItem.value}
               </MenuItem>
-            );
-          })}
+            ))}
         </Select>
       </FormControl>
     </Box>

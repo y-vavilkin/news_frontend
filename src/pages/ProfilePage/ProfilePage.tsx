@@ -1,9 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
+import { postsSetInput, postsSetPage, postsSetType } from '../../redux/actions/posts';
 import { userFailed, userRequest, userReset } from '../../redux/actions/user';
-import { postsSetInput, postsSetPage } from '../../redux/actions/posts';
-import { EMPTY, TIME_REDIRECT, PROFILE_PAGE } from '../../constants';
+import { EMPTY, TIME_REDIRECT, PROFILE_PAGE, ALL } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { BAD_URL, UNAUTHORIZED } from '../../constants/errors';
 import { changeError, filterPosts } from '../../helpers';
@@ -34,6 +34,7 @@ const ProfilePage = () => {
   useEffect(() => {
     dispatch(postsSetInput(''));
     dispatch(postsSetPage(PROFILE_PAGE));
+    dispatch(postsSetType(ALL));
   }, []);
 
   useEffect(() => {

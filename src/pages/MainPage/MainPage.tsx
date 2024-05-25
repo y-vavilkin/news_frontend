@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react';
 
-import { postsRequest, postsSetInput, postsSetPage } from '../../redux/actions/posts';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
-import { EMPTY, MAIN_PAGE } from '../../constants';
+import { ALL, EMPTY, MAIN_PAGE } from '../../constants';
 import PostsList from '../../components/PostsList';
 import { Post } from '../../interfaces/posts';
 import Notify from '../../components/Notify';
 import Loader from '../../components/Loader';
 import { filterPosts } from '../../helpers';
+import {
+  postsRequest,
+  postsSetInput,
+  postsSetPage,
+  postsSetType
+} from '../../redux/actions/posts';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
@@ -24,6 +29,7 @@ const MainPage = () => {
   useEffect(() => {
     dispatch(postsSetPage(MAIN_PAGE));
     dispatch(postsSetInput(''));
+    dispatch(postsSetType(ALL));
     dispatch(postsRequest());
   }, []);
 

@@ -16,7 +16,7 @@ const filterPosts = (posts: Post[], searchData: string, typeOfSearch: string) =>
       });
     }
     case AUTHORS: {
-      return posts.filter((post) => post.user.login.includes(text));
+      return posts.filter((post) => post.user?.login.includes(text));
     }
     default: {
       return posts.filter((post) => {
