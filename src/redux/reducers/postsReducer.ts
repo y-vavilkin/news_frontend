@@ -1,11 +1,10 @@
 import { PostAction, PostsState } from '../../interfaces/posts';
-import { ALL, MAIN_PAGE } from '../../constants';
+import { ALL } from '../../constants';
 import * as actionTypes from '../actions/actionTypes/posts';
 
 const initialState: PostsState = {
   input: '',
   posts: [],
-  page: MAIN_PAGE,
   isLoading: false,
   error: null,
   typeOfSearch: ALL
@@ -34,11 +33,6 @@ const postsReducer = (state: PostsState = initialState, action: PostAction): Pos
       return {
         ...state,
         typeOfSearch: action.payload
-      };
-    case actionTypes.POSTS_SET_PAGE:
-      return {
-        ...state,
-        page: action.payload
       };
     case actionTypes.POSTS_SET_INPUT:
       return {

@@ -1,11 +1,11 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
 
-import { postsSetInput, postsSetPage, postsSetType } from '../../redux/actions/posts';
 import { userFailed, userRequest, userReset } from '../../redux/actions/user';
-import { EMPTY, TIME_REDIRECT, PROFILE_PAGE, ALL } from '../../constants';
+import { postsSetInput, postsSetType } from '../../redux/actions/posts';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { BAD_URL, UNAUTHORIZED } from '../../constants/errors';
+import { EMPTY, TIME_REDIRECT, ALL } from '../../constants';
 import { changeError, filterPosts } from '../../helpers';
 import PostsList from '../../components/PostsList';
 import UserCard from '../../components/UserCard';
@@ -17,25 +17,24 @@ const ProfilePage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
+  const path = useLocation();
+  const [filtredPosts, setFiltredPosts] = useState<Post[]>([]);
 
   const userPosts = useAppSelector(state => state.currentUser.userPosts);
+  const isLoading = useAppSelector(state => state.currentUser.isLoading);
+  const typeOfSearch = useAppSelector(state => state.posts.typeOfSearch);
   const dataUser = useAppSelector(state => state.currentUser.user);
   const error = useAppSelector(state => state.currentUser.error);
-  const isLoading = useAppSelector(state => state.currentUser.isLoading);
   const inputText = useAppSelector(state => state.posts.input);
-  const typeOfSearch = useAppSelector(state => state.posts.typeOfSearch);
 
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  const isNotEmpty = posts !== undefined && posts.length !== 0;
+  const isNotEmpty = filtredPosts.length !== 0;
   const isUserExist = dataUser !== null;
   const isError = error !== null;
 
   useEffect(() => {
     dispatch(postsSetInput(''));
-    dispatch(postsSetPage(PROFILE_PAGE));
     dispatch(postsSetType(ALL));
-  }, []);
+  }, [path]);
 
   useEffect(() => {
     const requestId = Number(id);
@@ -55,9 +54,13 @@ const ProfilePage = () => {
     }
   }, [error]);
 
-  useEffect(() => {
-    setPosts(filterPosts(userPosts, inputText, typeOfSearch));
+  const filteredPosts = useMemo(() => {
+    return filterPosts(userPosts, inputText, typeOfSearch);
   }, [userPosts, inputText, typeOfSearch]);
+
+  useEffect(() => {
+    setFiltredPosts(filteredPosts);
+  }, [filteredPosts]);
 
   if (isLoading) return <Loader />;
 
@@ -72,7 +75,9 @@ const ProfilePage = () => {
             email={dataUser.email}
             avatarUrl={dataUser.avatarUrl}
           />
-          {isNotEmpty ? <PostsList postsData={posts} /> : <Notify info={EMPTY} status="info" />}
+          {isNotEmpty
+            ? <PostsList postsData={filtredPosts} />
+            : <Notify info={EMPTY} status="info" />}
         </>
       )}
     </>

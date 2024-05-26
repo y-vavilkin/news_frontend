@@ -6,9 +6,6 @@ export const USER = 'USER';
 export const CARD = 'CARD';
 export const TIME_REDIRECT = 3000;
 
-export const MAIN_PAGE = 'MAIN_PAGE';
-export const PROFILE_PAGE = 'PROFILE_PAGE';
-
 export const AUTHORS = 'AUTHORS';
 export const TITLE = 'TITLE';
 export const TAGS = 'TAGS';

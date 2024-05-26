@@ -20,11 +20,6 @@ export const postsSetType = (payload: string): PostAction => ({
   payload
 });
 
-export const postsSetPage = (payload: string): PostAction => ({
-  type: actionTypes.POSTS_SET_PAGE,
-  payload
-});
-
 export const postsSetInput = (payload: string): PostAction => ({
   type: actionTypes.POSTS_SET_INPUT,
   payload
