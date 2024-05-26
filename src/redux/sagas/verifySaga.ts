@@ -1,10 +1,9 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 
-import { AuthAction, AuthUser } from '../../interfaces/auth';
 import { changeError, extractErrorMessage } from '../../helpers';
-import { TOKEN } from '../../constants';
-import { authUserFailure, authUserReceived } from '../actions/auth';
+import { AuthAction, AuthUser } from '../../interfaces/auth';
+import { authUserFailure, authUserReceived, authUserReset } from '../actions/auth';
 import * as actionTypes from '../actions/actionTypes/auth';
 import whoami from '../api/whoami';
 
@@ -16,7 +15,7 @@ function * verifySaga (action: AuthAction) {
     }
   } catch (error: unknown) {
     const currentError: string = extractErrorMessage(error);
-    localStorage.removeItem(TOKEN);
+    yield put(authUserReset());
     yield put(authUserFailure(changeError(currentError)));
   }
 }

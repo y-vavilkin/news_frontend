@@ -1,4 +1,4 @@
-import { AUTHORS, TAGS, TITLE } from '../constants';
+import { AUTHORS, TAGS, TITLE } from '../constants/filters';
 import { Post } from '../interfaces/posts';
 
 const filterByTitle = (post: Post, text: string) => {

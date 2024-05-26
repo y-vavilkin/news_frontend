@@ -1,13 +1,13 @@
-import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useEffect, useMemo } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import PostsList from '../../components/PostsList';
-import { Post } from '../../interfaces/posts';
+import { ALL } from '../../constants/filters';
 import Notify from '../../components/Notify';
-import { ALL, EMPTY } from '../../constants';
 import Loader from '../../components/Loader';
 import { filterPosts } from '../../helpers';
+import { EMPTY } from '../../constants';
 import {
   postsRequest,
   postsSetInput,
@@ -17,16 +17,12 @@ import {
 const MainPage = () => {
   const dispatch = useAppDispatch();
   const path = useLocation();
-  const [filtredPosts, setFiltredPosts] = useState<Post[]>([]);
 
   const typeOfSearch = useAppSelector(state => state.posts.typeOfSearch);
   const isLoading = useAppSelector(state => state.posts.isLoading);
   const inputText = useAppSelector(state => state.posts.input);
   const posts = useAppSelector(state => state.posts.posts);
   const error = useAppSelector(state => state.posts.error);
-
-  const isNotEmpty = filtredPosts.length > 0;
-  const isError = error !== null;
 
   useEffect(() => {
     dispatch(postsRequest());
@@ -37,17 +33,12 @@ const MainPage = () => {
     dispatch(postsSetType(ALL));
   }, [path]);
 
-  useEffect(() => {
-    setFiltredPosts(posts);
-  }, [posts]);
-
   const filteredPosts = useMemo(() => {
     return filterPosts(posts, inputText, typeOfSearch);
   }, [posts, inputText, typeOfSearch]);
 
-  useEffect(() => {
-    setFiltredPosts(filteredPosts);
-  }, [filteredPosts]);
+  const isNotEmpty = filteredPosts.length > 0;
+  const isError = error !== null;
 
   if (isLoading) return <Loader />;
 
@@ -55,7 +46,7 @@ const MainPage = () => {
 
   return (
     <>
-      {isNotEmpty ? <PostsList postsData={filtredPosts} /> : <Notify info={EMPTY} status="info" />}
+      {isNotEmpty ? <PostsList postsData={filteredPosts} /> : <Notify info={EMPTY} status="info" />}
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { PostAction, PostsState } from '../../interfaces/posts';
-import { ALL } from '../../constants';
+import { ALL } from '../../constants/filters';
 import * as actionTypes from '../actions/actionTypes/posts';
 
 const initialState: PostsState = {
