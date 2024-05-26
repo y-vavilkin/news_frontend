@@ -17,8 +17,8 @@ import {
 const MainPage = () => {
   const dispatch = useAppDispatch();
   const posts = useAppSelector(state => state.posts.posts);
-  const isLoading = useAppSelector((state) => state.posts.isLoading);
-  const error = useAppSelector((state) => state.posts.error);
+  const isLoading = useAppSelector(state => state.posts.isLoading);
+  const error = useAppSelector(state => state.posts.error);
   const textInput = useAppSelector(state => state.posts.input);
   const typeOfSearch = useAppSelector(state => state.posts.typeOfSearch);
 

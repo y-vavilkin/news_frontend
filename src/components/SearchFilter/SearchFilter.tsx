@@ -13,12 +13,13 @@ import {
   MAIN_PAGE
 } from '../../constants';
 
-import classes from './FiltersField.module.scss';
+import classes from './SearchFilter.module.scss';
 
-const FiltersField = () => {
+const SearchFilter = () => {
   const dispatch = useAppDispatch();
   const typeOfSearch = useAppSelector(state => state.posts.typeOfSearch);
   const page = useAppSelector(state => state.posts.page);
+
   const isMainPage = page === MAIN_PAGE;
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -52,4 +53,4 @@ const FiltersField = () => {
   );
 };
 
-export default FiltersField;
+export default SearchFilter;

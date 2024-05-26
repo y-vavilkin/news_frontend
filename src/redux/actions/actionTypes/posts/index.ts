@@ -2,6 +2,6 @@ export const POSTS_REQUESTED = 'POSTS_REQUESTED';
 export const POSTS_RECEIVED = 'POSTS_RECEIVED';
 export const POSTS_FAILED = 'POSTS_FAILED';
 
+export const POSTS_SET_INPUT = 'POSTS_SET_INPUT';
 export const POSTS_SET_TYPE = 'POSTS_SET_TYPE';
 export const POSTS_SET_PAGE = 'POSTS_SET_PAGE';
-export const POSTS_SET_INPUT = 'POSTS_SET_INPUT';
