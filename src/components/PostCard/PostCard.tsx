@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { memo, useCallback } from 'react';
+import { useCallback } from 'react';
 
 import { changeFormatDate, getImageUrlWithBase } from '../../helpers';
 import { User as UserDescription } from '../../interfaces/user';
@@ -63,4 +63,4 @@ const PostCard = ({
   );
 };
 
-export default memo(PostCard);
+export default PostCard;

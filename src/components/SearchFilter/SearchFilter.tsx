@@ -32,6 +32,7 @@ const SearchFilter = () => {
         <Select
           value={typeOfSearch}
           onChange={handleChange}
+          name='filter-type'
         >
           {filteredMenuList.map((menuItem) => (
             <MenuItem key={menuItem.id} value={menuItem.value}>
