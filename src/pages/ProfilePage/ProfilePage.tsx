@@ -54,7 +54,7 @@ const ProfilePage = () => {
   useEffect(() => {
     if (error === UNAUTHORIZED) {
       handleRedirect(true);
-    } else {
+    } else if (error === changeError(BAD_URL)) {
       handleRedirect();
     }
   }, [error]);
