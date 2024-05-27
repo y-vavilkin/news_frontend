@@ -6,8 +6,8 @@ import Box from '@mui/material/Box';
 import { useMemo } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { postsSetType } from '../../redux/actions/posts';
-import menuList from '../../constants/filters';
+import menuList, { AUTHORS } from '../../constants/filters';
+import { postsSearch } from '../../redux/actions/posts';
 
 import classes from './SearchFilter.module.scss';
 
@@ -19,11 +19,11 @@ const SearchFilter = () => {
   const isMainPage = location.pathname === '/';
 
   const handleChange = (event: SelectChangeEvent) => {
-    dispatch(postsSetType(event.target.value));
+    dispatch(postsSearch({ typeOfSearch: event.target.value }));
   };
 
   const filteredMenuList = useMemo(() =>
-    menuList.filter((menuItem) => isMainPage || !menuItem.onlyOnMainPage),
+    menuList.filter((menuItem) => menuItem.value !== AUTHORS || isMainPage),
   [isMainPage]);
 
   return (

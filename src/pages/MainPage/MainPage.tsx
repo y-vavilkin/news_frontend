@@ -7,20 +7,19 @@ import { ALL } from '../../constants/filters';
 import Notify from '../../components/Notify';
 import Loader from '../../components/Loader';
 import { filterPosts } from '../../helpers';
-import { EMPTY } from '../../constants';
+import { EMPTY_POSTS } from '../../constants';
 import {
   postsRequest,
-  postsSetInput,
-  postsSetType
+  postsSearch
 } from '../../redux/actions/posts';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
   const path = useLocation();
 
+  const textForSearch = useAppSelector(state => state.posts.textForSearch);
   const typeOfSearch = useAppSelector(state => state.posts.typeOfSearch);
   const isLoading = useAppSelector(state => state.posts.isLoading);
-  const inputText = useAppSelector(state => state.posts.input);
   const posts = useAppSelector(state => state.posts.posts);
   const error = useAppSelector(state => state.posts.error);
 
@@ -29,24 +28,25 @@ const MainPage = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(postsSetInput(''));
-    dispatch(postsSetType(ALL));
+    dispatch(postsSearch({ textForSearch: '', typeOfSearch: ALL }));
   }, [path]);
 
   const filteredPosts = useMemo(() => {
-    return filterPosts(posts, inputText, typeOfSearch);
-  }, [posts, inputText, typeOfSearch]);
+    return filterPosts(posts, textForSearch, typeOfSearch);
+  }, [posts, textForSearch, typeOfSearch]);
 
   const isNotEmpty = filteredPosts.length > 0;
-  const isError = error !== null;
+  const hasError = error !== null;
 
   if (isLoading) return <Loader />;
 
-  if (isError) return <Notify info={error} status="error" />;
+  if (hasError) return <Notify info={error} status="error" />;
 
   return (
     <>
-      {isNotEmpty ? <PostsList postsData={filteredPosts} /> : <Notify info={EMPTY} status="info" />}
+      {isNotEmpty
+        ? <PostsList postsData={filteredPosts} />
+        : <Notify info={EMPTY_POSTS} status="info" />}
     </>
   );
 };

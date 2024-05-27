@@ -1,19 +1,19 @@
 import { AUTHORS, TAGS, TITLE } from '../constants/filters';
 import { Post } from '../interfaces/posts';
 
-const filterByTitle = (post: Post, text: string) => {
+const filterByTitle = (post: Post, text: string): boolean => {
   return post.title.toLowerCase().includes(text);
 };
 
-const filterByTags = (post: Post, text: string) => {
+const filterByTags = (post: Post, text: string): boolean => {
   return post.tags.some((tag) => tag.text.toLowerCase().includes(text));
 };
 
-const filterByAuthors = (post: Post, text: string) => {
+const filterByAuthors = (post: Post, text: string): boolean => {
   return post.user?.login.toLowerCase().includes(text);
 };
 
-const filterPosts = (posts: Post[], searchData: string, typeOfSearch: string) => {
+const filterPosts = (posts: Post[], searchData: string, typeOfSearch: string): Post[] | [] => {
   const text = searchData.toLowerCase();
 
   switch (typeOfSearch) {

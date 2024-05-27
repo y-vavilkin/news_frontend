@@ -3,10 +3,10 @@ import { ALL } from '../../constants/filters';
 import * as actionTypes from '../actions/actionTypes/posts';
 
 const initialState: PostsState = {
-  input: '',
   posts: [],
   isLoading: false,
   error: null,
+  textForSearch: '',
   typeOfSearch: ALL
 };
 
@@ -29,15 +29,12 @@ const postsReducer = (state: PostsState = initialState, action: PostAction): Pos
         isLoading: false,
         error: action.error ?? null
       };
-    case actionTypes.POSTS_SET_TYPE:
+    case actionTypes.SEARCH_POSTS:
+      console.log(action.payload);
       return {
         ...state,
-        typeOfSearch: action.payload
-      };
-    case actionTypes.POSTS_SET_INPUT:
-      return {
-        ...state,
-        input: action.payload
+        typeOfSearch: action.payload?.typeOfSearch ?? state.typeOfSearch,
+        textForSearch: action.payload?.textForSearch ?? state.textForSearch
       };
     default:
       return state;

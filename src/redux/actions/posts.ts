@@ -1,4 +1,4 @@
-import { Post, PostAction } from '../../interfaces/posts';
+import { Post, PostAction, SearchPosts } from '../../interfaces/posts';
 import * as actionTypes from './actionTypes/posts';
 
 export const postsRequest = (): PostAction => ({
@@ -15,12 +15,7 @@ export const postsReseived = (payload: Post[] | []): PostAction => ({
   payload
 });
 
-export const postsSetType = (payload: string): PostAction => ({
-  type: actionTypes.POSTS_SET_TYPE,
-  payload
-});
-
-export const postsSetInput = (payload: string): PostAction => ({
-  type: actionTypes.POSTS_SET_INPUT,
+export const postsSearch = (payload: SearchPosts): PostAction => ({
+  type: actionTypes.SEARCH_POSTS,
   payload
 });

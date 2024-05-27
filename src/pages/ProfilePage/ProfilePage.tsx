@@ -2,12 +2,12 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
 
 import { userFailed, userRequest, userReset } from '../../redux/actions/user';
-import { postsSetInput, postsSetType } from '../../redux/actions/posts';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { BAD_URL, UNAUTHORIZED } from '../../constants/errors';
+import { EMPTY_POSTS, TIME_REDIRECT } from '../../constants';
 import { changeError, filterPosts } from '../../helpers';
 import { authUserReset } from '../../redux/actions/auth';
-import { EMPTY, TIME_REDIRECT } from '../../constants';
+import { postsSearch } from '../../redux/actions/posts';
 import PostsList from '../../components/PostsList';
 import UserCard from '../../components/UserCard';
 import { ALL } from '../../constants/filters';
@@ -20,16 +20,15 @@ const ProfilePage = () => {
   const { id } = useParams();
   const path = useLocation();
 
+  const textForSearch = useAppSelector(state => state.posts.textForSearch);
   const userPosts = useAppSelector(state => state.currentUser.userPosts);
   const isLoading = useAppSelector(state => state.currentUser.isLoading);
   const typeOfSearch = useAppSelector(state => state.posts.typeOfSearch);
   const dataUser = useAppSelector(state => state.currentUser.user);
   const error = useAppSelector(state => state.currentUser.error);
-  const inputText = useAppSelector(state => state.posts.input);
 
   useEffect(() => {
-    dispatch(postsSetInput(''));
-    dispatch(postsSetType(ALL));
+    dispatch(postsSearch({ textForSearch: '', typeOfSearch: ALL }));
   }, [path]);
 
   useEffect(() => {
@@ -60,18 +59,18 @@ const ProfilePage = () => {
   }, [error]);
 
   const filteredPosts = useMemo(() => {
-    return filterPosts(userPosts, inputText, typeOfSearch);
-  }, [userPosts, inputText, typeOfSearch]);
+    return filterPosts(userPosts, textForSearch, typeOfSearch);
+  }, [userPosts, textForSearch, typeOfSearch]);
 
   if (isLoading) return <Loader />;
 
   const isNotEmpty = filteredPosts.length !== 0;
   const isUserExist = dataUser !== null;
-  const isError = error !== null;
+  const hasError = error !== null;
 
   return (
     <>
-      {!isUserExist && isError && <Notify info={error} status="error" />}
+      {!isUserExist && hasError && <Notify info={error} status="error" />}
       {isUserExist && (
         <>
           <UserCard
@@ -82,7 +81,7 @@ const ProfilePage = () => {
           />
           {isNotEmpty
             ? <PostsList postsData={filteredPosts} />
-            : <Notify info={EMPTY} status="info" />}
+            : <Notify info={EMPTY_POSTS} status="info" />}
         </>
       )}
     </>
