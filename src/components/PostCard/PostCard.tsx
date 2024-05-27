@@ -1,5 +1,4 @@
 import { useLocation } from 'react-router-dom';
-import { useCallback } from 'react';
 
 import { changeFormatDate, getImageUrlWithBase } from '../../helpers';
 import { User as UserDescription } from '../../interfaces/user';
@@ -32,17 +31,13 @@ const PostCard = ({
   const location = useLocation();
   const isMainPagePath = location.pathname === '/';
 
-  const getMemoizedImageUrl = useCallback(() => {
-    return getImageUrlWithBase(imageUrl, CARD);
-  }, [imageUrl]);
-
   return (
     <div className={classes.container}>
       <li className={classes.post}>
         <div className={classes.imageBlock}>
           <img
             className={classes.image}
-            src={getMemoizedImageUrl()}
+            src={getImageUrlWithBase(imageUrl, CARD)}
             alt="image"
             draggable="false"
           />

@@ -1,5 +1,5 @@
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { userFailed, userRequest, userReset } from '../../redux/actions/user';
 import { postsSetInput, postsSetType } from '../../redux/actions/posts';
@@ -41,7 +41,7 @@ const ProfilePage = () => {
     }
   }, [id]);
 
-  const handleRedirect = useCallback((resetAuth = false) => {
+  const handleRedirect = (resetAuth = false) => {
     setTimeout(() => {
       if (resetAuth) {
         dispatch(authUserReset());
@@ -49,7 +49,7 @@ const ProfilePage = () => {
       dispatch(userReset());
       navigate('/');
     }, TIME_REDIRECT);
-  }, []);
+  };
 
   useEffect(() => {
     if (error === UNAUTHORIZED) {
