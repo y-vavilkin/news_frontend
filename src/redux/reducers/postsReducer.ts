@@ -30,7 +30,6 @@ const postsReducer = (state: PostsState = initialState, action: PostAction): Pos
         error: action.error ?? null
       };
     case actionTypes.SEARCH_POSTS:
-      console.log(action.payload);
       return {
         ...state,
         typeOfSearch: action.payload?.typeOfSearch ?? state.typeOfSearch,

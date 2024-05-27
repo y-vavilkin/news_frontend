@@ -3,7 +3,7 @@ import FormControl from '@mui/material/FormControl';
 import { useLocation } from 'react-router-dom';
 import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import menuList, { AUTHORS } from '../../constants/filters';
@@ -22,9 +22,11 @@ const SearchFilter = () => {
     dispatch(postsSearch({ typeOfSearch: event.target.value }));
   };
 
-  const filteredMenuList = useMemo(() =>
-    menuList.filter((menuItem) => menuItem.value !== AUTHORS || isMainPage),
-  [isMainPage]);
+  const [filtredList, setFiltredList] = useState(menuList);
+
+  useEffect(() => {
+    setFiltredList(menuList.filter((menuItem) => menuItem.value !== AUTHORS || isMainPage));
+  }, [isMainPage]);
 
   return (
     <Box className={classes.box}>
@@ -32,9 +34,9 @@ const SearchFilter = () => {
         <Select
           value={typeOfSearch}
           onChange={handleChange}
-          name='filter-type'
+          name="filter-type"
         >
-          {filteredMenuList.map((menuItem) => (
+          {filtredList.map((menuItem) => (
             <MenuItem key={menuItem.id} value={menuItem.value}>
               {menuItem.value}
             </MenuItem>
