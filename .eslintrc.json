@@ -21,6 +21,23 @@
     }
   },
   "rules": {
+    "no-console": "error",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "type",
+          "object",
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "newlines-between": "always-and-inside-groups"
+      }
+    ],
     "max-len": ["error", { "code": 100 }],
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/promise-function-async": "off",

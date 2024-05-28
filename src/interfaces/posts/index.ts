@@ -19,12 +19,19 @@ export interface Post {
 
 export interface PostAction {
   type: string
-  payload?: Post[]
+  payload?: Post[] | string
   error?: string
 }
 
 export interface PostsState {
+  textForSearch: string
   posts: Post[]
   isLoading: boolean
   error: string | null
+  typeOfSearch: string
+}
+
+export interface MenuItem {
+  id: number
+  value: string
 }
