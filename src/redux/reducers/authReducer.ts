@@ -1,4 +1,4 @@
-import { AuthAction, AuthState } from '../../interfaces/auth';
+import { AuthAction, AuthState, AuthUser } from '../../interfaces/auth';
 import * as actionTypes from '../actions/actionTypes/auth';
 import { TOKEN } from '../../constants';
 
@@ -23,7 +23,7 @@ const authReducer = (state: AuthState = initialState, action: AuthAction): AuthS
         isLoading: false,
         isOnline: true,
         error: null,
-        authUser: action.payload
+        authUser: action.payload as AuthUser
       };
     case actionTypes.AUTH_USER_FAILURE:
       return {
@@ -43,7 +43,7 @@ const authReducer = (state: AuthState = initialState, action: AuthAction): AuthS
     case actionTypes.EDIT_PROFILE_RECEIVED: {
       return {
         ...state,
-        authUser: action.payload
+        authUser: action.payload as AuthUser
       };
     }
     default:

@@ -1,4 +1,5 @@
-import { UserState, UserAction } from '../../interfaces/user';
+import { UserState, UserAction, User } from '../../interfaces/user';
+import { Post } from '../../interfaces/posts';
 import * as actionTypes from '../actions/actionTypes/user';
 
 const initialState: UserState = {
@@ -27,8 +28,8 @@ const postsReducer = (state: UserState = initialState, action: UserAction): User
       return {
         ...state,
         isLoading: false,
-        user: action.payload,
-        userPosts: action.payload?.posts
+        user: action.payload as User,
+        userPosts: (action.payload as User).posts
       };
     case actionTypes.USER_FAILED:
     case actionTypes.ADD_POST_FAILED:
@@ -50,16 +51,16 @@ const postsReducer = (state: UserState = initialState, action: UserAction): User
         ...state,
         isLoadingModal: false,
         error: null,
-        userPosts: [action.payload, ...state.userPosts]
+        userPosts: [action.payload as Post, ...state.userPosts]
       };
     case actionTypes.EDIT_PROFILE_RECEIVED: {
       return {
         ...state,
         isLoadingModal: false,
         user: {
-          ...state.user,
-          login: action.payload?.login,
-          avatarUrl: action.payload?.avatarUrl
+          ...state.user!,
+          login: (action.payload as User).login,
+          avatarUrl: (action.payload as User).avatarUrl
         }
       };
     }
