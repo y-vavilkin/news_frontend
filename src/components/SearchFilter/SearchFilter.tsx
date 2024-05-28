@@ -1,9 +1,12 @@
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import FormControl from '@mui/material/FormControl';
 import { useLocation } from 'react-router-dom';
-import MenuItem from '@mui/material/MenuItem';
-import Box from '@mui/material/Box';
 import { useEffect, useState } from 'react';
+import {
+  Select,
+  SelectChangeEvent,
+  MenuItem,
+  FormControl,
+  Box
+} from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import menuList, { AUTHORS } from '../../constants/filters';
