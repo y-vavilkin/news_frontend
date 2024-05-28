@@ -7,22 +7,21 @@ import { useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import menuList, { AUTHORS } from '../../constants/filters';
-import { postsSearch } from '../../redux/actions/posts';
+import { setFilterSearch } from '../../redux/actions/posts';
 
 import classes from './SearchFilter.module.scss';
 
 const SearchFilter = () => {
   const dispatch = useAppDispatch();
+  const [filtredList, setFiltredList] = useState(menuList);
   const typeOfSearch = useAppSelector(state => state.posts.typeOfSearch);
 
   const location = useLocation();
   const isMainPage = location.pathname === '/';
 
-  const handleChange = (event: SelectChangeEvent) => {
-    dispatch(postsSearch({ typeOfSearch: event.target.value }));
+  const handleChange = (event: SelectChangeEvent): void => {
+    dispatch(setFilterSearch(event.target.value));
   };
-
-  const [filtredList, setFiltredList] = useState(menuList);
 
   useEffect(() => {
     setFiltredList(menuList.filter((menuItem) => menuItem.value !== AUTHORS || isMainPage));

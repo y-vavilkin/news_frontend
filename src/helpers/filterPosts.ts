@@ -13,7 +13,7 @@ const filterByAuthors = (post: Post, text: string): boolean => {
   return post.user?.login.toLowerCase().includes(text);
 };
 
-const filterPosts = (posts: Post[], searchData: string, typeOfSearch: string): Post[] | [] => {
+const filterPosts = (posts: Post[], searchData: string, typeOfSearch: string): Post[] => {
   const text = searchData.toLowerCase();
 
   switch (typeOfSearch) {

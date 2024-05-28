@@ -1,4 +1,5 @@
-import { Post, PostAction, SearchPosts } from '../../interfaces/posts';
+import { Post, PostAction } from '../../interfaces/posts';
+
 import * as actionTypes from './actionTypes/posts';
 
 export const postsRequest = (): PostAction => ({
@@ -15,7 +16,16 @@ export const postsReseived = (payload: Post[] | []): PostAction => ({
   payload
 });
 
-export const postsSearch = (payload: SearchPosts): PostAction => ({
-  type: actionTypes.SEARCH_POSTS,
+export const setSearchText = (payload: string): PostAction => ({
+  type: actionTypes.SET_SEARCH_TEXT,
   payload
+});
+
+export const setFilterSearch = (payload: string): PostAction => ({
+  type: actionTypes.SET_SEARCH_FILTER,
+  payload
+});
+
+export const resetSearch = (): PostAction => ({
+  type: actionTypes.RESET_SEARCH
 });

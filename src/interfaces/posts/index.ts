@@ -19,7 +19,7 @@ export interface Post {
 
 export interface PostAction {
   type: string
-  payload?: Post[] | string | SearchPosts
+  payload?: Post[] | string
   error?: string
 }
 
@@ -31,7 +31,7 @@ export interface PostsState {
   typeOfSearch: string
 }
 
-export interface SearchPosts {
-  textForSearch?: string
-  typeOfSearch?: string
+export interface MenuItem {
+  id: number
+  value: string
 }

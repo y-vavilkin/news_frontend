@@ -2,15 +2,15 @@ import { Box, TextField } from '@mui/material';
 import { ChangeEvent } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { postsSearch } from '../../redux/actions/posts';
+import { setSearchText } from '../../redux/actions/posts';
 
 const SearchField = () => {
   const dispatch = useAppDispatch();
 
   const textForSearch = useAppSelector(state => state.posts.textForSearch);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(postsSearch({ textForSearch: event.target.value }));
+  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    dispatch(setSearchText(event.target.value));
   };
 
   return (

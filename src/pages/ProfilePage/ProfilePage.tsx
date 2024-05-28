@@ -7,12 +7,12 @@ import { BAD_URL, UNAUTHORIZED } from '../../constants/errors';
 import { EMPTY_POSTS, TIME_REDIRECT } from '../../constants';
 import { changeError, filterPosts } from '../../helpers';
 import { authUserReset } from '../../redux/actions/auth';
-import { postsSearch } from '../../redux/actions/posts';
+import { resetSearch } from '../../redux/actions/posts';
 import PostsList from '../../components/PostsList';
 import UserCard from '../../components/UserCard';
-import { ALL } from '../../constants/filters';
 import Loader from '../../components/Loader';
 import Notify from '../../components/Notify';
+import { Post } from '../../interfaces/posts';
 
 const ProfilePage = () => {
   const dispatch = useAppDispatch();
@@ -28,7 +28,7 @@ const ProfilePage = () => {
   const error = useAppSelector(state => state.currentUser.error);
 
   useEffect(() => {
-    dispatch(postsSearch({ textForSearch: '', typeOfSearch: ALL }));
+    dispatch(resetSearch());
   }, [path]);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const ProfilePage = () => {
     }
   }, [error]);
 
-  const filteredPosts = useMemo(() => {
+  const filteredPosts: Post[] = useMemo(() => {
     return filterPosts(userPosts, textForSearch, typeOfSearch);
   }, [userPosts, textForSearch, typeOfSearch]);
 

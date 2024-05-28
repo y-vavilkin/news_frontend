@@ -29,11 +29,21 @@ const postsReducer = (state: PostsState = initialState, action: PostAction): Pos
         isLoading: false,
         error: action.error ?? null
       };
-    case actionTypes.SEARCH_POSTS:
+    case actionTypes.SET_SEARCH_TEXT:
       return {
         ...state,
-        typeOfSearch: action.payload?.typeOfSearch ?? state.typeOfSearch,
-        textForSearch: action.payload?.textForSearch ?? state.textForSearch
+        textForSearch: action.payload ?? initialState.textForSearch
+      };
+    case actionTypes.SET_SEARCH_FILTER:
+      return {
+        ...state,
+        typeOfSearch: action.payload ?? initialState.typeOfSearch
+      };
+    case actionTypes.RESET_SEARCH:
+      return {
+        ...state,
+        typeOfSearch: initialState.typeOfSearch,
+        textForSearch: initialState.textForSearch
       };
     default:
       return state;

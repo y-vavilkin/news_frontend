@@ -1,17 +1,14 @@
 import { useLocation } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
 
+import { postsRequest, resetSearch } from '../../redux/actions/posts';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import PostsList from '../../components/PostsList';
-import { ALL } from '../../constants/filters';
+import { EMPTY_POSTS } from '../../constants';
 import Notify from '../../components/Notify';
 import Loader from '../../components/Loader';
 import { filterPosts } from '../../helpers';
-import { EMPTY_POSTS } from '../../constants';
-import {
-  postsRequest,
-  postsSearch
-} from '../../redux/actions/posts';
+import { Post } from '../../interfaces/posts';
 
 const MainPage = () => {
   const dispatch = useAppDispatch();
@@ -28,10 +25,10 @@ const MainPage = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(postsSearch({ textForSearch: '', typeOfSearch: ALL }));
+    dispatch(resetSearch());
   }, [path]);
 
-  const filteredPosts = useMemo(() => {
+  const filteredPosts: Post[] = useMemo(() => {
     return filterPosts(posts, textForSearch, typeOfSearch);
   }, [posts, textForSearch, typeOfSearch]);
 
