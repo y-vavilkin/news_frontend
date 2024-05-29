@@ -1,4 +1,5 @@
 import { ModalAction, TypeModal } from '../../interfaces/modal';
+
 import * as actionTypes from './actionTypes/modal';
 
 export const openModal = (payload: TypeModal): ModalAction => ({

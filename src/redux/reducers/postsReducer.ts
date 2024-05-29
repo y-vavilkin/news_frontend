@@ -1,4 +1,4 @@
-import { PostAction, PostsState } from '../../interfaces/posts';
+import { Post, PostAction, PostsState } from '../../interfaces/posts';
 import { ALL } from '../../constants/filters';
 import * as actionTypes from '../actions/actionTypes/posts';
 
@@ -21,7 +21,7 @@ const postsReducer = (state: PostsState = initialState, action: PostAction): Pos
       return {
         ...state,
         isLoading: false,
-        posts: action.payload
+        posts: action.payload as Post[]
       };
     case actionTypes.POSTS_FAILED:
       return {
@@ -32,12 +32,12 @@ const postsReducer = (state: PostsState = initialState, action: PostAction): Pos
     case actionTypes.SET_SEARCH_TEXT:
       return {
         ...state,
-        textForSearch: action.payload ?? initialState.textForSearch
+        textForSearch: action.payload as string ?? initialState.textForSearch
       };
     case actionTypes.SET_SEARCH_FILTER:
       return {
         ...state,
-        typeOfSearch: action.payload ?? initialState.typeOfSearch
+        typeOfSearch: action.payload as string ?? initialState.typeOfSearch
       };
     case actionTypes.RESET_SEARCH:
       return {

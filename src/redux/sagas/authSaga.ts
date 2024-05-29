@@ -1,7 +1,7 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 
-import { AuthAction, AuthResponse } from '../../interfaces/auth';
+import { AuthAction, AuthFormData, AuthResponse } from '../../interfaces/auth';
 import { changeError, extractErrorMessage } from '../../helpers';
 import { TypeModal } from '../../interfaces/modal';
 import { TOKEN } from '../../constants';
@@ -17,7 +17,7 @@ function * authSaga (action: AuthAction) {
     const modalType: TypeModal = yield select(useAuthType);
     const { data }: AxiosResponse<AuthResponse> = yield call(
       authenticate,
-      action.payload,
+      action.payload as AuthFormData,
       modalType
     );
     localStorage.setItem(TOKEN, data.token);
