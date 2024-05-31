@@ -4,7 +4,7 @@ export const addPostSchema = Yup.object().shape({
   title: Yup.string()
     .trim()
     .min(1, 'Minimum 1 character')
-    .max(255, 'Maximum 255 characters')
+    .max(30, 'Maximum 30 characters')
     .required('Title is required'),
   content: Yup.string()
     .trim()

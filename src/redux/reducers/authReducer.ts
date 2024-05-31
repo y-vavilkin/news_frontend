@@ -32,7 +32,7 @@ const authReducer = (state: AuthState = initialState, action: AuthAction): AuthS
         error: action.error ?? null
       };
     case actionTypes.AUTH_USER_LOGOUT:
-    case actionTypes.AUTH_USER_RESET:
+    case actionTypes.AUTH_USER_RESET: {
       localStorage.removeItem(TOKEN);
       return {
         ...state,
@@ -40,12 +40,12 @@ const authReducer = (state: AuthState = initialState, action: AuthAction): AuthS
         authUser: null,
         isOnline: false
       };
-    case actionTypes.EDIT_PROFILE_RECEIVED: {
+    }
+    case actionTypes.EDIT_PROFILE_RECEIVED:
       return {
         ...state,
         authUser: action.payload as AuthUser
       };
-    }
     default:
       return state;
   }
