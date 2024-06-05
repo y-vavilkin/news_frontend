@@ -53,17 +53,12 @@ const postsReducer = (state: UserState = initialState, action: UserAction): User
         error: null,
         userPosts: [action.payload as Post, ...state.userPosts]
       };
-    case actionTypes.EDIT_PROFILE_RECEIVED: {
+    case actionTypes.EDIT_PROFILE_RECEIVED:
       return {
         ...state,
         isLoadingModal: false,
-        user: {
-          ...state.user!,
-          login: (action.payload as User).login,
-          avatarUrl: (action.payload as User).avatarUrl
-        }
+        user: action.payload as User
       };
-    }
     case actionTypes.ADD_POST_RESET:
     case actionTypes.USER_RESET:
     case actionTypes.EDIT_PROFILE_RESET:
