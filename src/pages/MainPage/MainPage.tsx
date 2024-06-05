@@ -28,16 +28,17 @@ const MainPage = () => {
 
   useEffect(() => {
     dispatch(resetSearch());
-    const token = new URLSearchParams(path.search).get('token')?.slice(1, -1);
+  }, [path]);
 
+  const token = new URLSearchParams(path.search).get('token')?.slice(1, -1);
+
+  useEffect(() => {
     if (token) {
       localStorage.setItem(TOKEN, token);
     }
-  }, [path]);
+  }, [token]);
 
   useEffect(() => {
-    const token = new URLSearchParams(path.search).get('token')?.slice(1, -1);
-
     if (id && token) {
       navigate(`/users/${id}`);
     }
