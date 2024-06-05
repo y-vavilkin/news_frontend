@@ -26,6 +26,7 @@ const authReducer = (state: AuthState = initialState, action: AuthAction): AuthS
         authUser: action.payload as AuthUser
       };
     case actionTypes.AUTH_USER_FAILURE:
+      localStorage.removeItem(TOKEN);
       return {
         ...state,
         isLoading: false,

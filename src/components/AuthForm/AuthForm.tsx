@@ -1,6 +1,7 @@
+import { Button, IconButton, TextField } from '@mui/material';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, TextField } from '@mui/material';
+import GoogleIcon from '@mui/icons-material/Google';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { AuthFormData } from '../../interfaces/auth';
@@ -12,6 +13,7 @@ import authFormSchema from './authFormSchema';
 
 const AuthForm = () => {
   const dispatch = useAppDispatch();
+
   const authError = useAppSelector(state => state.auth.error);
   const typeAuth = useAppSelector(state => state.modal.type);
   const isLogin = typeAuth === TypeModal.LOGIN;
@@ -26,6 +28,10 @@ const AuthForm = () => {
 
   const onSubmit: SubmitHandler<AuthFormData> = (data: AuthFormData) => {
     dispatch(authUser(data));
+  };
+
+  const authByGoogle = () => {
+    window.location.href = import.meta.env.VITE_GOOGLE_AUTH_URL;
   };
 
   const isLoginError = errors.login?.message !== undefined;
@@ -74,6 +80,9 @@ const AuthForm = () => {
       >
         Continue
       </Button>
+      <IconButton color="primary" onClick={authByGoogle}>
+        <GoogleIcon />
+      </IconButton>
       {authError !== null && (
         <p className={classes.error}>{authError}</p>
       )}
