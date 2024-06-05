@@ -3,7 +3,6 @@ import { useEffect, useMemo } from 'react';
 
 import { postsRequest, resetSearch } from '../../redux/actions/posts';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
-import { authCheck } from '../../redux/actions/auth';
 import { EMPTY_POSTS, TOKEN } from '../../constants';
 import PostsList from '../../components/PostsList';
 import { Post } from '../../interfaces/posts';
@@ -30,14 +29,19 @@ const MainPage = () => {
   useEffect(() => {
     dispatch(resetSearch());
     const token = new URLSearchParams(path.search).get('token')?.slice(1, -1);
-    if (token !== null && token !== undefined) {
+
+    if (token) {
       localStorage.setItem(TOKEN, token);
-      dispatch(authCheck());
-      if (id !== undefined) {
-        navigate(`/users/${id}`);
-      }
     }
-  }, [path, id]);
+  }, [path]);
+
+  useEffect(() => {
+    const token = new URLSearchParams(path.search).get('token')?.slice(1, -1);
+
+    if (id && token) {
+      navigate(`/users/${id}`);
+    }
+  }, [id]);
 
   const filteredPosts: Post[] = useMemo(() => {
     return filterPosts(posts, textForSearch, typeOfSearch);
