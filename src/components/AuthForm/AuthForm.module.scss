@@ -15,4 +15,17 @@
   .error {
     color: var(--red)
   }
+
+  .buttons {
+    margin: 10px 0;
+
+    .buttonAuth {
+      border: 1px solid white;
+    }
+  
+    .buttonAuth:hover {
+      border: 1px solid black;
+    }
+  }
+
 }

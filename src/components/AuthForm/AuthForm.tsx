@@ -80,9 +80,11 @@ const AuthForm = () => {
       >
         Continue
       </Button>
-      <IconButton color="primary" onClick={authByGoogle}>
-        <GoogleIcon />
-      </IconButton>
+      <div className={classes.buttons}>
+        <IconButton color="primary" onClick={authByGoogle} className={classes.buttonAuth}>
+          <GoogleIcon />
+        </IconButton>
+      </div>
       {authError !== null && (
         <p className={classes.error}>{authError}</p>
       )}
