@@ -1,7 +1,8 @@
 import { Pagination, Stack } from '@mui/material';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 
 import PostCard, { type PostProps } from '../PostCard';
+import usePagination from '../../redux/hooks';
 import { COUNT_POSTS } from '../../constants';
 
 import classes from './PostsList.module.scss';
@@ -11,16 +12,16 @@ interface PostsListProps {
 }
 
 const PostsList = ({ postsData }: PostsListProps) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(postsData.length / COUNT_POSTS);
+  const [
+    displayedPosts,
+    totalPages,
+    currentPage,
+    setCurrentPage
+  ] = usePagination(postsData, COUNT_POSTS);
 
-  const handleChangePage = (event: ChangeEvent<unknown>, page: number) => {
+  const handleChangePage = (_event: ChangeEvent<unknown>, page: number) => {
     setCurrentPage(page);
   };
-
-  const displayedPosts = postsData.slice(
-    (currentPage - 1) * COUNT_POSTS,
-    currentPage * COUNT_POSTS);
 
   return (
     <div className={classes.root}>
