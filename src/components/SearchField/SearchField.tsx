@@ -1,7 +1,7 @@
 import { Box, TextField } from '@mui/material';
 import { ChangeEvent } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setSearchText } from '../../redux/actions/posts';
 
 const SearchField = () => {

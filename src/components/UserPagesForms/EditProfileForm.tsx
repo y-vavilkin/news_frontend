@@ -6,8 +6,8 @@ import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
 
 import { EditProfileFormData, EditProfileRequest } from '../../interfaces/user';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { editProfileRequested } from '../../redux/actions/user';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { editProfileSchema } from './profileFormSchema';
 import classes from './UserPagesForms.module.scss';

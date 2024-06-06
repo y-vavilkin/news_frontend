@@ -2,11 +2,12 @@ import { useEffect } from 'react';
 import { useRoutes } from 'react-router-dom';
 
 import { authCheck } from './redux/actions/auth';
-import { useAppDispatch } from './redux/hooks';
+
+import Layout from './components/Layout/Layout';
 import ProfilePage from './pages/ProfilePage';
+import { useAppDispatch } from './hooks';
 import MainPage from './pages/MainPage';
 import { TOKEN } from './constants';
-import Layout from './components/Layout/Layout';
 import './App.scss';
 
 const routes = [

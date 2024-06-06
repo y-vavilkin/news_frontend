@@ -2,8 +2,8 @@ import { Button } from '@mui/material';
 
 import { authUserReset } from '../../redux/actions/auth';
 import { openModal } from '../../redux/actions/modal';
-import { useAppDispatch } from '../../redux/hooks';
 import { TypeModal } from '../../interfaces/modal';
+import { useAppDispatch } from '../../hooks';
 
 const AuthMenu = () => {
   const dispatch = useAppDispatch();

@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 import { memo } from 'react';
 
 import { addPostReset, editProfileReset } from '../../redux/actions/user';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { openModal } from '../../redux/actions/modal';
 import { getImageUrlWithBase } from '../../helpers';
 import { TypeModal } from '../../interfaces/modal';
