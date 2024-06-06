@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '../../hooks';
 import SearchFilter from '../SearchFilter';
 import SearchField from '../SearchField';
 import UserMenu from '../UserMenu';

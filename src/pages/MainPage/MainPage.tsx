@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
 
 import { postsRequest, resetSearch } from '../../redux/actions/posts';
-import { useAppSelector, useAppDispatch } from '../../redux/hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import { EMPTY_POSTS, TOKEN } from '../../constants';
 import PostsList from '../../components/PostsList';
 import { Post } from '../../interfaces/posts';

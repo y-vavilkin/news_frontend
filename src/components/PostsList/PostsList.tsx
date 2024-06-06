@@ -1,9 +1,9 @@
 import { Pagination, Stack } from '@mui/material';
 import { ChangeEvent } from 'react';
 
-import PostCard, { type PostProps } from '../PostCard';
-import usePagination from '../../redux/hooks';
+import usePagination from '../../hooks/pagination';
 import { COUNT_POSTS } from '../../constants';
+import PostCard, { type PostProps } from '../PostCard';
 
 import classes from './PostsList.module.scss';
 

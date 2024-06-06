@@ -2,9 +2,9 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
 
 import { userFailed, userRequest, userReset } from '../../redux/actions/user';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { BAD_URL, UNAUTHORIZED } from '../../constants/errors';
 import { EMPTY_POSTS, TIME_REDIRECT } from '../../constants';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeError, filterPosts } from '../../helpers';
 import { authUserReset } from '../../redux/actions/auth';
 import { resetSearch } from '../../redux/actions/posts';

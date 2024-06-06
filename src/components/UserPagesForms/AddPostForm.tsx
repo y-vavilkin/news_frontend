@@ -5,7 +5,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { Button, TextField } from '@mui/material';
 
 import { AddPostFormData, PostRequest } from '../../interfaces/user';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addPostRequested } from '../../redux/actions/user';
 
 import { addPostSchema } from './profileFormSchema';

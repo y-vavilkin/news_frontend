@@ -1,4 +1,5 @@
 import { Alert, AlertColor } from '@mui/material';
+
 import classes from './Notify.module.scss';
 
 interface NotifyProps {

@@ -8,7 +8,7 @@ import {
   Box
 } from '@mui/material';
 
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import menuList, { AUTHORS } from '../../constants/filters';
 import { setFilterSearch } from '../../redux/actions/posts';
 

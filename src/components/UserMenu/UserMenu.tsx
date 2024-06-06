@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { authLogout } from '../../redux/actions/auth';
 import { getImageUrlWithBase } from '../../helpers';
 import { USER } from '../../constants';
