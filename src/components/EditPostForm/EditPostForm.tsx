@@ -18,13 +18,13 @@ import { editPostRequested } from '../../redux/actions/user';
 import { editPostSchema } from './postFormSchema';
 import classes from './EditPostForm.module.scss';
 
-const AddPostForm = () => {
+const EditPostForm = () => {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(state => state.currentUser.isLoadingModal);
   const errorOfRequest = useAppSelector(state => state.currentUser.error);
   const typeModal = useAppSelector(state => state.modal.type);
   const postId = useAppSelector(state => state.currentUser.postId);
-  const [title, content, tags] = usePost(postId);
+  const { title, content, tags } = usePost(postId);
 
   const {
     watch,
@@ -41,17 +41,15 @@ const AddPostForm = () => {
   const hasContentError = errors.content?.message !== undefined;
   const hasTitleError = errors.title?.message !== undefined;
   const hasTagsError = errors.tags?.message !== undefined;
-  const hasAddPostError = hasContentError || hasTitleError || hasTagsError;
+  const hasEditPostError = hasContentError || hasTitleError || hasTagsError;
 
   const textButtonImage = isImageUploaded ? 'thanks' : 'upload file';
   const color = isImageUploaded ? 'success' : 'primary';
 
   const onSubmit: SubmitHandler<PostFormData> = (data: PostFormData) => {
-    if (data.imagePost instanceof FileList && data.imagePost.length > 0) {
-      data.imagePost = data.imagePost[0];
-    } else {
-      data.imagePost = null;
-    }
+    data.imagePost = data.imagePost instanceof FileList
+      ? data.imagePost[0]
+      : null;
     dispatch(editPostRequested(data as PostRequest));
   };
 
@@ -115,7 +113,7 @@ const AddPostForm = () => {
           color="primary"
           loading={isLoading}
           variant="contained"
-          disabled={hasAddPostError}
+          disabled={hasEditPostError}
           className={classes.button}
         >
           edit post
@@ -126,4 +124,4 @@ const AddPostForm = () => {
   );
 };
 
-export default AddPostForm;
+export default EditPostForm;
