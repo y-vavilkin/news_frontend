@@ -1,8 +1,8 @@
 export enum TypeModal {
   LOGIN = 'login',
-  ADD_POST = 'add_post',
+  ADD_POST = 'add post',
   REGISTRATION = 'registration',
-  EDIT_PROFILE = 'edit_profile'
+  EDIT_PROFILE = 'edit profile'
 }
 
 export interface ModalAction {

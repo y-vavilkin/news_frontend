@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+import { Box } from '@mui/material';
 import { memo } from 'react';
 
 import { changeFormatDate, getImageUrlWithBase } from '../../helpers';
@@ -35,14 +36,14 @@ const PostCard = ({
   return (
     <div className={classes.container}>
       <li className={classes.post}>
-        <div className={classes.imageBlock}>
+        <Box className={classes.imageBlock}>
           <img
             className={classes.image}
             src={getImageUrlWithBase(imageUrl, CARD)}
             alt="image"
             draggable="false"
           />
-        </div>
+        </Box>
         <div className={classes.contentBlock}>
           <h1 className={classes.title}>{title}</h1>
           <div className={classes.content}>

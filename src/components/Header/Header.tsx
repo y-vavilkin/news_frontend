@@ -1,3 +1,4 @@
+import { Box, Stack } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { useAppSelector } from '../../hooks';
@@ -12,18 +13,18 @@ const Header = () => {
   const isOnline = useAppSelector((state) => state.auth.isOnline);
 
   return (
-    <div className={classes.header}>
+    <Stack direction="row" className={classes.header}>
       <Link to="/" className={classes.logo}>
         <img src="/logo.webp" alt="logo" />
       </Link>
-      <div className={classes.inputs}>
+      <Stack direction="row" >
         <SearchField />
         <SearchFilter />
-      </div>
-      <div className={classes.links}>
+      </Stack>
+      <Box className={classes.links}>
         {isOnline ? <UserMenu /> : <AuthMenu />}
-      </div>
-    </div>
+      </Box>
+    </Stack>
   );
 };
 

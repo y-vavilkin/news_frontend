@@ -2,7 +2,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { Button, TextField } from '@mui/material';
+import { Button, FormControl, FormLabel, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 
 import { EditProfileFormData, EditProfileRequest } from '../../interfaces/user';
@@ -18,6 +18,7 @@ const EditProfileForm = () => {
   const isLoading = useAppSelector(state => state.currentUser.isLoadingModal);
   const errorOfRequest = useAppSelector(state => state.currentUser.error);
   const login = useAppSelector(state => state.auth.authUser?.login);
+  const typeModal = useAppSelector(state => state.modal.type);
 
   const {
     watch,
@@ -50,7 +51,13 @@ const EditProfileForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={classes.box}>
+    <FormControl
+      component="form"
+      onSubmit={handleSubmit(onSubmit)}
+      className={classes.box}
+      sx={{ p: 2 }}
+    >
+      <FormLabel>{typeModal?.toUpperCase()}</FormLabel>
       <TextField
         type="text"
         label="Login"
@@ -59,8 +66,8 @@ const EditProfileForm = () => {
         defaultValue={login}
         {...register('login')}
       />
-      <p className={classes.error}>{errors.login?.message}</p>
-      <div className={classes.buttons}>
+      <Typography className={classes.error}>{errors.login?.message}</Typography>
+      <Stack direction="row" className={classes.buttons}>
         <Button
           component="label"
           variant="contained"
@@ -87,10 +94,10 @@ const EditProfileForm = () => {
         >
           Save changes
         </LoadingButton>
-      </div>
-      <p className={classes.error}>{errorOfRequest}</p>
-      <p className={classes.error}>{errorOfInput}</p>
-    </form>
+      </Stack>
+      <Typography className={classes.error}>{errorOfRequest}</Typography>
+      <Typography className={classes.error}>{errorOfInput}</Typography>
+    </FormControl>
   );
 };
 

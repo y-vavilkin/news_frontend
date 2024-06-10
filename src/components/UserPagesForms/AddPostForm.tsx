@@ -2,7 +2,14 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { Button, TextField } from '@mui/material';
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  TextField,
+  Typography,
+  Stack
+} from '@mui/material';
 
 import { AddPostFormData, PostRequest } from '../../interfaces/user';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -15,6 +22,7 @@ const AddPostForm = () => {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(state => state.currentUser.isLoadingModal);
   const errorOfRequest = useAppSelector(state => state.currentUser.error);
+  const typeModal = useAppSelector(state => state.modal.type);
 
   const {
     watch,
@@ -46,7 +54,13 @@ const AddPostForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={classes.box}>
+    <FormControl
+      component="form"
+      onSubmit={handleSubmit(onSubmit)}
+      className={classes.box}
+      sx={{ p: 2 }}
+    >
+      <FormLabel>{typeModal?.toUpperCase()}</FormLabel>
       <TextField
         type="text"
         label="Title"
@@ -54,7 +68,7 @@ const AddPostForm = () => {
         margin="normal"
         {...register('title')}
       />
-      <p className={classes.error}>{errors.title?.message}</p>
+      <Typography className={classes.error}>{errors.title?.message}</Typography>
       <TextField
         type="text"
         label="Content"
@@ -64,7 +78,7 @@ const AddPostForm = () => {
         rows={4}
         {...register('content')}
       />
-      <p className={classes.error}>{errors.content?.message}</p>
+      <Typography className={classes.error}>{errors.content?.message}</Typography>
       <TextField
         type="text"
         label="Tags"
@@ -73,8 +87,8 @@ const AddPostForm = () => {
         placeholder="Use more than one: `,`"
         {...register('tags')}
       />
-      <p className={classes.error}>{errors.tags?.message}</p>
-      <div className={classes.buttons}>
+      <Typography className={classes.error}>{errors.tags?.message}</Typography>
+      <Stack direction="row" className={classes.buttons}>
         <Button
           component="label"
           variant="contained"
@@ -101,9 +115,9 @@ const AddPostForm = () => {
         >
           Create post
         </LoadingButton>
-      </div>
-      <p className={classes.error}>{errorOfRequest}</p>
-    </form>
+      </Stack>
+      <Typography className={classes.error}>{errorOfRequest}</Typography>
+    </FormControl>
   );
 };
 

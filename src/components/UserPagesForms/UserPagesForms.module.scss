@@ -30,8 +30,9 @@
       }
     }
   }
-}
 
-.error {
-  color: var(--red)
+  .error {
+    font-family: var(--font);
+    color: var(--red)
+  }
 }
