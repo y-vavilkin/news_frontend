@@ -1,15 +1,16 @@
 import { Box, Button, ListItem, Typography } from '@mui/material';
 import { useLocation, useParams } from 'react-router-dom';
 import { Delete } from '@mui/icons-material';
-import { memo } from 'react';
-
 import { LoadingButton } from '@mui/lab';
+import { memo } from 'react';
 
 import { changeFormatDate, getImageUrlWithBase } from '../../helpers';
 import { User as UserDescription } from '../../interfaces/user';
 import { Tag as TagDescription } from '../../interfaces/posts';
-import { deletePostRequested } from '../../redux/actions/user';
+import { deletePostRequested, setIdPost } from '../../redux/actions/user';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import { openModal } from '../../redux/actions/modal';
+import { TypeModal } from '../../interfaces/modal';
 import { CARD } from '../../constants';
 import User from '../User';
 import Tag from '../Tag';
@@ -39,7 +40,7 @@ const PostCard = ({
   const dispatch = useAppDispatch();
   const location = useLocation();
   const { id: userUrlId } = useParams();
-  const idOfDeletedPost = useAppSelector(state => state.currentUser.idOfDeletedPost);
+  const postId = useAppSelector(state => state.currentUser.postId);
   const isLoading = useAppSelector(state => state.currentUser.isLoadingPost);
   const userId = useAppSelector(state => state.auth.authUser?.id);
 
@@ -48,6 +49,11 @@ const PostCard = ({
 
   const handleDeletePost = () => {
     dispatch(deletePostRequested(Number(id)));
+  };
+
+  const handleEditPost = () => {
+    dispatch(setIdPost(id));
+    dispatch(openModal(TypeModal.EDIT_POST));
   };
 
   return (
@@ -75,6 +81,7 @@ const PostCard = ({
         {!isMainPagePath && isUserProfile && (
           <Box className={classes.buttons}>
             <Button
+              onClick={handleEditPost}
               variant="contained"
               className={classes.button}
             >
@@ -84,7 +91,7 @@ const PostCard = ({
               onClick={handleDeletePost}
               variant="contained"
               className={classes.button}
-              loading={isLoading && idOfDeletedPost === id}
+              loading={isLoading && postId === id}
             >
               <Delete />
             </LoadingButton>

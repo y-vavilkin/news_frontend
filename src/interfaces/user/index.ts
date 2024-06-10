@@ -24,10 +24,10 @@ export interface UserState {
   isLoadingPost: boolean
   isLoading: boolean
   error: string | null
-  idOfDeletedPost: number
+  postId: number
 }
 
-export interface AddPostFormData {
+export interface PostFormData {
   title: string
   content: string
   tags: string

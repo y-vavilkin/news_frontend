@@ -79,3 +79,23 @@ export const deletePostFailed = (error: string): UserAction => ({
   type: actionTypes.DELETE_POST_FAILED,
   error
 });
+
+export const setIdPost = (payload: number): UserAction => ({
+  type: actionTypes.SET_POST_ID,
+  payload
+});
+
+export const editPostRequested = (payload: PostRequest): UserAction => ({
+  type: actionTypes.EDIT_POST_REQUESTED,
+  payload
+});
+
+export const editPostFailed = (error: string): UserAction => ({
+  type: actionTypes.EDIT_POST_FAILED,
+  error
+});
+
+export const editPostReceived = (payload: Post): UserAction => ({
+  type: actionTypes.EDIT_POST_RECEIVED,
+  payload
+});

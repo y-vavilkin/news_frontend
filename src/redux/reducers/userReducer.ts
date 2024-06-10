@@ -9,7 +9,7 @@ const initialState: UserState = {
   error: null,
   user: null,
   userPosts: [],
-  idOfDeletedPost: -1
+  postId: -1
 };
 
 const postsReducer = (state: UserState = initialState, action: UserAction): UserState => {
@@ -36,9 +36,11 @@ const postsReducer = (state: UserState = initialState, action: UserAction): User
     case actionTypes.USER_FAILED:
     case actionTypes.ADD_POST_FAILED:
     case actionTypes.EDIT_PROFILE_FAILED:
+    case actionTypes.DELETE_POST_FAILED:
       return {
         ...state,
         isLoading: false,
+        isLoadingPost: false,
         isLoadingModal: false,
         error: action.error ?? null
       };
@@ -54,6 +56,21 @@ const postsReducer = (state: UserState = initialState, action: UserAction): User
         isLoadingModal: false,
         error: null,
         userPosts: [action.payload as Post, ...state.userPosts]
+      };
+    case actionTypes.EDIT_POST_REQUESTED:
+      return {
+        ...state,
+        error: null,
+        isLoadingModal: true
+      };
+    case actionTypes.EDIT_POST_RECEIVED:
+      return {
+        ...state,
+        isLoadingModal: false,
+        error: null,
+        userPosts: state.userPosts.map(post =>
+          post.id === (action.payload as Post).id ? action.payload as Post : post
+        )
       };
     case actionTypes.EDIT_PROFILE_RECEIVED:
       return {
@@ -72,20 +89,19 @@ const postsReducer = (state: UserState = initialState, action: UserAction): User
       return {
         ...state,
         isLoadingPost: true,
-        idOfDeletedPost: action.payload as number
+        postId: action.payload as number
       };
     case actionTypes.DELETE_POST_RECEIVED:
       return {
         ...state,
         isLoadingPost: false,
-        userPosts: state.userPosts.filter(post => post.id !== state.idOfDeletedPost),
-        idOfDeletedPost: -1
+        userPosts: state.userPosts.filter(post => post.id !== state.postId),
+        postId: -1
       };
-    case actionTypes.DELETE_POST_FAILED:
+    case actionTypes.SET_POST_ID:
       return {
         ...state,
-        isLoadingPost: false,
-        error: action.error ?? null
+        postId: action.payload as number
       };
     default:
       return state;

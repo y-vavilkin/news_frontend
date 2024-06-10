@@ -5,6 +5,7 @@ import authSaga from './verifySaga.ts';
 import userSaga from './userSaga.ts';
 import verifySaga from './authSaga.ts';
 import addPostSaga from './addPostSaga.ts';
+import editPostSaga from './editPostSaga.ts';
 import deletePostSaga from './deletePostSaga.ts';
 import editProfileSaga from './editProfileSaga.ts';
 
@@ -15,6 +16,7 @@ function * rootSaga () {
     userSaga(),
     verifySaga(),
     addPostSaga(),
+    editPostSaga(),
     deletePostSaga(),
     editProfileSaga()
   ]);
