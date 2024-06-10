@@ -1,4 +1,4 @@
-import { Pagination, Stack } from '@mui/material';
+import { Box, List, Pagination, Stack } from '@mui/material';
 import { ChangeEvent } from 'react';
 
 import usePagination from '../../hooks/pagination';
@@ -24,8 +24,8 @@ const PostsList = ({ postsData }: PostsListProps) => {
   };
 
   return (
-    <div className={classes.root}>
-      <div className={classes.posts}>
+    <Box className={classes.root}>
+      <List component="ul" className={classes.posts}>
         {displayedPosts.map((post) =>
           <PostCard
             key={post.id}
@@ -38,7 +38,7 @@ const PostsList = ({ postsData }: PostsListProps) => {
             tags={post.tags}
           />
         )}
-      </div>
+      </List>
       <Stack spacing={2} className={classes.pagination}>
         <Pagination
           count={totalPages}
@@ -48,7 +48,7 @@ const PostsList = ({ postsData }: PostsListProps) => {
           size="large"
         />
       </Stack>
-    </div>
+    </Box>
   );
 };
 

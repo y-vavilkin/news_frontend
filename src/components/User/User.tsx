@@ -1,3 +1,4 @@
+import { Avatar, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { type User as UserDescription } from '../../interfaces/user';
@@ -15,14 +16,12 @@ const User = ({ user }: UserProps) => {
   const isOnline = useAppSelector(state => state.auth.isOnline);
 
   return (
-    <div className={classes.user}>
-      <img
-        className={classes.avatar}
+    <Box className={classes.user}>
+      <Avatar
         src={getImageUrlWithBase(user.avatarUrl, USER)}
         alt="avatar"
-        draggable="false"
       />
-      <div className={classes.info}>
+      <Box className={classes.info}>
         {isOnline && (
           <Link className={classes.link} to={`users/${user.id}`}>
             <p>{user.login}</p>
@@ -31,8 +30,8 @@ const User = ({ user }: UserProps) => {
         {!isOnline && (
           <p>{user.login}</p>
         )}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

@@ -1,5 +1,5 @@
-import { Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
+import { Avatar, Button, Stack } from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { authLogout } from '../../redux/actions/auth';
@@ -21,12 +21,12 @@ const UserMenu = () => {
   };
 
   return (
-    <>
-      <Link to={`/users/${userId}`}>
-        <img
-          className={classes.avatar}
+    <Stack direction="row" spacing={2}>
+      <Link to={`/users/${userId}`} className={classes.avatarLink}>
+        <Avatar
           src={getImageUrlWithBase(userAvatar, USER)}
           alt="Profile"
+          sx={{ width: 50, height: 50 }}
         />
       </Link>
       <Button
@@ -36,7 +36,7 @@ const UserMenu = () => {
       >
         logout
       </Button>
-    </>
+    </Stack>
   );
 };
 

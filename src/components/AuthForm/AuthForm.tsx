@@ -1,7 +1,15 @@
-import { Button, IconButton, TextField } from '@mui/material';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import GoogleIcon from '@mui/icons-material/Google';
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  IconButton,
+  TextField,
+  Box,
+  Typography
+} from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AuthFormData } from '../../interfaces/auth';
@@ -39,7 +47,13 @@ const AuthForm = () => {
   const isPasswordError = errors.password?.message !== undefined;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={classes.box}>
+    <FormControl
+      component="form"
+      onSubmit={handleSubmit(onSubmit)}
+      className={classes.box}
+      sx={{ p: 2 }}
+    >
+      <FormLabel>{typeAuth?.toUpperCase()}</FormLabel>
       {!isLogin && (
         <>
           <TextField
@@ -50,7 +64,7 @@ const AuthForm = () => {
             autoComplete="username"
             {...register('login')}
           />
-          <p className={classes.error}>{errors.login?.message}</p>
+          <Typography className={classes.error}>{errors.login?.message}</Typography>
         </>
       )}
       <TextField
@@ -61,7 +75,7 @@ const AuthForm = () => {
         autoComplete="email"
         {...register('email')}
       />
-      <p className={classes.error}>{errors.email?.message}</p>
+      <Typography className={classes.error}>{errors.email?.message}</Typography>
       <TextField
         type="password"
         label="Password"
@@ -70,7 +84,7 @@ const AuthForm = () => {
         autoComplete="new-password"
         {...register('password')}
       />
-      <p className={classes.error}>{errors.password?.message}</p>
+      <Typography className={classes.error}>{errors.password?.message}</Typography>
       <Button
         type="submit"
         variant="contained"
@@ -80,15 +94,15 @@ const AuthForm = () => {
       >
         Continue
       </Button>
-      <div className={classes.buttons}>
+      <Box className={classes.buttons}>
         <IconButton color="primary" onClick={authByGoogle} className={classes.buttonAuth}>
           <GoogleIcon />
         </IconButton>
-      </div>
+      </Box>
       {authError !== null && (
         <p className={classes.error}>{authError}</p>
       )}
-    </form>
+    </FormControl>
   );
 };
 

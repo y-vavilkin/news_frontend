@@ -1,4 +1,4 @@
-import { Alert, AlertColor } from '@mui/material';
+import { Alert, AlertColor, Box } from '@mui/material';
 
 import classes from './Notify.module.scss';
 
@@ -9,11 +9,11 @@ interface NotifyProps {
 
 const Notify = ({ info, status }: NotifyProps) => {
   return (
-    <div className={classes.block}>
+    <Box className={classes.block}>
       <Alert className={classes.alert} variant="filled" severity={status} >
         {info}
       </Alert>
-    </div>
+    </Box>
   );
 };
 

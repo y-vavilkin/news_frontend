@@ -1,5 +1,5 @@
+import { Avatar, Box, Button, Stack } from '@mui/material';
 import { Edit, Add } from '@mui/icons-material';
-import { Button } from '@mui/material';
 import { memo } from 'react';
 
 import { addPostReset, editProfileReset } from '../../redux/actions/user';
@@ -33,18 +33,18 @@ const UserCard = ({ id, login, email, avatarUrl }: UserCardProps) => {
   };
 
   return (
-    <div className={classes.userDescription}>
-      <img
-        className={classes.avatar}
+    <Box className={classes.userDescription}>
+      <Avatar
         src={getImageUrlWithBase(avatarUrl, USER)}
         alt="Avatar"
+        sx={{ width: 60, height: 60 }}
       />
-      <div className={classes.information}>
+      <Stack className={classes.information}>
         <p>Login: {login}</p>
         <p>Email: {email}</p>
-      </div>
+      </Stack>
       {id === userId && (
-        <div className={classes.buttons}>
+        <Box className={classes.buttons}>
           <Button
             variant="contained"
             startIcon={<Add />}
@@ -59,9 +59,9 @@ const UserCard = ({ id, login, email, avatarUrl }: UserCardProps) => {
           >
             Edit Profile
           </Button>
-        </div>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 };
 
