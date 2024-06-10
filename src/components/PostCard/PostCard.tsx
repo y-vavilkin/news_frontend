@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { Box, ListItem, Typography } from '@mui/material';
 import { memo } from 'react';
 
 import { changeFormatDate, getImageUrlWithBase } from '../../helpers';
@@ -34,8 +34,8 @@ const PostCard = ({
   const isMainPagePath = location.pathname === '/';
 
   return (
-    <div className={classes.container}>
-      <li className={classes.post}>
+    <ListItem className={classes.container} sx={{ p: 0, width: 400 }}>
+      <Box className={classes.post}>
         <Box className={classes.imageBlock}>
           <img
             className={classes.image}
@@ -44,19 +44,19 @@ const PostCard = ({
             draggable="false"
           />
         </Box>
-        <div className={classes.contentBlock}>
-          <h1 className={classes.title}>{title}</h1>
-          <div className={classes.content}>
+        <Box className={classes.contentBlock}>
+          <Typography variant="h6" className={classes.title}>{title}</Typography>
+          <Box className={classes.content}>
             {isMainPagePath && (
               <User user={user} />
             )}
-            <p>{changeFormatDate(createdAt)}</p>
-            <p className={classes.text}>{content}</p>
-          </div>
-        </div>
+            <Typography className={classes.date}>{changeFormatDate(createdAt)}</Typography>
+            <Typography className={classes.text}>{content}</Typography>
+          </Box>
+        </Box>
         <Tag tags={tags} />
-      </li>
-    </div>
+      </Box>
+    </ListItem>
   );
 };
 
