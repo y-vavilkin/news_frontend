@@ -1,4 +1,5 @@
 import {
+  POST_NOT_HAS_BEEN_DELETED,
   GLOBAL_ERROR,
   USER_EXIST,
   INCORRECT_DATA,
@@ -25,6 +26,9 @@ const changeError = (error: string) => {
     }
     case INCORRECT_DATA: {
       return 'Sorry, incorrect data';
+    }
+    case POST_NOT_HAS_BEEN_DELETED: {
+      return 'Sorry, post not has been deleted';
     }
     case ERROR_401: {
       return 'Sorry, you are unauthorized';

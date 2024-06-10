@@ -65,3 +65,17 @@ export const editProfileFailed = (error: string): UserAction => ({
 export const editProfileReset = (): UserAction => ({
   type: actionTypes.EDIT_PROFILE_RESET
 });
+
+export const deletePostRequested = (payload: number): UserAction => ({
+  type: actionTypes.DELETE_POST_REQUESTED,
+  payload
+});
+
+export const deletePostReceived = (): UserAction => ({
+  type: actionTypes.DELETE_POST_RECEIVED
+});
+
+export const deletePostFailed = (error: string): UserAction => ({
+  type: actionTypes.DELETE_POST_FAILED,
+  error
+});

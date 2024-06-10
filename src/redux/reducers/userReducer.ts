@@ -5,9 +5,11 @@ import * as actionTypes from '../actions/actionTypes/user';
 const initialState: UserState = {
   isLoading: false,
   isLoadingModal: false,
+  isLoadingPost: false,
   error: null,
   user: null,
-  userPosts: []
+  userPosts: [],
+  idOfDeletedPost: -1
 };
 
 const postsReducer = (state: UserState = initialState, action: UserAction): UserState => {
@@ -65,6 +67,25 @@ const postsReducer = (state: UserState = initialState, action: UserAction): User
       return {
         ...state,
         error: null
+      };
+    case actionTypes.DELETE_POST_REQUESTED:
+      return {
+        ...state,
+        isLoadingPost: true,
+        idOfDeletedPost: action.payload as number
+      };
+    case actionTypes.DELETE_POST_RECEIVED:
+      return {
+        ...state,
+        isLoadingPost: false,
+        userPosts: state.userPosts.filter(post => post.id !== state.idOfDeletedPost),
+        idOfDeletedPost: -1
+      };
+    case actionTypes.DELETE_POST_FAILED:
+      return {
+        ...state,
+        isLoadingPost: false,
+        error: action.error ?? null
       };
     default:
       return state;

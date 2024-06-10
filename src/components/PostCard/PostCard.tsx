@@ -1,10 +1,15 @@
-import { useLocation } from 'react-router-dom';
-import { Box, ListItem, Typography } from '@mui/material';
+import { Box, Button, ListItem, Typography } from '@mui/material';
+import { useLocation, useParams } from 'react-router-dom';
+import { Delete } from '@mui/icons-material';
 import { memo } from 'react';
+
+import { LoadingButton } from '@mui/lab';
 
 import { changeFormatDate, getImageUrlWithBase } from '../../helpers';
 import { User as UserDescription } from '../../interfaces/user';
 import { Tag as TagDescription } from '../../interfaces/posts';
+import { deletePostRequested } from '../../redux/actions/user';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { CARD } from '../../constants';
 import User from '../User';
 import Tag from '../Tag';
@@ -23,6 +28,7 @@ export interface PostProps {
 }
 
 const PostCard = ({
+  id,
   imageUrl,
   title,
   createdAt,
@@ -30,8 +36,19 @@ const PostCard = ({
   user,
   tags
 }: PostProps) => {
+  const dispatch = useAppDispatch();
   const location = useLocation();
+  const { id: userUrlId } = useParams();
+  const idOfDeletedPost = useAppSelector(state => state.currentUser.idOfDeletedPost);
+  const isLoading = useAppSelector(state => state.currentUser.isLoadingPost);
+  const userId = useAppSelector(state => state.auth.authUser?.id);
+
   const isMainPagePath = location.pathname === '/';
+  const isUserProfile = userId === Number(userUrlId);
+
+  const handleDeletePost = () => {
+    dispatch(deletePostRequested(Number(id)));
+  };
 
   return (
     <ListItem className={classes.container} sx={{ p: 0, width: 400 }}>
@@ -55,6 +72,24 @@ const PostCard = ({
           </Box>
         </Box>
         <Tag tags={tags} />
+        {!isMainPagePath && isUserProfile && (
+          <Box className={classes.buttons}>
+            <Button
+              variant="contained"
+              className={classes.button}
+            >
+              edit
+            </Button>
+            <LoadingButton
+              onClick={handleDeletePost}
+              variant="contained"
+              className={classes.button}
+              loading={isLoading && idOfDeletedPost === id}
+            >
+              <Delete />
+            </LoadingButton>
+          </Box>
+        )}
       </Box>
     </ListItem>
   );

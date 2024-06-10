@@ -21,8 +21,10 @@ export interface UserState {
   user: User | null
   userPosts: Post[]
   isLoadingModal: boolean
+  isLoadingPost: boolean
   isLoading: boolean
   error: string | null
+  idOfDeletedPost: number
 }
 
 export interface AddPostFormData {
