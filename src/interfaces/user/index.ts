@@ -21,11 +21,13 @@ export interface UserState {
   user: User | null
   userPosts: Post[]
   isLoadingModal: boolean
+  isLoadingPost: boolean
   isLoading: boolean
   error: string | null
+  postId: number
 }
 
-export interface AddPostFormData {
+export interface PostFormData {
   title: string
   content: string
   tags: string

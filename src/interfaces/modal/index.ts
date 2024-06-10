@@ -1,6 +1,7 @@
 export enum TypeModal {
   LOGIN = 'login',
   ADD_POST = 'add post',
+  EDIT_POST = 'edit post',
   REGISTRATION = 'registration',
   EDIT_PROFILE = 'edit profile'
 }
