@@ -1,4 +1,4 @@
-import { Box, Button, ListItem, Typography } from '@mui/material';
+import { Box, Button, ButtonGroup, ListItem, Typography } from '@mui/material';
 import { useLocation, useParams } from 'react-router-dom';
 import { Delete } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
@@ -37,12 +37,14 @@ const PostCard = ({
   user,
   tags
 }: PostProps) => {
+  const { id: userUrlId } = useParams();
   const dispatch = useAppDispatch();
   const location = useLocation();
-  const { id: userUrlId } = useParams();
+
   const postId = useAppSelector(state => state.currentUser.postId);
   const isLoading = useAppSelector(state => state.currentUser.isLoadingPost);
   const userId = useAppSelector(state => state.auth.authUser?.id);
+  const isAuth = useAppSelector(state => state.auth.isOnline);
 
   const isMainPagePath = location.pathname === '/';
   const isUserProfile = userId === Number(userUrlId);
@@ -54,6 +56,11 @@ const PostCard = ({
   const handleEditPost = () => {
     dispatch(setIdPost(id));
     dispatch(openModal(TypeModal.EDIT_POST));
+  };
+
+  const handleShowComments = () => {
+    dispatch(setIdPost(id));
+    dispatch(openModal(TypeModal.COMMENTS));
   };
 
   return (
@@ -78,25 +85,33 @@ const PostCard = ({
           </Box>
         </Box>
         <Tag tags={tags} />
-        {!isMainPagePath && isUserProfile && (
-          <Box className={classes.buttons}>
+        <ButtonGroup className={classes.buttons}>
+          {isUserProfile && (
             <Button
               onClick={handleEditPost}
               variant="contained"
-              className={classes.button}
             >
               edit
             </Button>
+          )}
+          {isUserProfile && (
             <LoadingButton
               onClick={handleDeletePost}
               variant="contained"
-              className={classes.button}
               loading={isLoading && postId === id}
             >
               <Delete />
             </LoadingButton>
-          </Box>
-        )}
+          )}
+          {isAuth && (
+            <Button
+              onClick={handleShowComments}
+              variant="contained"
+            >
+              comments
+            </Button>
+          )}
+        </ButtonGroup>
       </Box>
     </ListItem>
   );

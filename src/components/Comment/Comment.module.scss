@@ -1,0 +1,37 @@
+.comment {
+
+  .content {
+    width: 100%;
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+
+      .userImage {
+        border: 1px solid var(--black);
+      }
+
+      .userInfo {
+        align-items: end;
+      }
+    }
+
+    .link {
+      text-decoration: none;
+      color: var(--black)
+    }
+
+    .link:hover {
+      color: var(--second-color-font)
+    }
+
+    .text {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 5;
+      overflow: hidden;
+      word-wrap: break-word;
+      font-family: var(--font);
+    }
+  }
+}

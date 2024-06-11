@@ -1,5 +1,6 @@
 import { AddPostForm, EditProfileForm } from '../components/UserPagesForms';
 import EditPostForm from '../components/EditPostForm';
+import CommentsList from '../components/CommentsList';
 import { TypeModal } from '../interfaces/modal';
 import AuthForm from '../components/AuthForm';
 
@@ -17,6 +18,9 @@ const selectForm = (type: TypeModal | undefined) => {
     }
     case TypeModal.EDIT_POST: {
       return EditPostForm;
+    }
+    case TypeModal.COMMENTS: {
+      return CommentsList;
     }
     default:
       return AddPostForm;
