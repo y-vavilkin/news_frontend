@@ -1,4 +1,4 @@
-import { Box, List } from '@mui/material';
+import { Box, FormLabel, List } from '@mui/material';
 import { useEffect } from 'react';
 
 import { commentsRequested } from '../../redux/actions/comments';
@@ -17,6 +17,8 @@ const CommentsList = () => {
   const currentUserId = useAppSelector(state => state.auth.authUser?.id);
   const isLoading = useAppSelector(state => state.comments.isLoadingModal);
   const comments = useAppSelector(state => state.comments.comments);
+  const typeModal = useAppSelector(state => state.modal.type);
+
   const isNotEmpty = comments.length > 0;
 
   useEffect(() => {
@@ -33,6 +35,7 @@ const CommentsList = () => {
 
   return (
     <Box className={classes.list}>
+      <FormLabel className={classes.title}>{typeModal?.toUpperCase()}</FormLabel>
       <CommentInput />
       <List>
         {isNotEmpty

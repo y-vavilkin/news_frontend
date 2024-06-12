@@ -32,7 +32,7 @@ export const addCommentFailed = (error: string): CommentAction => ({
 });
 
 export const setInputText = (payload: string): CommentAction => ({
-  type: actionTypes.SET_INPUT_TEXT,
+  type: actionTypes.SET_INPUT_TEXT_FOR_CREATE,
   payload
 });
 

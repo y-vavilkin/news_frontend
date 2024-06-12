@@ -55,7 +55,7 @@ const commentsReducer = (
         isLoadingComment: false,
         error: action.error ?? null
       };
-    case actionTypes.SET_INPUT_TEXT:
+    case actionTypes.SET_INPUT_TEXT_FOR_CREATE:
       return {
         ...state,
         inputTextForCreate: typeof action.payload === 'string' ? action.payload : ''

@@ -4,4 +4,10 @@
   border-radius: 10px;
   height: 90vh;
   overflow: scroll;
+
+  .title {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+  }
 }

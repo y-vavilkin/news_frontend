@@ -1,12 +1,13 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FormControl, TextField } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { LoadingButton } from '@mui/lab';
 import { ChangeEvent, useEffect } from 'react';
+import { LoadingButton } from '@mui/lab';
 
 import { addCommentRequested, setInputText } from '../../redux/actions/comments';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { CommentData } from '../../interfaces/comments';
+import { CREATE, NEW_COMMENT } from '../../constants';
 
 import { commentSchema } from './commentSchema';
 
@@ -44,7 +45,7 @@ const CommentInput = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <TextField
-        placeholder='Create comment'
+        placeholder={NEW_COMMENT}
         fullWidth
         value={commentText}
         {...register('text')}
@@ -57,7 +58,7 @@ const CommentInput = () => {
         variant="contained"
         color={error !== null ? 'error' : 'primary'}
       >
-        {error ?? 'create'}
+        {error ?? CREATE}
       </LoadingButton>
     </FormControl>
   );

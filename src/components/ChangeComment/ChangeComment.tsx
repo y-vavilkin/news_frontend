@@ -1,10 +1,11 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
 import { FormControl, Stack, TextField } from '@mui/material';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { LoadingButton } from '@mui/lab';
 import { ChangeEvent, useEffect } from 'react';
+import { LoadingButton } from '@mui/lab';
 
 import { editCommentRequested, setInputTextForEdit } from '../../redux/actions/comments';
+import { NEW_COMMENT, SAVE_INPUT_TEXT } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { CommentData } from '../../interfaces/comments';
 
@@ -46,7 +47,7 @@ const ChangeComment = () => {
     >
       <Stack direction="row">
         <TextField
-          placeholder={inputError ?? 'Type new message for comment'}
+          placeholder={inputError ?? NEW_COMMENT}
           fullWidth
           value={commentText}
           {...register('text')}
@@ -59,7 +60,7 @@ const ChangeComment = () => {
           loading={isLoading}
           color={error !== null ? 'error' : 'primary'}
         >
-          {error ?? 'save'}
+          {error ?? SAVE_INPUT_TEXT}
         </LoadingButton>
       </Stack>
     </FormControl>
