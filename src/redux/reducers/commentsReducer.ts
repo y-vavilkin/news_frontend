@@ -2,11 +2,11 @@ import { Comment, CommentAction, CommentState } from '../../interfaces/comments'
 import * as actionTypes from '../actions/actionTypes/comments';
 
 const initialState: CommentState = {
-  isLoading: false,
-  isLoadingDelete: false,
+  isLoadingModal: false,
+  isLoadingComment: false,
   error: null,
   comments: [],
-  inputText: '',
+  inputTextForCreate: '',
   inputTextForEdit: '',
   editInput: false,
   commentId: -1
@@ -20,84 +20,66 @@ const commentsReducer = (
     case actionTypes.COMMENTS_REQUESTED:
       return {
         ...state,
-        isLoading: true
+        isLoadingModal: true
       };
     case actionTypes.COMMENTS_RECEIVED:
       return {
         ...state,
-        isLoading: false,
+        isLoadingModal: false,
         comments: action.payload as Comment[]
       };
     case actionTypes.COMMENTS_FAILED:
       return {
         ...state,
-        isLoading: false,
+        isLoadingModal: false,
         error: action.error ?? null
       };
     case actionTypes.ADD_COMMENT_REQUESTED:
+    case actionTypes.EDIT_COMMENT_REQUESTED:
+    case actionTypes.DELETE_COOMENT_REQUESTED:
       return {
         ...state,
-        isLoading: true
+        isLoadingComment: true
       };
     case actionTypes.ADD_COMMENT_RECEIVED:
       return {
         ...state,
-        isLoading: false,
+        isLoadingComment: false,
         comments: [action.payload as Comment, ...state.comments]
       };
     case actionTypes.ADD_COMMENT_FAILED:
+    case actionTypes.EDIT_COMMENT_FAILED:
+    case actionTypes.DELETE_COOMENT_FAILED:
       return {
         ...state,
-        isLoading: false,
+        isLoadingComment: false,
         error: action.error ?? null
       };
     case actionTypes.SET_INPUT_TEXT:
       return {
         ...state,
-        inputText: typeof action.payload === 'string' ? action.payload : ''
-      };
-    case actionTypes.DELETE_COOMENT_REQUESTED:
-      return {
-        ...state,
-        isLoadingDelete: true
+        inputTextForCreate: typeof action.payload === 'string' ? action.payload : ''
       };
     case actionTypes.DELETE_COOMENT_RECEIVED:
       return {
         ...state,
-        isLoadingDelete: false,
+        isLoadingComment: false,
         comments: state.comments.filter(comment => comment.id !== state.commentId)
-      };
-    case actionTypes.DELETE_COOMENT_FAILED:
-      return {
-        ...state,
-        isLoadingDelete: false,
-        error: action.error ?? null
       };
     case actionTypes.SET_COMMENT_ID:
       return {
         ...state,
         commentId: typeof action.payload === 'number' ? action.payload : -1
       };
-    case actionTypes.EDIT_COMMENT_REQUESTED:
-      return {
-        ...state,
-        isLoadingDelete: true
-      };
     case actionTypes.EDIT_COMMENT_RECEIVED:
       return {
         ...state,
-        isLoadingDelete: false,
+        isLoadingComment: false,
         comments: state.comments.map(comment =>
           comment.id === (action.payload as Comment).id
             ? { ...comment, ...action.payload as Comment }
             : comment
         )
-      };
-    case actionTypes.EDIT_COMMENT_FAILED:
-      return {
-        ...state,
-        isLoadingDelete: false,
-        error: action.error ?? null
       };
     case actionTypes.TOGGLE_EDIT_INPUT:
       return {

@@ -13,7 +13,7 @@ import { commentSchema } from './commentSchema';
 const ChangeComment = () => {
   const dispatch = useAppDispatch();
   const commentText = useAppSelector(state => state.comments.inputTextForEdit);
-  const isLoading = useAppSelector(state => state.comments.isLoadingDelete);
+  const isLoading = useAppSelector(state => state.comments.isLoadingComment);
   const error = useAppSelector(state => state.comments.error);
 
   const { register, handleSubmit, setValue, formState: { errors } } = useForm({

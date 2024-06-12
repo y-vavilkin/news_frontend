@@ -36,7 +36,7 @@ export interface CommentProps {
 
 const Comment = ({ id, text, user, updatedAt, isVisibleActions }: CommentProps) => {
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector(state => state.comments.isLoadingDelete);
+  const isLoading = useAppSelector(state => state.comments.isLoadingComment);
   const commentId = useAppSelector(state => state.comments.commentId);
   const visibility = useAppSelector(state => state.comments.editInput);
 

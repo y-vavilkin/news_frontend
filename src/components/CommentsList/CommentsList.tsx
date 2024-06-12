@@ -15,7 +15,7 @@ const CommentsList = () => {
   const dispatch = useAppDispatch();
 
   const currentUserId = useAppSelector(state => state.auth.authUser?.id);
-  const isLoading = useAppSelector(state => state.comments.isLoading);
+  const isLoading = useAppSelector(state => state.comments.isLoadingModal);
   const comments = useAppSelector(state => state.comments.comments);
   const isNotEmpty = comments.length > 0;
 

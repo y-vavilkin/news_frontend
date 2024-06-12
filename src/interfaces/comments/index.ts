@@ -17,11 +17,11 @@ export interface CommentAction {
 }
 
 export interface CommentState {
-  isLoading: boolean
-  isLoadingDelete: boolean
+  isLoadingModal: boolean
+  isLoadingComment: boolean
   error: string | null
   comments: Comment[]
-  inputText: string
+  inputTextForCreate: string
   inputTextForEdit: string
   editInput: boolean
   commentId: number

@@ -12,7 +12,7 @@ import { commentSchema } from './commentSchema';
 
 const CommentInput = () => {
   const dispatch = useAppDispatch();
-  const commentText = useAppSelector(state => state.comments.inputText);
+  const commentText = useAppSelector(state => state.comments.inputTextForCreate);
   const error = useAppSelector(state => state.comments.error);
 
   const { register, handleSubmit, setValue, formState: { errors } } = useForm({
