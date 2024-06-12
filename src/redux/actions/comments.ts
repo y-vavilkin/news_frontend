@@ -54,3 +54,27 @@ export const setCommentId = (payload: number): CommentAction => ({
   type: actionTypes.SET_COMMENT_ID,
   payload
 });
+
+export const editCommentRequested = (payload: CommentData): CommentAction => ({
+  type: actionTypes.EDIT_COMMENT_REQUESTED,
+  payload
+});
+
+export const editCommentReceived = (payload: Comment): CommentAction => ({
+  type: actionTypes.EDIT_COMMENT_RECEIVED,
+  payload
+});
+
+export const editCommentFailed = (error: string): CommentAction => ({
+  type: actionTypes.EDIT_COMMENT_FAILED,
+  error
+});
+
+export const toggleEditInput = (): CommentAction => ({
+  type: actionTypes.TOGGLE_EDIT_INPUT
+});
+
+export const setInputTextForEdit = (payload: string): CommentAction => ({
+  type: actionTypes.SET_INPUT_TEXT_FOR_EDIT,
+  payload
+});

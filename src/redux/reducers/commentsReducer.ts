@@ -7,6 +7,8 @@ const initialState: CommentState = {
   error: null,
   comments: [],
   inputText: '',
+  inputTextForEdit: '',
+  editInput: false,
   commentId: -1
 };
 
@@ -75,6 +77,37 @@ const commentsReducer = (
       return {
         ...state,
         commentId: typeof action.payload === 'number' ? action.payload : -1
+      };
+    case actionTypes.EDIT_COMMENT_REQUESTED:
+      return {
+        ...state,
+        isLoadingDelete: true
+      };
+    case actionTypes.EDIT_COMMENT_RECEIVED:
+      return {
+        ...state,
+        isLoadingDelete: false,
+        comments: state.comments.map(comment =>
+          comment.id === (action.payload as Comment).id
+            ? { ...comment, ...action.payload as Comment }
+            : comment
+        )
+      };
+    case actionTypes.EDIT_COMMENT_FAILED:
+      return {
+        ...state,
+        isLoadingDelete: false,
+        error: action.error ?? null
+      };
+    case actionTypes.TOGGLE_EDIT_INPUT:
+      return {
+        ...state,
+        editInput: !state.editInput
+      };
+    case actionTypes.SET_INPUT_TEXT_FOR_EDIT:
+      return {
+        ...state,
+        inputTextForEdit: typeof action.payload === 'string' ? action.payload : ''
       };
     default:
       return state;

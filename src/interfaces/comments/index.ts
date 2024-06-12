@@ -22,6 +22,8 @@ export interface CommentState {
   error: string | null
   comments: Comment[]
   inputText: string
+  inputTextForEdit: string
+  editInput: boolean
   commentId: number
 }
 

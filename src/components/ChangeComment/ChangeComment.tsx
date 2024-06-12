@@ -1,18 +1,19 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { FormControl, TextField } from '@mui/material';
+import { FormControl, Stack, TextField } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoadingButton } from '@mui/lab';
 import { ChangeEvent, useEffect } from 'react';
 
-import { addCommentRequested, setInputText } from '../../redux/actions/comments';
+import { editCommentRequested, setInputTextForEdit } from '../../redux/actions/comments';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { CommentData } from '../../interfaces/comments';
 
 import { commentSchema } from './commentSchema';
 
-const CommentInput = () => {
+const ChangeComment = () => {
   const dispatch = useAppDispatch();
-  const commentText = useAppSelector(state => state.comments.inputText);
+  const commentText = useAppSelector(state => state.comments.inputTextForEdit);
+  const isLoading = useAppSelector(state => state.comments.isLoadingDelete);
   const error = useAppSelector(state => state.comments.error);
 
   const { register, handleSubmit, setValue, formState: { errors } } = useForm({
@@ -30,11 +31,11 @@ const CommentInput = () => {
   const hasInputError = inputError !== undefined;
 
   const onChangeCommentText = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setInputText(event.target.value));
+    dispatch(setInputTextForEdit(event.target.value));
   };
 
   const onSubmit: SubmitHandler<CommentData> = (data: CommentData) => {
-    dispatch(addCommentRequested(data));
+    dispatch(editCommentRequested(data));
   };
 
   return (
@@ -43,24 +44,26 @@ const CommentInput = () => {
       component="form"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <TextField
-        placeholder='Create comment'
-        fullWidth
-        value={commentText}
-        {...register('text')}
-        onChange={onChangeCommentText}
-        error={!!hasInputError}
-        helperText={inputError}
-      />
-      <LoadingButton
-        type="submit"
-        variant="contained"
-        color={error !== null ? 'error' : 'primary'}
-      >
-        {error ?? 'create'}
-      </LoadingButton>
+      <Stack direction="row">
+        <TextField
+          placeholder={inputError ?? 'Type new message for comment'}
+          fullWidth
+          value={commentText}
+          {...register('text')}
+          onChange={onChangeCommentText}
+          error={!!hasInputError}
+        />
+        <LoadingButton
+          type="submit"
+          variant="contained"
+          loading={isLoading}
+          color={error !== null ? 'error' : 'primary'}
+        >
+          {error ?? 'save'}
+        </LoadingButton>
+      </Stack>
     </FormControl>
   );
 };
 
-export default CommentInput;
+export default ChangeComment;
