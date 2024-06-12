@@ -7,6 +7,7 @@ import verifySaga from './authSaga.ts';
 import addPostSaga from './addPostSaga.ts';
 import editPostSaga from './editPostSaga.ts';
 import commentsSaga from './commentsSaga.ts';
+import addCommentSaga from './addCommentSaga.ts';
 import deletePostSaga from './deletePostSaga.ts';
 import editProfileSaga from './editProfileSaga.ts';
 
@@ -19,6 +20,7 @@ function * rootSaga () {
     addPostSaga(),
     editPostSaga(),
     commentsSaga(),
+    addCommentSaga(),
     deletePostSaga(),
     editProfileSaga()
   ]);

@@ -12,12 +12,18 @@ export interface Comment {
 
 export interface CommentAction {
   type: string
-  payload?: Comment[]
+  payload?: Comment[] | Comment | CommentData | string
   error?: string
 }
 
 export interface CommentState {
   isLoading: boolean
+  isLoadingModal: boolean
   error: string | null
   comments: Comment[]
+  inputText: string
+}
+
+export interface CommentData {
+  text: string
 }

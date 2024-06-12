@@ -1,10 +1,10 @@
-import { Box, List, Stack, TextField } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+import { Box, List } from '@mui/material';
 import { useEffect } from 'react';
 
-import { commentsRequest } from '../../redux/actions/comments';
+import { commentsRequested } from '../../redux/actions/comments';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { EMPTY_COMMENTS } from '../../constants';
+import CommentInput from '../CommentInput';
 import Comment from '../Comment/Comment';
 import Loader from '../Loader';
 import Notify from '../Notify';
@@ -14,19 +14,20 @@ import classes from './CommentsList.module.scss';
 const CommentsList = () => {
   const dispatch = useAppDispatch();
 
-  const currentUserId = useAppSelector(state => state.currentUser.user?.id ?? -1);
+  const currentUserId = useAppSelector(state => state.auth.authUser?.id);
   const isLoading = useAppSelector(state => state.comments.isLoading);
   const comments = useAppSelector(state => state.comments.comments);
   const isNotEmpty = comments.length > 0;
 
   useEffect(() => {
-    dispatch(commentsRequest());
+    dispatch(commentsRequested());
   }, []);
 
   if (isLoading) return <Loader />;
 
   return (
     <Box className={classes.list}>
+      <CommentInput />
       <List>
         {isNotEmpty
           ? comments.map((comment) => {
@@ -43,19 +44,6 @@ const CommentsList = () => {
           })
           : <Notify info={EMPTY_COMMENTS} status={'info'} />}
       </List>
-      <Stack>
-        <TextField
-          placeholder='Create comment'
-          fullWidth
-          multiline
-          maxRows={4}
-        />
-        <LoadingButton
-          variant="contained"
-        >
-          create
-        </LoadingButton>
-      </Stack>
     </Box>
   );
 };

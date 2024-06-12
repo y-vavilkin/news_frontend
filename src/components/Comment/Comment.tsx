@@ -20,6 +20,7 @@ const Comment = ({ text, user, updatedAt, isVisibleActions }: CommentProps) => {
   return (
     <ListItem className={classes.comment}>
       <Stack className={classes.content}>
+        <Divider sx={{ m: 1 }} />
         <Stack className={classes.container} direction="row">
           <ListItemAvatar>
             <Avatar
@@ -49,7 +50,6 @@ const Comment = ({ text, user, updatedAt, isVisibleActions }: CommentProps) => {
             </LoadingButton>
           </>)}
         </Stack>
-        <Divider sx={{ m: 1 }} />
       </Stack>
     </ListItem>
   );

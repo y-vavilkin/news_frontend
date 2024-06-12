@@ -1,8 +1,8 @@
-import { Comment, CommentAction } from '../../interfaces/comments';
+import { Comment, CommentAction, CommentData } from '../../interfaces/comments';
 
 import * as actionTypes from './actionTypes/comments';
 
-export const commentsRequest = (): CommentAction => ({
+export const commentsRequested = (): CommentAction => ({
   type: actionTypes.COMMENTS_REQUESTED
 });
 
@@ -13,5 +13,25 @@ export const commentsFailed = (error: string): CommentAction => ({
 
 export const commentsReseived = (payload: Comment[]): CommentAction => ({
   type: actionTypes.COMMENTS_RECEIVED,
+  payload
+});
+
+export const addCommentRequested = (payload: CommentData): CommentAction => ({
+  type: actionTypes.ADD_COMMENT_REQUESTED,
+  payload
+});
+
+export const addCommentReceived = (payload: Comment): CommentAction => ({
+  type: actionTypes.ADD_COMMENT_RECEIVED,
+  payload
+});
+
+export const addCommentFailed = (error: string): CommentAction => ({
+  type: actionTypes.ADD_COMMENT_FAILED,
+  error
+});
+
+export const setInputText = (payload: string): CommentAction => ({
+  type: actionTypes.SET_INPUT_TEXT,
   payload
 });
