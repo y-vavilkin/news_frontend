@@ -23,7 +23,13 @@ const CommentsList = () => {
     dispatch(commentsRequested());
   }, []);
 
-  if (isLoading) return <Loader />;
+  if (isLoading) {
+    return (
+      <Box className={classes.list}>
+        <Loader />
+      </Box>
+    );
+  }
 
   return (
     <Box className={classes.list}>

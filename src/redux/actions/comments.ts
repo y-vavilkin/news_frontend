@@ -35,3 +35,22 @@ export const setInputText = (payload: string): CommentAction => ({
   type: actionTypes.SET_INPUT_TEXT,
   payload
 });
+
+export const deleteCommentRequested = (payload: number): CommentAction => ({
+  type: actionTypes.DELETE_COOMENT_REQUESTED,
+  payload
+});
+
+export const deleteCommentReceived = (): CommentAction => ({
+  type: actionTypes.DELETE_COOMENT_RECEIVED
+});
+
+export const deleteCommentFailed = (error: string): CommentAction => ({
+  type: actionTypes.DELETE_COOMENT_FAILED,
+  error
+});
+
+export const setCommentId = (payload: number): CommentAction => ({
+  type: actionTypes.SET_COMMENT_ID,
+  payload
+});

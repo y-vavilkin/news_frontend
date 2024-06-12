@@ -2,7 +2,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { FormControl, TextField } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoadingButton } from '@mui/lab';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 
 import { addCommentRequested, setInputText } from '../../redux/actions/comments';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -15,9 +15,16 @@ const InputText = () => {
   const commentText = useAppSelector(state => state.comments.inputText);
   const error = useAppSelector(state => state.comments.error);
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(commentSchema)
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm({
+    resolver: yupResolver(commentSchema),
+    defaultValues: {
+      text: commentText
+    }
   });
+
+  useEffect(() => {
+    setValue('text', commentText);
+  }, [commentText]);
 
   const inputError = errors.text?.message;
   const hasInputError = inputError !== undefined;
@@ -39,8 +46,6 @@ const InputText = () => {
       <TextField
         placeholder='Create comment'
         fullWidth
-        multiline
-        maxRows={3}
         value={commentText}
         {...register('text')}
         onChange={onChangeCommentText}

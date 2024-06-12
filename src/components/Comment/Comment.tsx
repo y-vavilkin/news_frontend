@@ -1,10 +1,23 @@
-import { Avatar, Divider, ListItem, ListItemAvatar, Stack, Typography } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Edit } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import { memo } from 'react';
+import {
+  Avatar,
+  Divider,
+  IconButton,
+  ListItem,
+  ListItemAvatar,
+  Stack,
+  Typography
+} from '@mui/material';
 
 import { changeFormatDate, getImageUrlWithBase } from '../../helpers';
+import { deleteCommentRequested, setCommentId } from '../../redux/actions/comments';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { User } from '../../interfaces/user';
 import { USER } from '../../constants';
+import Loader from '../Loader';
 
 import classes from './Comment.module.scss';
 
@@ -16,7 +29,20 @@ export interface CommentProps {
   isVisibleActions: boolean
 }
 
-const Comment = ({ text, user, updatedAt, isVisibleActions }: CommentProps) => {
+const Comment = ({ id, text, user, updatedAt, isVisibleActions }: CommentProps) => {
+  const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(state => state.comments.isLoadingDelete);
+  const commentId = useAppSelector(state => state.comments.commentId);
+
+  const isCurrentComment = commentId === id;
+
+  const handleDeleteComment = () => {
+    dispatch(setCommentId(id));
+    dispatch(deleteCommentRequested(id));
+  };
+
+  if (isLoading && isCurrentComment) return <Loader />;
+
   return (
     <ListItem className={classes.comment}>
       <Stack className={classes.content}>
@@ -39,20 +65,20 @@ const Comment = ({ text, user, updatedAt, isVisibleActions }: CommentProps) => {
           </Stack>
         </Stack>
         <Typography className={classes.text}>{text}</Typography>
-        <Typography className={classes.text}>{changeFormatDate(updatedAt)}</Typography>
-        <Stack direction="row">
+        <Stack direction="row" className={classes.actions}>
           {isVisibleActions && (<>
-            <LoadingButton variant="contained">
-              edit
-            </LoadingButton>
-            <LoadingButton variant="contained">
-              delete
-            </LoadingButton>
+            <IconButton onClick={handleDeleteComment}>
+              <DeleteIcon />
+            </IconButton>
+            <IconButton>
+              <Edit />
+            </IconButton>
           </>)}
+          <Typography className={classes.text}>{changeFormatDate(updatedAt)}</Typography>
         </Stack>
       </Stack>
     </ListItem>
   );
 };
 
-export default Comment;
+export default memo(Comment);

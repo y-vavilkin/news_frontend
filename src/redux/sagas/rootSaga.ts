@@ -10,6 +10,7 @@ import commentsSaga from './commentsSaga.ts';
 import addCommentSaga from './addCommentSaga.ts';
 import deletePostSaga from './deletePostSaga.ts';
 import editProfileSaga from './editProfileSaga.ts';
+import deleteCommentSaga from './deleteCommentSaga.ts';
 
 function * rootSaga () {
   yield all([
@@ -22,7 +23,8 @@ function * rootSaga () {
     commentsSaga(),
     addCommentSaga(),
     deletePostSaga(),
-    editProfileSaga()
+    editProfileSaga(),
+    deleteCommentSaga()
   ]);
 }
 

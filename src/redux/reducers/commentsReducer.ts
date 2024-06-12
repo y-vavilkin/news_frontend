@@ -3,10 +3,11 @@ import * as actionTypes from '../actions/actionTypes/comments';
 
 const initialState: CommentState = {
   isLoading: false,
-  isLoadingModal: false,
+  isLoadingDelete: false,
   error: null,
   comments: [],
-  inputText: ''
+  inputText: '',
+  commentId: -1
 };
 
 const commentsReducer = (
@@ -34,24 +35,46 @@ const commentsReducer = (
     case actionTypes.ADD_COMMENT_REQUESTED:
       return {
         ...state,
-        isLoadingModal: true
+        isLoading: true
       };
     case actionTypes.ADD_COMMENT_RECEIVED:
       return {
         ...state,
-        isLoadingModal: false,
+        isLoading: false,
         comments: [action.payload as Comment, ...state.comments]
       };
     case actionTypes.ADD_COMMENT_FAILED:
       return {
         ...state,
-        isLoadingModal: false,
+        isLoading: false,
         error: action.error ?? null
       };
     case actionTypes.SET_INPUT_TEXT:
       return {
         ...state,
         inputText: typeof action.payload === 'string' ? action.payload : ''
+      };
+    case actionTypes.DELETE_COOMENT_REQUESTED:
+      return {
+        ...state,
+        isLoadingDelete: true
+      };
+    case actionTypes.DELETE_COOMENT_RECEIVED:
+      return {
+        ...state,
+        isLoadingDelete: false,
+        comments: state.comments.filter(comment => comment.id !== state.commentId)
+      };
+    case actionTypes.DELETE_COOMENT_FAILED:
+      return {
+        ...state,
+        isLoadingDelete: false,
+        error: action.error ?? null
+      };
+    case actionTypes.SET_COMMENT_ID:
+      return {
+        ...state,
+        commentId: typeof action.payload === 'number' ? action.payload : -1
       };
     default:
       return state;
