@@ -3,7 +3,7 @@ import { FormControl, TextField } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoadingButton } from '@mui/lab';
 
-import { CREATE, ERROR, NEW_COMMENT, PRIMARY } from '../../constants';
+import { CREATE, EMPTY_TEXT, ERROR, NEW_COMMENT, PRIMARY } from '../../constants';
 import { addCommentRequested } from '../../redux/actions/comments';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { CommentData } from '../../interfaces/comments';
@@ -22,11 +22,10 @@ const CommentInput = () => {
   });
 
   const inputError = errors.text?.message;
-  const hasInputError = inputError !== undefined;
 
   const onSubmit: SubmitHandler<CommentData> = (data: CommentData) => {
     dispatch(addCommentRequested(data));
-    setValue('text', '');
+    setValue('text', EMPTY_TEXT);
   };
 
   return (
@@ -39,7 +38,7 @@ const CommentInput = () => {
         placeholder={inputError ?? NEW_COMMENT}
         fullWidth
         {...register('text')}
-        error={!!hasInputError}
+        error={!!inputError}
       />
       <LoadingButton
         type="submit"

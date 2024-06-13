@@ -10,7 +10,7 @@ import editComment from '../api/editComment';
 import {
   editCommentReceived,
   editCommentFailed,
-  setCommentId
+  setFetchCommentId
 } from '../actions/comments';
 
 function * editCommentWorker ({ payload }: CommentAction) {
@@ -21,7 +21,7 @@ function * editCommentWorker ({ payload }: CommentAction) {
       payload as CommentData,
       commentId
     );
-    yield put(setCommentId(-1));
+    yield put(setFetchCommentId(null));
     yield put(editCommentReceived(data));
   } catch (error: unknown) {
     const currentError: string = getError(error);

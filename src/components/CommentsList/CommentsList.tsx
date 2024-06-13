@@ -39,18 +39,16 @@ const CommentsList = () => {
       <CommentInput />
       <List>
         {isNotEmpty
-          ? comments.map((comment) => {
-            return (
-              <Comment
-                key={comment.id}
-                id={comment.id}
-                text={comment.text}
-                updatedAt={comment.updatedAt}
-                user={comment.user}
-                isVisibleActions={currentUserId === comment.user.id}
-              />
-            );
-          })
+          ? comments.map((comment) =>
+            <Comment
+              key={comment.id}
+              id={comment.id}
+              text={comment.text}
+              updatedAt={comment.updatedAt}
+              user={comment.user}
+              isVisibleActions={currentUserId === comment.user.id}
+            />
+          )
           : <Notify info={EMPTY_COMMENTS} status={INFO} />}
       </List>
     </Box>

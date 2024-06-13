@@ -12,7 +12,7 @@ import {
   Typography
 } from '@mui/material';
 
-import { deleteCommentRequested, setCommentId } from '../../redux/actions/comments';
+import { deleteCommentRequested, setFetchCommentId } from '../../redux/actions/comments';
 import { changeFormatDate, getImageUrlWithBase } from '../../helpers';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { closeModal } from '../../redux/actions/modal';
@@ -34,18 +34,17 @@ export interface CommentProps {
 const Comment = ({ id, text, user, updatedAt, isVisibleActions }: CommentProps) => {
   const dispatch = useAppDispatch();
   const [visibility, setVisibility] = useState(false);
+  const [isActive, setIsActive] = useState<boolean>(false);
   const isLoading = useAppSelector(state => state.comments.isLoadingComment);
-  const commentId = useAppSelector(state => state.comments.commentId);
-
-  const isCurrentComment = commentId === id;
 
   const handleDeleteComment = () => {
-    dispatch(setCommentId(id));
+    dispatch(setFetchCommentId(id));
     dispatch(deleteCommentRequested(id));
   };
 
   const handleEditComment = () => {
-    dispatch(setCommentId(id));
+    setIsActive(true);
+    dispatch(setFetchCommentId(id));
     setVisibility(!visibility);
   };
 
@@ -53,7 +52,7 @@ const Comment = ({ id, text, user, updatedAt, isVisibleActions }: CommentProps) 
     dispatch(closeModal());
   };
 
-  if (isLoading && isCurrentComment) return <Loader />;
+  if (isLoading && isActive) return <Loader />;
 
   return (
     <ListItem className={classes.comment}>
@@ -77,11 +76,11 @@ const Comment = ({ id, text, user, updatedAt, isVisibleActions }: CommentProps) 
             </Link>
           </Stack>
         </Stack>
-        <Typography className={classes.text}>
-          {isVisibleActions && visibility
-            ? <ChangeComment changeVisibility={setVisibility} />
-            : text}
-        </Typography>
+        {isVisibleActions && visibility
+          ? <ChangeComment changeVisibility={setVisibility} />
+          : <Typography className={classes.text}>
+            {text}
+          </Typography>}
         <Stack direction="row" className={classes.actions}>
           {isVisibleActions &&
             (<Stack direction="row">

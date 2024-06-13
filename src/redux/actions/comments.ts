@@ -45,7 +45,7 @@ export const deleteCommentFailed = (error: string): CommentAction => ({
   error
 });
 
-export const setCommentId = (payload: number): CommentAction => ({
+export const setFetchCommentId = (payload: number | null): CommentAction => ({
   type: actionTypes.SET_COMMENT_ID,
   payload
 });

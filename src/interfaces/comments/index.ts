@@ -12,7 +12,7 @@ export interface Comment {
 
 export interface CommentAction {
   type: string
-  payload?: Comment[] | Comment | CommentData | string | number
+  payload?: Comment[] | Comment | CommentData | string | number | null
   error?: string
 }
 

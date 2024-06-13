@@ -28,7 +28,6 @@ const ChangeComment = ({ changeVisibility }: ChangeCommentProps) => {
   });
 
   const inputError = errors.text?.message;
-  const hasInputError = inputError !== undefined;
 
   const onSubmit: SubmitHandler<CommentData> = (data: CommentData) => {
     dispatch(editCommentRequested(data));
@@ -46,7 +45,7 @@ const ChangeComment = ({ changeVisibility }: ChangeCommentProps) => {
           placeholder={inputError ?? NEW_COMMENT}
           fullWidth
           {...register('text')}
-          error={!!hasInputError}
+          error={!!inputError}
         />
         <LoadingButton
           type="submit"
