@@ -1,13 +1,13 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
-import { GLOBAL_ERROR } from '../../constants/errors';
 import { usePostId } from '../../hooks/redux-hooks';
 import { Comment } from '../../interfaces/comments';
 import { changeError } from '../../helpers';
 import { commentsFailed, commentsReseived } from '../actions/comments';
 import * as actionTypes from '../actions/actionTypes/comments';
 import getComments from '../api/getComments';
+import getError from '../../helpers/getError';
 
 function * commentsWorker () {
   try {
@@ -15,7 +15,7 @@ function * commentsWorker () {
     const { data }: AxiosResponse<Comment[]> = yield call(getComments, postId);
     yield put(commentsReseived(data));
   } catch (error: unknown) {
-    const currentError: string = error instanceof AxiosError ? error.message : GLOBAL_ERROR;
+    const currentError: string = getError(error);
     yield put(commentsFailed(changeError(currentError)));
   }
 }

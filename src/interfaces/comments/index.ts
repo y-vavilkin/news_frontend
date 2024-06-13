@@ -21,9 +21,6 @@ export interface CommentState {
   isLoadingComment: boolean
   error: string | null
   comments: Comment[]
-  inputTextForCreate: string
-  inputTextForEdit: string
-  editInput: boolean
   commentId: number
 }
 

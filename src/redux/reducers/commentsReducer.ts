@@ -6,9 +6,6 @@ const initialState: CommentState = {
   isLoadingComment: false,
   error: null,
   comments: [],
-  inputTextForCreate: '',
-  inputTextForEdit: '',
-  editInput: false,
   commentId: -1
 };
 
@@ -55,11 +52,6 @@ const commentsReducer = (
         isLoadingComment: false,
         error: action.error ?? null
       };
-    case actionTypes.SET_INPUT_TEXT_FOR_CREATE:
-      return {
-        ...state,
-        inputTextForCreate: typeof action.payload === 'string' ? action.payload : ''
-      };
     case actionTypes.DELETE_COOMENT_RECEIVED:
       return {
         ...state,
@@ -80,16 +72,6 @@ const commentsReducer = (
             ? { ...comment, ...action.payload as Comment }
             : comment
         )
-      };
-    case actionTypes.TOGGLE_EDIT_INPUT:
-      return {
-        ...state,
-        editInput: !state.editInput
-      };
-    case actionTypes.SET_INPUT_TEXT_FOR_EDIT:
-      return {
-        ...state,
-        inputTextForEdit: typeof action.payload === 'string' ? action.payload : ''
       };
     default:
       return state;

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import { commentsRequested } from '../../redux/actions/comments';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { EMPTY_COMMENTS } from '../../constants';
+import { EMPTY_COMMENTS, INFO } from '../../constants';
 import CommentInput from '../CommentInput';
 import Comment from '../Comment/Comment';
 import Loader from '../Loader';
@@ -51,7 +51,7 @@ const CommentsList = () => {
               />
             );
           })
-          : <Notify info={EMPTY_COMMENTS} status={'info'} />}
+          : <Notify info={EMPTY_COMMENTS} status={INFO} />}
       </List>
     </Box>
   );

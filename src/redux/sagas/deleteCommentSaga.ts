@@ -1,8 +1,7 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { AxiosError } from 'axios';
 
 import { CommentAction } from '../../interfaces/comments';
-import { GLOBAL_ERROR } from '../../constants/errors';
+import getError from '../../helpers/getError';
 import { changeError } from '../../helpers';
 import { deleteCommentFailed, deleteCommentReceived } from '../actions/comments';
 import * as actionTypes from '../actions/actionTypes/comments';
@@ -13,7 +12,7 @@ function * deleteCommentWorker ({ payload }: CommentAction) {
     yield call(deleteComment, payload as number);
     yield put(deleteCommentReceived());
   } catch (error: unknown) {
-    const currentError: string = error instanceof AxiosError ? error.message : GLOBAL_ERROR;
+    const currentError: string = getError(error);
     yield put(deleteCommentFailed(changeError(currentError)));
   }
 }

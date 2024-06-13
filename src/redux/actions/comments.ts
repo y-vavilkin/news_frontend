@@ -31,11 +31,6 @@ export const addCommentFailed = (error: string): CommentAction => ({
   error
 });
 
-export const setInputText = (payload: string): CommentAction => ({
-  type: actionTypes.SET_INPUT_TEXT_FOR_CREATE,
-  payload
-});
-
 export const deleteCommentRequested = (payload: number): CommentAction => ({
   type: actionTypes.DELETE_COOMENT_REQUESTED,
   payload
@@ -68,13 +63,4 @@ export const editCommentReceived = (payload: Comment): CommentAction => ({
 export const editCommentFailed = (error: string): CommentAction => ({
   type: actionTypes.EDIT_COMMENT_FAILED,
   error
-});
-
-export const toggleEditInput = (): CommentAction => ({
-  type: actionTypes.TOGGLE_EDIT_INPUT
-});
-
-export const setInputTextForEdit = (payload: string): CommentAction => ({
-  type: actionTypes.SET_INPUT_TEXT_FOR_EDIT,
-  payload
 });

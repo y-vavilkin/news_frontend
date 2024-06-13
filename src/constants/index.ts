@@ -12,3 +12,7 @@ export const CARD = 'CARD';
 
 export const TIME_REDIRECT = 3000;
 export const COUNT_POSTS = 3;
+
+export const ERROR = 'error';
+export const PRIMARY = 'primary';
+export const INFO = 'info';

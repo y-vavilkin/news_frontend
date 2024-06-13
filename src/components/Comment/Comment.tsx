@@ -1,7 +1,7 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Edit } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import {
   Avatar,
   Divider,
@@ -12,15 +12,12 @@ import {
   Typography
 } from '@mui/material';
 
+import { deleteCommentRequested, setCommentId } from '../../redux/actions/comments';
 import { changeFormatDate, getImageUrlWithBase } from '../../helpers';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import { closeModal } from '../../redux/actions/modal';
 import { User } from '../../interfaces/user';
 import { USER } from '../../constants';
-import {
-  deleteCommentRequested,
-  setCommentId,
-  toggleEditInput
-} from '../../redux/actions/comments';
 import ChangeComment from '../ChangeComment';
 import Loader from '../Loader';
 
@@ -29,16 +26,16 @@ import classes from './Comment.module.scss';
 export interface CommentProps {
   id: number
   text: string
-  updatedAt: string
   user: User
+  updatedAt: string
   isVisibleActions: boolean
 }
 
 const Comment = ({ id, text, user, updatedAt, isVisibleActions }: CommentProps) => {
   const dispatch = useAppDispatch();
+  const [visibility, setVisibility] = useState(false);
   const isLoading = useAppSelector(state => state.comments.isLoadingComment);
   const commentId = useAppSelector(state => state.comments.commentId);
-  const visibility = useAppSelector(state => state.comments.editInput);
 
   const isCurrentComment = commentId === id;
 
@@ -49,7 +46,11 @@ const Comment = ({ id, text, user, updatedAt, isVisibleActions }: CommentProps) 
 
   const handleEditComment = () => {
     dispatch(setCommentId(id));
-    dispatch(toggleEditInput());
+    setVisibility(!visibility);
+  };
+
+  const handleCloseModal = () => {
+    dispatch(closeModal());
   };
 
   if (isLoading && isCurrentComment) return <Loader />;
@@ -68,19 +69,19 @@ const Comment = ({ id, text, user, updatedAt, isVisibleActions }: CommentProps) 
             />
           </ListItemAvatar>
           <Stack className={classes.userInfo}>
-            <Link className={classes.link} to={`users/${user.id}`}>
+            <Link className={classes.link} to={`users/${user.id}`} onClick={handleCloseModal}>
               <Typography className={classes.text}>{user.login}</Typography>
             </Link>
-            <Link className={classes.link} to={`users/${user.id}`}>
+            <Link className={classes.link} to={`users/${user.id}`} onClick={handleCloseModal}>
               <Typography className={classes.text}>{user.email}</Typography>
             </Link>
           </Stack>
         </Stack>
-        {isVisibleActions && isCurrentComment
-          ? (visibility
-            ? <ChangeComment />
-            : <Typography className={classes.text}>{text}</Typography>)
-          : <Typography className={classes.text}>{text}</Typography>}
+        <Typography className={classes.text}>
+          {isVisibleActions && visibility
+            ? <ChangeComment changeVisibility={setVisibility} />
+            : text}
+        </Typography>
         <Stack direction="row" className={classes.actions}>
           {isVisibleActions &&
             (<Stack direction="row">
