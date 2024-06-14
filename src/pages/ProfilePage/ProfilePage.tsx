@@ -78,6 +78,7 @@ const ProfilePage = () => {
             login={dataUser.login}
             email={dataUser.email}
             avatarUrl={dataUser.avatarUrl}
+            role={dataUser.role}
           />
           {isNotEmpty
             ? <PostsList postsData={filteredPosts} />

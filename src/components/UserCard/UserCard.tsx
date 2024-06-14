@@ -16,9 +16,10 @@ interface UserCardProps {
   login: string
   email: string
   avatarUrl: string | null
+  role: string
 }
 
-const UserCard = ({ id, login, email, avatarUrl }: UserCardProps) => {
+const UserCard = ({ id, login, email, avatarUrl, role }: UserCardProps) => {
   const dispatch = useAppDispatch();
   const userId = useAppSelector(state => state.auth.authUser?.id);
 
@@ -40,6 +41,7 @@ const UserCard = ({ id, login, email, avatarUrl }: UserCardProps) => {
         sx={{ width: 60, height: 60 }}
       />
       <Stack className={classes.information}>
+        <p>Role: {role.toUpperCase()}</p>
         <p>Login: {login}</p>
         <p>Email: {email}</p>
       </Stack>
