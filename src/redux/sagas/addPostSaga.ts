@@ -1,9 +1,9 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
 import { PostRequest, UserAction } from '../../interfaces/user';
-import { GLOBAL_ERROR } from '../../constants/errors';
 import { Post } from '../../interfaces/posts';
+import getError from '../../helpers/getError';
 import { changeError } from '../../helpers';
 import { addPostFailed, addPostReceived } from '../actions/user';
 import * as actionTypes from '../actions/actionTypes/user';
@@ -16,7 +16,7 @@ function * addPostWorker ({ payload }: UserAction) {
     yield put(addPostReceived(data));
     yield put(closeModal());
   } catch (error: unknown) {
-    const currentError: string = error instanceof AxiosError ? error.message : GLOBAL_ERROR;
+    const currentError: string = getError(error);
     yield put(addPostFailed(changeError(currentError)));
   }
 }

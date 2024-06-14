@@ -1,13 +1,13 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 
 import { PostRequest, UserAction } from '../../interfaces/user';
-import { GLOBAL_ERROR } from '../../constants/errors';
 import { usePostId } from '../../hooks/redux-hooks';
 import { Post } from '../../interfaces/posts';
 import { changeError } from '../../helpers';
 import { editPostFailed, editPostReceived, setIdPost } from '../actions/user';
 import * as actionTypes from '../actions/actionTypes/user';
+import getError from '../../helpers/getError';
 import { closeModal } from '../actions/modal';
 import editPost from '../api/editPost';
 
@@ -19,7 +19,7 @@ function * editPostWorker ({ payload }: UserAction) {
     yield put(setIdPost(-1));
     yield put(closeModal());
   } catch (error: unknown) {
-    const currentError: string = error instanceof AxiosError ? error.message : GLOBAL_ERROR;
+    const currentError: string = getError(error);
     yield put(editPostFailed(changeError(currentError)));
   }
 }
