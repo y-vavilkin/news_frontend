@@ -5,6 +5,7 @@ export interface AuthUser {
   avatarUrl: string | null
   createdAt: string
   updatedAt: string
+  role: string
 }
 
 export interface AuthFormData {

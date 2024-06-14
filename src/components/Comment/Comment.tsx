@@ -17,7 +17,7 @@ import { changeFormatDate, getImageUrlWithBase } from '../../helpers';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { closeModal } from '../../redux/actions/modal';
 import { User } from '../../interfaces/user';
-import { USER } from '../../constants';
+import { ADMIN, USER } from '../../constants';
 import ChangeComment from '../ChangeComment';
 import Loader from '../Loader';
 
@@ -34,9 +34,13 @@ export interface CommentProps {
 const Comment = ({ id, text, user, updatedAt, isVisibleActions }: CommentProps) => {
   const dispatch = useAppDispatch();
   const refCommentItem = useRef<HTMLLIElement | null>(null);
-  const [visibility, setVisibility] = useState(false);
+  const [visibility, setVisibility] = useState<boolean>(false);
   const [isActive, setIsActive] = useState<boolean>(false);
+
   const isLoading = useAppSelector(state => state.comments.isLoadingComment);
+  const role = useAppSelector(state => state.auth.authUser?.role);
+
+  const isAdmin = role === ADMIN;
 
   const handleDeleteComment = () => {
     dispatch(setFetchCommentId(id));
@@ -92,7 +96,7 @@ const Comment = ({ id, text, user, updatedAt, isVisibleActions }: CommentProps) 
             {text}
           </Typography>}
         <Stack direction="row" className={classes.actions}>
-          {isVisibleActions &&
+          {(isVisibleActions) &&
             (<Stack direction="row">
               <IconButton onClick={handleDeleteComment}>
                 <DeleteIcon />
@@ -101,6 +105,10 @@ const Comment = ({ id, text, user, updatedAt, isVisibleActions }: CommentProps) 
                 <Edit />
               </IconButton>
             </Stack>)}
+          {(!isVisibleActions && isAdmin) && (
+            <IconButton onClick={handleDeleteComment} color="error">
+              <DeleteIcon />
+            </IconButton>)}
           <Typography className={classes.text}>{changeFormatDate(updatedAt)}</Typography>
         </Stack>
       </Stack>

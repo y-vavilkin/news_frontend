@@ -9,6 +9,7 @@ export interface User {
   createdAt: string
   updatedAt: string
   posts: Post[]
+  role: string
 }
 
 export interface UserAction {

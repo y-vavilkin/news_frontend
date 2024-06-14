@@ -4,14 +4,14 @@ import { Delete } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import { memo } from 'react';
 
+import { deletePostRequested, setIdPost } from '../../redux/actions/user';
 import { changeFormatDate, getImageUrlWithBase } from '../../helpers';
 import { User as UserDescription } from '../../interfaces/user';
 import { Tag as TagDescription } from '../../interfaces/posts';
-import { deletePostRequested, setIdPost } from '../../redux/actions/user';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { openModal } from '../../redux/actions/modal';
 import { TypeModal } from '../../interfaces/modal';
-import { CARD } from '../../constants';
+import { ADMIN, CARD } from '../../constants';
 import User from '../User';
 import Tag from '../Tag';
 
@@ -45,9 +45,11 @@ const PostCard = ({
   const isLoading = useAppSelector(state => state.currentUser.isLoadingPost);
   const userId = useAppSelector(state => state.auth.authUser?.id);
   const isAuth = useAppSelector(state => state.auth.isOnline);
+  const role = useAppSelector(state => state.auth.authUser?.role);
 
   const isMainPagePath = location.pathname === '/';
   const isUserProfile = userId === Number(userUrlId);
+  const isAdmin = role === ADMIN;
 
   const handleDeletePost = () => {
     dispatch(deletePostRequested(Number(id)));
@@ -94,10 +96,11 @@ const PostCard = ({
               edit
             </Button>
           )}
-          {isUserProfile && (
+          {(isUserProfile || (!isMainPagePath && isAdmin)) && (
             <LoadingButton
               onClick={handleDeletePost}
               variant="contained"
+              color={isAdmin ? 'error' : 'primary'}
               loading={isLoading && postId === id}
             >
               <Delete />

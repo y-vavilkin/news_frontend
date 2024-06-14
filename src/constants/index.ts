@@ -17,3 +17,5 @@ export const COUNT_POSTS = 3;
 export const PRIMARY = 'primary';
 export const ERROR = 'error';
 export const INFO = 'info';
+
+export const ADMIN = 'admin';
