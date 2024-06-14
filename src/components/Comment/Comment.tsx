@@ -1,7 +1,7 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Edit } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-import { memo, useState } from 'react';
+import { memo, useRef, useState } from 'react';
 import {
   Avatar,
   Divider,
@@ -33,6 +33,7 @@ export interface CommentProps {
 
 const Comment = ({ id, text, user, updatedAt, isVisibleActions }: CommentProps) => {
   const dispatch = useAppDispatch();
+  const refCommentItem = useRef<HTMLLIElement | null>(null);
   const [visibility, setVisibility] = useState(false);
   const [isActive, setIsActive] = useState<boolean>(false);
   const isLoading = useAppSelector(state => state.comments.isLoadingComment);
@@ -44,8 +45,17 @@ const Comment = ({ id, text, user, updatedAt, isVisibleActions }: CommentProps) 
 
   const handleEditComment = () => {
     setIsActive(true);
-    dispatch(setFetchCommentId(id));
     setVisibility(!visibility);
+    dispatch(setFetchCommentId(id));
+
+    if (refCommentItem.current) {
+      refCommentItem.current.focus();
+    }
+  };
+
+  const resetBlur = () => {
+    setIsActive(false);
+    setVisibility(false);
   };
 
   const handleCloseModal = () => {
@@ -55,7 +65,7 @@ const Comment = ({ id, text, user, updatedAt, isVisibleActions }: CommentProps) 
   if (isLoading && isActive) return <Loader />;
 
   return (
-    <ListItem className={classes.comment}>
+    <ListItem className={classes.comment} ref={refCommentItem} onBlur={resetBlur}>
       <Stack className={classes.content}>
         <Divider sx={{ m: 1 }} />
         <Stack className={classes.container} direction="row">
