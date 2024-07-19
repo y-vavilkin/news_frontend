@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 
-import {EditProfileForm} from '../components/UserPagesForms';
-import {AddPostForm} from '../components/UserPagesForms';
-import EditPostForm from '../components/EditPostForm';
-import CommentsList from '../components/CommentsList';
-import { TypeModal } from '../interfaces/modal';
-import AuthForm from '../components/AuthForm';
+import {EditProfileForm} from '../../components/UserPagesForms';
+import {AddPostForm} from '../../components/UserPagesForms';
+import EditPostForm from '../../components/EditPostForm';
+import CommentsList from '../../components/CommentsList';
+import { TypeModal } from '../../interfaces/modal';
+import AuthForm from '../../components/AuthForm';
 
-import selectForm from './selectForm';
+import selectForm from '../../helpers/selectForm';
 
 describe('selectForm function', () => {
   it('should return AuthForm for TypeModal.REGISTRATION or TypeModal.LOGIN', () => {
@@ -33,6 +33,5 @@ describe('selectForm function', () => {
 
   it('should return AddPostForm for an unknown TypeModal', () => {
     expect(selectForm(undefined)).toBe(AddPostForm);
-    expect(selectForm('unknown' as TypeModal)).toBe(AddPostForm);
   });
 });

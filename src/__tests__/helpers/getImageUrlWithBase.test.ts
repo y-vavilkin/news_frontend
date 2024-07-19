@@ -1,31 +1,31 @@
 import { describe, it, expect } from 'vitest';
 
-import { CARD, USER } from '../constants';
+import { CARD, USER } from '../../constants';
 
-import getImageUrlWithBase from './getImageUrlWithBase';
+import getImageUrlWithBase from '../../helpers/getImageUrlWithBase';
 
 describe('getImageUrlWithBase', () => {
-  it('должна вернуть URL изображения для CARD', () => {
+  it('should return the image URL for CARD', () => {
     const result = getImageUrlWithBase('image.jpg', CARD);
     expect(result).toBe('http://localhost:3000/image.jpg');
   });
 
-  it('должна вернуть placeholder для CARD, если imageUrl null', () => {
+  it('should return placeholder for CARD if imageUrl is null', () => {
     const result = getImageUrlWithBase(null, CARD);
     expect(result).toBe('/placeholderImage.webp');
   });
 
-  it('должна вернуть URL изображения для USER', () => {
+  it('should return the image URL for USER', () => {
     const result = getImageUrlWithBase('avatar.jpg', USER);
     expect(result).toBe('http://localhost:3000/avatar.jpg');
   });
 
-  it('должна вернуть placeholder для USER, если imageUrl null', () => {
+  it('should return placeholder for USER if imageUrl is null', () => {
     const result = getImageUrlWithBase(null, USER);
     expect(result).toBe('/placeholderAvatar.webp');
   });
 
-  it('должна вернуть notFound для неизвестного типа', () => {
+  it('should return notFound for unknown type', () => {
     const result = getImageUrlWithBase('image.jpg', 'UNKNOWN');
     expect(result).toBe('/notFound.webp');
   });

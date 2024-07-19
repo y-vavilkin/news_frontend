@@ -1,14 +1,19 @@
-import { defineConfig } from 'vitest/config';
+import { defineConfig, mergeConfig } from 'vitest/config';
 import dotenv from 'dotenv';
+
+import viteConfig from './vite.config';
 
 // Подтягивает переменные окружения для тестов
 dotenv.config();
 
-export default defineConfig({
-  test: {
-    name: 'helpers',
-    root: './src',
-    globals: true,
-    environment: 'jsdom',
-  },
-});
+export default mergeConfig(
+  viteConfig,
+  defineConfig(
+    {
+      test: {
+        globals: true,
+        environment: 'jsdom',
+      }
+    },
+  ),
+);
