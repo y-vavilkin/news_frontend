@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, test } from 'vitest';
 
 import {EditProfileForm} from '../../components/UserPagesForms';
 import {AddPostForm} from '../../components/UserPagesForms';
@@ -10,28 +10,25 @@ import AuthForm from '../../components/AuthForm';
 import selectForm from '../../helpers/selectForm';
 
 describe('selectForm function', () => {
-  it('should return AuthForm for TypeModal.REGISTRATION or TypeModal.LOGIN', () => {
+  test('should return AuthForm for TypeModal.REGISTRATION or TypeModal.LOGIN', () => {
     expect(selectForm(TypeModal.REGISTRATION)).toBe(AuthForm);
     expect(selectForm(TypeModal.LOGIN)).toBe(AuthForm);
   });
 
-  it('should return AddPostForm for TypeModal.ADD_POST', () => {
+  test('should return AddPostForm for TypeModal.ADD_POST or undefined', () => {
     expect(selectForm(TypeModal.ADD_POST)).toBe(AddPostForm);
+    expect(selectForm(undefined)).toBe(AddPostForm);
   });
 
-  it('should return EditProfileForm for TypeModal.EDIT_PROFILE', () => {
+  test('should return EditProfileForm for TypeModal.EDIT_PROFILE', () => {
     expect(selectForm(TypeModal.EDIT_PROFILE)).toBe(EditProfileForm);
   });
 
-  it('should return EditPostForm for TypeModal.EDIT_POST', () => {
+  test('should return EditPostForm for TypeModal.EDIT_POST', () => {
     expect(selectForm(TypeModal.EDIT_POST)).toBe(EditPostForm);
   });
 
-  it('should return CommentsList for TypeModal.COMMENTS', () => {
+  test('should return CommentsList for TypeModal.COMMENTS', () => {
     expect(selectForm(TypeModal.COMMENTS)).toBe(CommentsList);
-  });
-
-  it('should return AddPostForm for an unknown TypeModal', () => {
-    expect(selectForm(undefined)).toBe(AddPostForm);
   });
 });

@@ -8,8 +8,17 @@ import '@testing-library/jest-dom';
 import { TypeModal } from '../../interfaces/modal';
 import AuthForm from '../../components/AuthForm';
 
+type TMockState = {
+  auth: {
+    error: string | null
+  },
+  modal: {
+    type: TypeModal
+  }
+}
+
 const mockStore = configureStore([]);
-const initialState = {
+const initialState: TMockState = {
   auth: { error: null },
   modal: { type: TypeModal.LOGIN }
 };

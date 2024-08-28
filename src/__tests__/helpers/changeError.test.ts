@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
+import {changeError} from '../../helpers';
 import {
   POST_NOT_HAS_BEEN_DELETED,
   GLOBAL_ERROR,
@@ -11,8 +12,6 @@ import {
   ERROR_404,
   BAD_URL
 } from '../../constants/errors';
-
-import {changeError} from '../../helpers';
 
 describe('changeError', () => {
   test('returns message for GLOBAL_ERROR', () => {

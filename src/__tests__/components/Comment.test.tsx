@@ -6,8 +6,6 @@ import { Provider } from 'react-redux';
 
 import Comment, { CommentProps } from '../../components/Comment/Comment';
 
-
-
 describe('Comment component', () => {
   const mockStore = configureStore([]);
   let store: MockStore;
