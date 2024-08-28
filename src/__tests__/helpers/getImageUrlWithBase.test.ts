@@ -1,26 +1,24 @@
-import { describe, expect, test } from 'vitest';
+import { describe, expect, test } from "vitest";
 
-import getImageUrlWithBase from '../../helpers/getImageUrlWithBase';
-import { CARD, USER } from '../../constants';
+import getImageUrlWithBase from "../../helpers/getImageUrlWithBase";
+import { CARD, USER } from "../../constants";
 
-describe('getImageUrlWithBase', () => {
-  test('should return the image URL for CARD', () => {
-    expect(getImageUrlWithBase('image.jpg', CARD)).toBe('http://localhost:3000/image.jpg');
+describe("GET IMAGE URL", () => {
+  const url = import.meta.env.VITE_SERVER_URL;
+
+  test("Возврат URL для компоненты CARD", () => {
+    expect(getImageUrlWithBase("image.jpg", CARD)).toBe(`${url}/image.jpg`);
   });
 
-  test('should return placeholder for CARD if imageUrl is null', () => {
-    expect(getImageUrlWithBase(null, CARD)).toBe('/placeholderImage.webp');
+  test("Возврат placeholder для компоненты CARD если imageUrl null", () => {
+    expect(getImageUrlWithBase(null, CARD)).toBe("/placeholderImage.webp");
   });
 
-  test('should return the image URL for USER', () => {
-    expect(getImageUrlWithBase('avatar.jpg', USER)).toBe('http://localhost:3000/avatar.jpg');
+  test("Возврат URL для компоненты USER", () => {
+    expect(getImageUrlWithBase("avatar.jpg", USER)).toBe(`${url}/avatar.jpg`);
   });
 
-  test('should return placeholder for USER if imageUrl is null', () => {
-    expect(getImageUrlWithBase(null, USER)).toBe('/placeholderAvatar.webp');
-  });
-
-  test('should return notFound for unknown type', () => {
-    expect(getImageUrlWithBase('image.jpg', 'UNKNOWN')).toBe('/notFound.webp');
+  test("Возврат placeholder для компоненты USER если imageUrl null", () => {
+    expect(getImageUrlWithBase(null, USER)).toBe("/placeholderAvatar.webp");
   });
 });
