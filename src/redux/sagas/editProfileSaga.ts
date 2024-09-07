@@ -10,7 +10,7 @@ import * as actionTypes from '../actions/actionTypes/user';
 import { closeModal } from '../actions/modal';
 import editProfile from '../api/editProfile';
 
-function * editProfileWorker ({ payload }: UserAction) {
+export function * editProfileWorker ({ payload }: UserAction) {
   try {
     const { data }: AxiosResponse<AuthUser> = yield call(
       editProfile,
