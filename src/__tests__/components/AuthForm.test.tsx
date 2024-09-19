@@ -4,16 +4,16 @@ import '@testing-library/jest-dom';
 
 import AuthForm from '../../components/AuthForm';
 
-import { errorState, renderWithProvider } from './const';
+import { errorState, renderAuthForm } from './mocks';
 
 describe('AUTH FORM', () => {
   test('Рендер компоненты AuthForm', () => {
-    renderWithProvider(<AuthForm />);
+    renderAuthForm(<AuthForm />);
     expect(screen.getByText(/login/i)).toBeInTheDocument();
   });
 
   test('Валидация и отправка формы', async () => {
-    const { store } = renderWithProvider(<AuthForm />);
+    const { store } = renderAuthForm(<AuthForm />);
 
     fireEvent.change(screen.getByLabelText(/email/i), {
       target: { value: 'test@example.com' }
@@ -35,7 +35,7 @@ describe('AUTH FORM', () => {
   });
 
   test('Отображение ошибок валидации', async () => {
-    renderWithProvider(<AuthForm />);
+    renderAuthForm(<AuthForm />);
 
     fireEvent.change(screen.getByLabelText(/email/i), {
       target: { value: '' }
@@ -52,7 +52,7 @@ describe('AUTH FORM', () => {
   });
 
   test('Отображение ошибок авторизации', async () => {
-    renderWithProvider(<AuthForm />, errorState);
+    renderAuthForm(<AuthForm />, errorState);
 
     await waitFor(() => {
       expect(screen.getByText(/some error/i)).toBeInTheDocument();

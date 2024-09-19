@@ -9,7 +9,7 @@ import editProfile from '../../api/editProfile.ts';
 
 import { editProfileWorker } from '../editProfileSaga.ts';
 
-import { mockAction, mockError, mockErrorMessage, mockResponse } from './const';
+import { mockAction, mockError, mockErrorMessage, mockResponse } from './mocks';
 
 vi.mock('../../api/editProfile');
 vi.mock('../../../helpers/getError');

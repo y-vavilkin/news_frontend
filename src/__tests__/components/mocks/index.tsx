@@ -1,14 +1,32 @@
-import configureStore, { MockStore } from 'redux-mock-store';
-import { render } from '@testing-library/react';
+import configureStore from 'redux-mock-store';
+import { render, RenderOptions } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import React from 'react';
-
-import { beforeEach } from 'vitest';
 
 import { MemoryRouter } from 'react-router-dom';
 
 import { TypeModal } from '../../../interfaces/modal';
-import Comment, { CommentProps } from '../../../components/Comment/Comment.tsx';
+import { CommentProps } from '../../../components/Comment/Comment.tsx';
+
+export const renderWithProvider = (
+  component: React.ReactNode,
+  initialState: any = {},
+  options?: Omit<RenderOptions, 'wrapper'>
+) => {
+  const mockStore = configureStore([]);
+  const store = mockStore(initialState);
+
+  const Wrapper = ({ children }: { children: React.ReactNode }) => (
+    <Provider store={store}>
+      <MemoryRouter>{children}</MemoryRouter>
+    </Provider>
+  );
+
+  return {
+    ...render(component, { wrapper: Wrapper, ...options }),
+    store
+  };
+};
 
 /*
 *
@@ -24,7 +42,6 @@ interface TMockState {
   }
 }
 
-const mockAuthFormStore = configureStore([]);
 const initialState: TMockState = {
   auth: { error: null },
   modal: { type: TypeModal.LOGIN }
@@ -35,15 +52,8 @@ export const errorState: TMockState = {
   modal: { type: TypeModal.LOGIN }
 };
 
-export const renderWithProvider = (
-  component: React.ReactNode,
-  state = initialState
-) => {
-  const store = mockAuthFormStore(state);
-  return {
-    ...render(<Provider store={store}>{component}</Provider>),
-    store
-  };
+export const renderAuthForm = (component: React.ReactNode, state = initialState) => {
+  return renderWithProvider(component, state);
 };
 
 /*
@@ -51,22 +61,16 @@ export const renderWithProvider = (
 * Comment.tsx
 *
 */
-const mockStoreComment = configureStore([]);
-
-export let storeComment: MockStore;
-
-beforeEach(() => {
-  storeComment = mockStoreComment({
-    comments: {
-      isLoadingComment: false
-    },
-    auth: {
-      authUser: {
-        role: 'ADMIN'
-      }
+export const initialCommentState = {
+  comments: {
+    isLoadingComment: false
+  },
+  auth: {
+    authUser: {
+      role: 'ADMIN'
     }
-  });
-});
+  }
+};
 
 export const mockComment: CommentProps = {
   id: 1,
@@ -85,12 +89,6 @@ export const mockComment: CommentProps = {
   isVisibleActions: true
 };
 
-export const renderComment = () => {
-  return render(
-    <Provider store={storeComment}>
-      <MemoryRouter>
-        <Comment {...mockComment} />
-      </MemoryRouter>
-    </Provider>
-  );
+export const renderComment = (component: React.ReactNode, state = initialCommentState) => {
+  return renderWithProvider(component, state);
 };
