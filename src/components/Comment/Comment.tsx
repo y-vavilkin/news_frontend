@@ -98,7 +98,7 @@ const Comment = ({ id, text, user, updatedAt, isVisibleActions }: CommentProps) 
         <Stack direction="row" className={classes.actions}>
           {(isVisibleActions) &&
             (<Stack direction="row">
-              <IconButton onClick={handleDeleteComment}>
+              <IconButton data-testid='delete-comment' onClick={handleDeleteComment}>
                 <DeleteIcon />
               </IconButton>
               <IconButton onClick={handleEditComment}>
@@ -106,7 +106,7 @@ const Comment = ({ id, text, user, updatedAt, isVisibleActions }: CommentProps) 
               </IconButton>
             </Stack>)}
           {(!isVisibleActions && isAdmin) && (
-            <IconButton onClick={handleDeleteComment} color="error">
+            <IconButton data-testid='delete-comment' onClick={handleDeleteComment} color="error">
               <DeleteIcon />
             </IconButton>)}
           <Typography className={classes.text}>{changeFormatDate(updatedAt)}</Typography>
