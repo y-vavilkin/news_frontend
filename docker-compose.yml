@@ -1,0 +1,33 @@
+name: news
+
+services:
+  frontend:
+    image: news_frontend
+    container_name: news_dev
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - 5173:5173
+    networks:
+      - frontend-network
+
+  nginx:
+    image: news_nginx
+    container_name: news_prod
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - 80:80
+    depends_on:
+      - frontend
+    networks:
+      - frontend-network
+
+networks:
+  frontend-network:
+    driver: bridge
