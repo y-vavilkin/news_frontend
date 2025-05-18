@@ -98,6 +98,7 @@ const PostCard = ({
           )}
           {(isUserProfile || (!isMainPagePath && isAdmin)) && (
             <LoadingButton
+              data-testid="delete-post-button"
               onClick={handleDeletePost}
               variant="contained"
               color={isAdmin ? 'error' : 'primary'}

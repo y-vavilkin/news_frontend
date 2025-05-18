@@ -57,6 +57,7 @@ const AuthForm = () => {
       {!isLogin && (
         <>
           <TextField
+            placeholder="Login"
             type="login"
             label="Login"
             fullWidth
@@ -68,6 +69,7 @@ const AuthForm = () => {
         </>
       )}
       <TextField
+        placeholder="Email"
         type="email"
         label="Email"
         fullWidth
@@ -77,6 +79,7 @@ const AuthForm = () => {
       />
       <Typography className={classes.error}>{errors.email?.message}</Typography>
       <TextField
+        placeholder="Password"
         type="password"
         label="Password"
         fullWidth

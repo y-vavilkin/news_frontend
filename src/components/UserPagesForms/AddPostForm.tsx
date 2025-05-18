@@ -62,6 +62,7 @@ const AddPostForm = () => {
     >
       <FormLabel>{typeModal?.toUpperCase()}</FormLabel>
       <TextField
+        data-testid="Title"
         type="text"
         label="Title"
         fullWidth
@@ -70,6 +71,7 @@ const AddPostForm = () => {
       />
       <Typography className={classes.error}>{errors.title?.message}</Typography>
       <TextField
+        data-testid="Content"
         type="text"
         label="Content"
         fullWidth
@@ -80,6 +82,7 @@ const AddPostForm = () => {
       />
       <Typography className={classes.error}>{errors.content?.message}</Typography>
       <TextField
+        data-testid="Tags"
         type="text"
         label="Tags"
         fullWidth
@@ -106,6 +109,7 @@ const AddPostForm = () => {
           />
         </Button>
         <LoadingButton
+          data-testid="create-post-button"
           type="submit"
           color="primary"
           loading={isLoading}

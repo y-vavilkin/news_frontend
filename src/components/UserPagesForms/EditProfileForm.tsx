@@ -59,6 +59,7 @@ const EditProfileForm = () => {
     >
       <FormLabel>{typeModal?.toUpperCase()}</FormLabel>
       <TextField
+        data-testid="Login"
         type="text"
         label="Login"
         fullWidth
@@ -85,6 +86,7 @@ const EditProfileForm = () => {
           />
         </Button>
         <LoadingButton
+          data-testid="save-changes-button"
           type="submit"
           color="primary"
           loading={isLoading}

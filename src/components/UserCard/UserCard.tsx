@@ -48,6 +48,7 @@ const UserCard = ({ id, login, email, avatarUrl, role }: UserCardProps) => {
       {id === userId && (
         <Box className={classes.buttons}>
           <Button
+            data-testid="add-post-button"
             variant="contained"
             startIcon={<Add />}
             onClick={openAddPostModal}
@@ -55,6 +56,7 @@ const UserCard = ({ id, login, email, avatarUrl, role }: UserCardProps) => {
             Add Post
           </Button>
           <Button
+            data-testid="edit-profile-button"
             variant="contained"
             startIcon={<Edit />}
             onClick={openEditProfileModal}
