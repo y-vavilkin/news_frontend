@@ -30,6 +30,7 @@ const UserMenu = () => {
         />
       </Link>
       <Button
+        data-testid="logout-button"
         color="success"
         variant="contained"
         onClick={handlerLogout}
